@@ -1,5 +1,37 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Help</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-help</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/help.html -->
+<div class="d-flex flex-column h-100 p-3">
+  <div class="flex-fill overflow-auto" style="height: 0">
+    <h3>{{ current.name }}</h3>
+    <div [innerHTML]="currentHtml"></div>
+
+    @if (parent) {
+      <nav class="border-top d-flex mt-3">
+        <div class="bg-dark text-light p-2" style="width: 95px">Parent</div>
+        <div class="nav">
+          <a class="nav-link" href="#" (click)="go($event, parent.id)">{{ parent.name }}</a>
+        </div>
+      </nav>
+    }
+
+    @if (children.length) {
+      <nav class="border-top d-flex">
+        <div class="bg-dark text-light p-2" style="width: 95px">Children</div>
+        <div class="nav flex-wrap">
+          @for (c of children; track c.id) {
+            <a class="nav-link" href="#" (click)="go($event, c.id)">{{ c.name }}</a>
+          }
+        </div>
+      </nav>
+    }
+
+    @if (siblings.length) {
+      <nav class="border-top d-flex">
+        <div class="bg-dark text-light p-2" style="width: 95px">Related</div>
+        <div class="nav flex-wrap">
+          @for (s of siblings; track s.id) {
+            <a class="nav-link" href="#" (click)="go($event, s.id)">{{ s.name }}</a>
+          }
+        </div>
+      </nav>
+    }
+  </div>
 </div>

@@ -1,5 +1,215 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Diplomacy</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-diplomacy</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/diplomacy.html -->
+<div class="d-block h-100 pl-2 p-3 overflow-auto">
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'diplomacy'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'diplomacy'"
+        >Diplomacy</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'influence'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'influence'"
+        >Influence</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'trade'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'trade'"
+        >Trade Routes</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'wonders'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'wonders'"
+        >Wonders</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'stats'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'stats'"
+        >Stats</a
+      >
+    </li>
+  </ul>
+
+  @if (tab === 'diplomacy') {
+    @if (!relations.length) {
+      <div class="bg-info text-light p-3">
+        You haven't discovered any civilization yet !
+      </div>
+    } @else {
+      <table class="table">
+        <tbody>
+          @for (r of relations; track r.id) {
+            <tr>
+              <td>
+                <b>{{ r.name }}</b>
+              </td>
+              <td>{{ r.capital }}</td>
+              <td>{{ r.statusLabel }}</td>
+              <td class="text-trade">
+                <i class="fas fa-trailer"></i>
+                {{ r.tradeRoutes }}
+              </td>
+              <td>
+                @if (r.status === 0 || r.status === 2) {
+                  <button type="button" class="btn btn-danger mr-1">Declare war !</button>
+                }
+                @if (r.status === 1) {
+                  <button type="button" class="btn btn-primary mr-1">Negociate peace</button>
+                }
+                @if (r.status === 0) {
+                  <button type="button" class="btn btn-success mr-1">Offer Defensive Pact</button>
+                }
+                @if (r.status === 3) {
+                  <button type="button" class="btn btn-primary">Leave Defensive Pact</button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+
+  @if (tab === 'influence') {
+    @if (!relations.length) {
+      <p class="text-muted">No civilizations discovered yet.</p>
+    } @else {
+      <table class="table">
+        <tbody>
+          @for (r of relations; track r.id) {
+            <tr>
+              <td>
+                <b>{{ r.name }}</b>
+              </td>
+              <td class="text-influence text-120">
+                <i class="fas fa-broadcast-tower"></i>
+                {{ r.influence }}%
+              </td>
+              <td>
+                <button type="button" class="btn btn-warning">
+                  Promote culture
+                  <span class="text-culture">
+                    (<i class="fas fa-theater-masks"></i>
+                    {{ r.promoteCost }}
+                  </span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+
+  @if (tab === 'trade') {
+    <b class="d-inline-block m-3">Maximum nb of trade routes : {{ maxTradeRoutes }}</b>
+    @if (!trades.length) {
+      <p class="text-muted">No active trade routes.</p>
+    } @else {
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th class="text-gold"><i class="fas fa-coins"></i></th>
+            <th class="text-culture"><i class="fas fa-theater-masks"></i></th>
+            <th class="text-diplomacy"><i class="fas fa-handshake"></i></th>
+            <th class="text-science"><i class="fas fa-flask"></i></th>
+            <th class="text-faith"><i class="fas fa-pray"></i></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of trades; track $index) {
+            <tr>
+              <td>{{ t.from }}</td>
+              <td>{{ t.to }}</td>
+              <td class="text-gold">+{{ t.gold }}</td>
+              <td class="text-culture">+{{ t.culture }}</td>
+              <td class="text-diplomacy">+{{ t.diplomacy }}</td>
+              <td class="text-science">+{{ t.science }}</td>
+              <td class="text-faith">+{{ t.faith }}</td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm">Delete route</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="p-2">
+        <i class="fas fa-exclamation-triangle"></i>
+        Deleting a trade route results in loosing the associated caravan.
+      </div>
+    }
+  }
+
+  @if (tab === 'wonders') {
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Wonder</th>
+          <th>Owner</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (w of wonders; track w.id) {
+          <tr>
+            <td>{{ w.label }}</td>
+            <td>{{ w.owner || '—' }}</td>
+            <td>
+              @if (w.city) {
+                {{ w.city }}
+              } @else {
+                <span style="color: #999">
+                  <i class="fas fa-question"></i> Unknown city
+                </span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (tab === 'stats') {
+    <div class="d-flex flex-wrap border-bottom">
+      <div class="mr-4 border-left pl-2 mb-3" style="width: 220px">
+        <div class="d-flex font-weight-bold">
+          <span class="flex-fill">Global cities:</span>
+          {{ globalCities }}
+        </div>
+      </div>
+      <div class="mr-4 border-left pl-2 mb-3" style="width: 220px">
+        <div class="d-flex font-weight-bold">
+          <span class="flex-fill">Global population:</span>
+          {{ globalPop }}
+        </div>
+      </div>
+      <div class="mr-4 border-left pl-2 mb-3" style="width: 220px">
+        <div class="d-flex font-weight-bold">
+          <span class="flex-fill">Wonders:</span>
+          {{ ownedWonderCount }}
+        </div>
+      </div>
+    </div>
+    <p class="text-muted mt-2">Detailed civilization rankings appear once diplomacy is active.</p>
+  }
 </div>

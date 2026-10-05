@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DataService } from '../../core/services/data.service';
 
-/** Reconstructed from production selector `app-deity`. */
 @Component({
   selector: 'app-deity',
   standalone: true,
@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './deity.component.scss',
 })
 export class DeityComponent {
-  readonly title = 'Deity';
+  private readonly data = inject(DataService);
+
+  readonly deities = Object.values(this.data.conf.deities).map((d: any) => ({
+    id: d.id,
+    name: d.name,
+    description: d.description,
+    color: d.color,
+    icon: d.icon,
+  }));
 }

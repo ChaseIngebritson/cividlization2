@@ -1,5 +1,149 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Simulator</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-simulator</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/simulator.html -->
+<div class="h-100 overflow-auto p-3">
+  <div class="alert alert-info py-2">
+    <i class="fas fa-info-circle"></i>
+    Civilizations might have various bonuses that are not included in this simulation. Results might
+    be different in a real situation.
+  </div>
+
+  <div class="mb-3">
+    <b>Defender:</b>
+    <div class="form-group form-check d-inline-block mr-2 ml-2">
+      <input
+        class="form-check-input"
+        id="type-0"
+        name="def"
+        type="radio"
+        [value]="0"
+        [(ngModel)]="defenderType"
+      />
+      <label class="form-check-label" for="type-0">Barbarian</label>
+    </div>
+    <div class="form-group form-check d-inline-block mr-1">
+      <input
+        class="form-check-input"
+        id="type-1"
+        name="def"
+        type="radio"
+        [value]="1"
+        [(ngModel)]="defenderType"
+      />
+      <label class="form-check-label" for="type-1">Civilization</label>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap">
+    <div>
+      <h4>Attacker</h4>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Troop</th>
+            <th>Number</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of combatTroops; track t.id) {
+            <tr class="form-group">
+              <td>
+                <label [for]="'atk-' + t.id">{{ t.name }}</label>
+              </td>
+              <td>
+                <input
+                  class="form-control form-control-sm"
+                  style="width: 90px"
+                  [id]="'atk-' + t.id"
+                  min="0"
+                  type="number"
+                  [(ngModel)]="attacking[t.id]"
+                />
+              </td>
+              <td class="text-danger">
+                {{ attackingResults[t.id] != null ? attackingResults[t.id] : '' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ml-2 pl-2 border-left">
+      <h4>Defender</h4>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Troop</th>
+            <th>Number</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of combatTroops; track t.id) {
+            <tr class="form-group">
+              <td>
+                <label [for]="'def-' + t.id">{{ t.name }}</label>
+              </td>
+              <td>
+                <input
+                  class="form-control form-control-sm"
+                  style="width: 90px"
+                  [id]="'def-' + t.id"
+                  min="0"
+                  type="number"
+                  [(ngModel)]="defending[t.id]"
+                />
+              </td>
+              <td class="text-danger">
+                {{ defendingResults[t.id] != null ? defendingResults[t.id] : '' }}
+              </td>
+            </tr>
+          }
+          <tr>
+            <td>
+              <label for="d-pop">Population</label>
+            </td>
+            <td>
+              <input
+                class="form-control form-control-sm"
+                style="width: 90px"
+                id="d-pop"
+                min="0"
+                type="number"
+                [(ngModel)]="population"
+              />
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Walls</td>
+            <td>
+              <input id="walls" type="checkbox" [(ngModel)]="walls" />
+            </td>
+            <td>
+              <input id="walls_result" type="checkbox" [checked]="wallsResult" disabled />
+            </td>
+          </tr>
+          <tr>
+            <td>Castle</td>
+            <td>
+              <input id="castle" type="checkbox" [(ngModel)]="castle" />
+            </td>
+            <td>
+              <input id="castle_result" type="checkbox" [checked]="castleResult" disabled />
+            </td>
+          </tr>
+          <tr>
+            <td>Fortress</td>
+            <td>
+              <input id="fortress" type="checkbox" [(ngModel)]="fortress" />
+            </td>
+            <td>
+              <input id="fortress_result" type="checkbox" [checked]="fortressResult" disabled />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" (click)="simulate()">Simulate</button>
+    </div>
+  </div>
 </div>

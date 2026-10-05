@@ -1,5 +1,17 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Notifications</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-notifications</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/notifications.html -->
+<div class="p-3 h-100 overflow-auto">
+  <h3>Notifications</h3>
+  @if (notifications.length === 0) {
+    <p class="text-muted">No notifications yet.</p>
+  } @else {
+    <div class="overflow-auto">
+      @for (n of notifications; track $index) {
+        <div class="mb-2">
+          @if (n.icon) {
+            <i [class]="n.icon"></i>
+          }
+          {{ n.text }}
+        </div>
+      }
+    </div>
+  }
 </div>

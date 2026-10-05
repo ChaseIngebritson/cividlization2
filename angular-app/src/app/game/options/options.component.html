@@ -1,5 +1,168 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Options</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-options</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/options.html -->
+<div class="p-3 h-100 overflow-auto">
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'game'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'game'"
+        >Game Options</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab === 'ui'"
+        href="#"
+        (click)="$event.preventDefault(); tab = 'ui'"
+        >UI Options</a
+      >
+    </li>
+  </ul>
+
+  @if (tab === 'game') {
+    <h2>Game options</h2>
+
+    <h5>Difficulty</h5>
+    <div class="d-flex flex-wrap mb-3">
+      @for (d of difficulties; track d.id) {
+        <div
+          class="border rounded p-2 m-1 cursor-pointer"
+          style="max-width: 220px"
+          [class.border-primary]="difficulty === d.id"
+          (click)="difficulty = d.id"
+        >
+          <b class="d-block text-center">{{ d.name }}</b>
+          <p class="mb-0 small" [innerHTML]="d.description"></p>
+        </div>
+      }
+    </div>
+
+    <h5>Offline</h5>
+    <div class="form-group form-check d-inline-block mr-1 mb-3">
+      <input class="form-check-input" id="a-save" type="checkbox" [(ngModel)]="preventOffline" />
+      <label class="form-check-label" for="a-save">Prevent progress when offline</label>
+    </div>
+
+    <h5>Barbarians</h5>
+    <div class="form-group form-check d-inline-block mr-1 mb-3">
+      <input class="form-check-input" id="no_respawn" type="checkbox" [(ngModel)]="noRespawn" />
+      <label class="form-check-label" for="no_respawn">Prevent city respawn</label>
+    </div>
+
+    <h5>Stats &amp; highscore</h5>
+    <div class="form-group form-check mb-3">
+      <input class="form-check-input" id="nostats" type="checkbox" [(ngModel)]="noStats" />
+      <label class="form-check-label" for="nostats">Do not send stats &amp; highscores</label>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="saveGame()">Save</button>
+    @if (saved) {
+      <div class="text-success mt-2">Changes saved succesfully !</div>
+    }
+
+    <h5 class="mt-4">Restart this run</h5>
+    <p>Like a reincarnation but without any gain from this run !</p>
+    <button type="button" class="btn btn-danger" (click)="confirmRestart = true">
+      Restart this run
+    </button>
+  }
+
+  @if (tab === 'ui') {
+    <h2>UI options</h2>
+
+    <h5>Theme</h5>
+    <div class="form-group form-check mb-3">
+      <input class="form-check-input" id="darktheme" type="checkbox" [(ngModel)]="darkTheme" />
+      <label class="form-check-label" for="darktheme">Dark theme (experimental)</label>
+    </div>
+
+    <h5>Auto-pause</h5>
+    <div class="mb-3">
+      @for (opt of autoPauseOpts; track opt.id) {
+        <div class="form-group form-check d-inline-block mr-2">
+          <input
+            class="form-check-input"
+            [id]="'a-' + opt.id"
+            type="checkbox"
+            [(ngModel)]="autoPause[opt.id]"
+          />
+          <label class="form-check-label" [for]="'a-' + opt.id">{{ opt.label }}</label>
+        </div>
+      }
+    </div>
+
+    <h5>Notifications</h5>
+    <div class="mb-3">
+      <div class="form-group form-check d-inline-block mr-2">
+        <input class="form-check-input" id="notif_pop" type="checkbox" [(ngModel)]="notifPop" />
+        <label class="form-check-label" for="notif_pop">New Citizen</label>
+      </div>
+      <div class="form-group form-check d-inline-block mr-2">
+        <input
+          class="form-check-input"
+          id="notif_building"
+          type="checkbox"
+          [(ngModel)]="notifBuilding"
+        />
+        <label class="form-check-label" for="notif_building">New Building</label>
+      </div>
+    </div>
+
+    <h5>History</h5>
+    <div class="mb-3">
+      <label class="form-label" for="max_rpt">Battle Report History</label>
+      <input
+        class="form-control form-control-sm d-inline-block ml-1 mr-3"
+        style="width: 80px"
+        id="max_rpt"
+        min="5"
+        type="number"
+        [(ngModel)]="maxReports"
+      />
+      <label class="form-label ml-2" for="max_notif">Notification History</label>
+      <input
+        class="form-control form-control-sm d-inline-block ml-1"
+        style="width: 80px"
+        id="max_notif"
+        min="5"
+        type="number"
+        [(ngModel)]="maxNotifs"
+      />
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="saveUi()">Save</button>
+    @if (saved) {
+      <div class="text-success mt-2">Changes saved succesfully !</div>
+    }
+  }
+
+  @if (confirmRestart) {
+    <div class="modal-backdrop show"></div>
+    <div class="modal d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Restart this run</h4>
+            <button type="button" class="close" (click)="confirmRestart = false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-danger">
+            <b>Are you sure you want to restart ?</b>
+            <br />
+            All progress from this run will be lost !
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="confirmRestart = false">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" (click)="confirmRestart = false">
+              Restart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

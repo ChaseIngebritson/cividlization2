@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DataService } from '../../core/services/data.service';
 
-/** Reconstructed from production selector `app-notifications`. */
 @Component({
   selector: 'app-notifications',
   standalone: true,
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './notifications.component.scss',
 })
 export class NotificationsComponent {
-  readonly title = 'Notifications';
+  private readonly data = inject(DataService);
+
+  get notifications(): { text: string; icon?: string }[] {
+    return (this.data.data as any).notifications ?? [];
+  }
 }

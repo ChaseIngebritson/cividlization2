@@ -1,5 +1,27 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Deity</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-deity</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/deity.html -->
+<div class="h-100 overflow-auto p-3">
+  <h2>Deity Selection</h2>
+  <p class="text-muted mb-3">
+    Choose wisely — you will not be able to change your deity before you reincarnate.
+  </p>
+  <div class="d-flex flex-column">
+    @for (d of deities; track d.id) {
+      <div class="card mb-2">
+        <div class="d-flex align-items-stretch">
+          <div
+            class="text-300 d-flex align-items-center px-3"
+            [style.color]="d.color"
+          >
+            <i [class]="d.icon + ' fa-2x'"></i>
+          </div>
+          <div class="card-body d-flex flex-fill align-items-center p-2">
+            <div class="flex-fill">
+              <h5 class="card-title mb-1">{{ d.name }}</h5>
+              <span class="card-text" [innerHTML]="d.description"></span>
+            </div>
+            <button type="button" class="btn btn-primary ml-2">Select</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
 </div>

@@ -1,5 +1,60 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Reports</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-reports</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/reports.html -->
+<div class="h-100 overflow-auto p-3">
+  <h2>Battle reports</h2>
+
+  @if (!selected) {
+    <button type="button" class="btn btn-sm btn-danger mb-2" [disabled]="!reports.length">
+      Mark all as read
+    </button>
+
+    @if (reports.length === 0) {
+      <p class="text-muted">No battle reports yet.</p>
+    } @else {
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (r of reports; track $index) {
+            <tr>
+              <td>
+                @if (!r.read) {
+                  <i class="fas fa-circle text-primary text-50"></i>
+                }
+              </td>
+              <td>{{ r.date }}</td>
+              <td>{{ r.from }}</td>
+              <td>{{ r.to }}</td>
+              <td>{{ r.status }}</td>
+              <td class="btn-link cursor-pointer" (click)="selected = r">
+                <i class="fas fa-eye"></i> Details
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  } @else {
+    <div>
+      <h4>
+        Battle of {{ selected.to }}
+        <small class="text-muted ml-2">{{ selected.date }}</small>
+      </h4>
+      <b>{{ selected.status }}</b>
+      <div class="mt-3">
+        <button type="button" class="btn btn-secondary" (click)="selected = null">
+          Back to list
+        </button>
+        @if (data.isUnlocked('menu_simulator')) {
+          <button type="button" class="btn btn-primary ml-2">Send to Battle Simulator</button>
+        }
+      </div>
+    </div>
+  }
 </div>

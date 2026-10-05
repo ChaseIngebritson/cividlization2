@@ -1,5 +1,113 @@
-<div class="p-3 overflow-auto h-100 recovered-view">
-  <h2>Attacks</h2>
-  <p class="text-muted">UI recovered from View Engine AOT template <code>app-attacks</code>.</p>
-  <!-- Raw decompiled template preserved in decompiled/game/templates/attacks.html -->
+<div class="overflow-auto h-100 p-3">
+  @if (!hasMovements) {
+    <p class="text-muted">No attacks or transfers in progress.</p>
+  }
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Speed</th>
+        <th></th>
+        <th>Gold</th>
+        <th>Remaining Time</th>
+        <th>Troops</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (a of attacks; track $index) {
+        <tr>
+          <td>
+            @if (a.incoming) {
+              <span class="badge badge-pill badge-danger mr-2">!</span>
+            }
+            {{ a.from }}
+          </td>
+          <td>{{ a.to }}</td>
+          <td>{{ a.speed }}</td>
+          <td>{{ a.status }}</td>
+          <td>{{ a.gold || '' }}</td>
+          <td>{{ a.eta }}</td>
+          <td>{{ a.troops }}</td>
+          <td>
+            @if (!a.incoming) {
+              <button type="button" class="btn btn-danger btn-sm" title="Cancel">
+                <i class="fas fa-times"></i>
+              </button>
+            }
+          </td>
+        </tr>
+      }
+      @for (s of spies; track $index) {
+        <tr>
+          <td>{{ s.from }}</td>
+          <td>{{ s.to }}</td>
+          <td>{{ s.speed }}</td>
+          <td>{{ s.returning ? 'Returning' : 'Spying' }}</td>
+          <td></td>
+          <td>{{ s.eta }}</td>
+          <td>Spy: {{ s.spies }}</td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" title="Cancel">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      }
+      @for (s of scouts; track $index) {
+        <tr>
+          <td>{{ s.from }}</td>
+          <td>
+            <a routerLink="/game/world">{{ s.to }}</a>
+          </td>
+          <td>{{ s.speed }}</td>
+          <td>{{ s.returning ? 'Returning' : 'Scouting' }}</td>
+          <td></td>
+          <td>{{ s.eta }}</td>
+          <td>{{ s.explorer ? 'Explorer' : 'Scout' }}: 1</td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" title="Cancel">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      }
+      @for (w of workers; track $index) {
+        <tr>
+          <td>{{ w.from }}</td>
+          <td>
+            <a routerLink="/game/world">{{ w.to }}</a>
+          </td>
+          <td>{{ w.speed }}</td>
+          <td>{{ w.constructing ? 'Constructing' : 'Moving' }}</td>
+          <td></td>
+          <td>{{ w.eta }}</td>
+          <td></td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" title="Cancel">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      }
+      @for (g of goldTransfers; track $index) {
+        <tr>
+          <td>{{ g.from }}</td>
+          <td>{{ g.to }}</td>
+          <td>{{ g.speed }}</td>
+          <td>Gold transfer</td>
+          <td>{{ g.gold }}</td>
+          <td>{{ g.eta }}</td>
+          <td></td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" title="Cancel">
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>
