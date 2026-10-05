@@ -9,8 +9,6 @@ import { DataService } from '../../core/services/data.service';
 })
 export class ScienceComponent {
   private readonly data = inject(DataService);
-  readonly title = 'Science';
-
   readonly techs = Object.values(this.data.conf.sciences).map((t: any) => ({
     id: t.id,
     label: typeof t.label === 'function' ? t.label() : t.label,

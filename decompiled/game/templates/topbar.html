@@ -1,0 +1,409 @@
+<nav class="d-flex bg-dark text-light p-2 text-110 font-weight-bold overflow-hidden" style="height:47px;">
+<div class="mr-2 text-center text-pop">
+<i>
+</i>
+ {{ dataService.pop( }} 
+@if (dataService.hasScience("art") {
+  <a class="mr-2 text-center text-culture text-truncate text-90" routerLink="/game/policies" style="width: 200px">
+  <i>
+  </i>
+   {{ t, i }} ({{ ? }})
+  </a>
+}
+</div>
+<div class="mr-2 text-center text-happiness" style="width: 75px">
+<i>
+</i>
+ {{ t }} 
+@if (dataService.isUnlocked("trade") {
+  <a class="mr-2 text-center text-trade" fragment="tab_trade" routerLink="/game/diplomacy" style="width: 88px">
+  <i>
+  </i>
+   {{ dataService.tradeRouteNb( }} / {{ ? }} 
+  </a>
+}
+@if (dataService.isUnlocked("colonization") {
+  <a class="mr-2 text-center text-colony" fragment="tab_colonies" placement="bottom" routerLink="/game/diplomacy" style="width: 88px">
+  <i>
+  </i>
+   {{ dataService.colonyNb( }} / {{ ? }} 
+  <ng-container>
+
+  </ng-container>
+  </a>
+}
+</div>
+<div class="mr-2 text-center text-science text-truncate text-90" style="max-width:300px">
+<i>
+</i>
+@if (dataService.player() {
+  <a class="ml-1" routerLink="/game/science">
+   {{ t, i, s }} {{ ? }} ({{ ? }}) 
+  </a>
+}
+@if (!dataService.player() {
+  <a routerLink="/game/science">
+  Nothing selected
+  </a>
+}
+@if (dataService.hasScience("spirituality") {
+  <div class="mr-2 text-center text-faith text-90" style="width: 135px">
+  <i>
+  </i>
+   {{ t, i }} ({{ ? }})
+  </div>
+}
+@if (dataService.player() {
+  <div class="mr-2 text-center text-progress" style="width: 88px">
+  <i>
+  </i>
+   {{ t }}
+  </div>
+}
+@if (dataService.isUnlocked("orientation") {
+  <a fragment="tab_orientation" routerLink="/game/empire">
+  <i>
+  </i>
+   {{ t }} 
+  </a>
+}
+</div>
+@if (data.prestige) {
+  <a class="text-prestige mr-2'" fragment="tab_prestige" routerLink="/game/powers">
+  <i>
+  </i>
+   {{ t }} 
+  </a>
+}
+<div class="ml-auto">
+@if (dataService.player() {
+  <a class="mr-2 text-center text-120 line-height-1" routerLink="/game/deity">
+  <i>
+  </i>
+  </a>
+}
+<span class="cursor-pointer p-3 opacity-90" title="Play/pause [space]">
+<i>
+</i>
+@if (!environment.production) {
+  <button class="btn btn-success btn-sm">
+  <i class="fas fa-terminal">
+  </i>
+  </button>
+}
+</span>
+@if (inIframe() {
+  <span class="cursor-pointer p-3 opacity-90" title="Fullscreen">
+  <i>
+  </i>
+  </span>
+}
+@if (!data.noautosave) {
+  <div class="btn-group mr-2">
+  <button class="btn btn-primary btn-sm text-nowrap" style="width:78px">
+   Save 
+  @if (data.tuto_done) {
+    <span>
+    ({{ saveTime( }}s)
+    </span>
+  }
+  <div class="btn-group" container="body" ngbDropdown="">
+  <button aria-haspopup="true" class="btn btn-primary dropdown-toggle-split btn-sm dropdown-toggle" ngbDropdownToggle="">
+  <div class="dropdown-menu" ngbDropdownMenu="">
+  <button class="dropdown-item" hover-class="bg-primary text-light" ngbDropdownItem="">
+  <i>
+  </i>
+   Export
+  <button class="dropdown-item" hover-class="bg-primary text-light" ngbDropdownItem="">
+  <i>
+  </i>
+   Download
+  </button>
+  </button>
+  </div>
+  </button>
+  </div>
+  </button>
+  </div>
+}
+@if (data.noautosave) {
+  <button class="btn btn-primary btn-sm text-nowrap">
+  Save
+  </button>
+}
+@if (dataService.isUnlocked("reincarnation") {
+  <button class="btn btn-outline-warning btn-sm">
+  Reincarnation (
+  <i>
+  </i>
+   +{{ favorGain( }}) 
+  </button>
+}
+@if (dataService.player() {
+  <button class="btn btn-outline-warning btn-sm">
+   Time Travel (
+  <i>
+  </i>
+   +{{ dataService.prestigeGain( }}) 
+  </button>
+}
+<span class="cursor-pointer p-3 opacity-90" title="Exit">
+<i>
+</i>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Export save
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <textarea class="form-control" readonly="">
+  {{ saveStr }}
+  </textarea>
+  <div class="bg-success text-light p-3 mt-3 rounded font-weight-bold">
+  <i>
+  </i>
+   Save has been copied to clipboard
+  <div class="modal-footer">
+  <button class="btn btn-primary" type="button">
+  <i>
+  </i>
+   Download
+  <button class="btn btn-outline-dark" type="button">
+  Close
+  </button>
+  </button>
+  </div>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+</span>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Reincarnation
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <b>
+  Are you sure you want to reincarnate ?
+  </b>
+  @if (0 != dataService.favorGain() {
+    <p>
+    You will gain: 
+    <b class="mr-1">
+    {{ t }}
+    <span>
+    <i>
+    </i>
+     and 
+    <b class="mr-1">
+    {{ i }}
+    <span class="text-dark">
+    <i>
+    </i>
+     ( based on your current faith) 
+    </span>
+    </b>
+    </span>
+    </b>
+    </p>
+  }
+  <p>
+  Next favor point at: 
+  <i>
+  </i>
+   {{ t }}
+  @if (0 == dataService.favorGain() {
+    <p>
+    You will gain 
+    <b class="text-danger">
+    nothing !
+    </b>
+    </p>
+  }
+  <p>
+   You will keep : your powers, your previously earned favor
+  </p>
+  </p>
+  <p>
+   You will lose: 
+  <u>
+  everything else
+  </u>
+  <div class="modal-footer">
+  <button class="btn btn-outline-dark" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-warning" type="button">
+  Reincarnate !
+  </button>
+  </div>
+  </p>
+  </div>
+  </button>
+  </div>
+</ng-container>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Time Travel
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <b>
+  Are you sure you want to time travel ?
+  </b>
+  @if (0 != dataService.prestigeGain() {
+    <p>
+    You will gain: 
+    <b class="mr-1">
+    {{ t }}
+    <span class="text-prestige">
+    <i>
+    </i>
+     ( based on your current progress) 
+    </span>
+    </b>
+    </p>
+  }
+  <p>
+  Each 
+  <i>
+  </i>
+   gives you a +1% bonus in 
+  <i>
+  </i>
+   & 
+  <i>
+  </i>
+  @if (0 == dataService.prestigeGain() {
+    <p>
+    You will gain 
+    <b class="text-danger">
+    nothing !
+    </b>
+    </p>
+  }
+  <p>
+   You will keep : your 
+  <span class="text-prestige">
+  <i>
+  </i>
+  , your powers, your previously earned favor
+  </span>
+  <p>
+   You will lose: 
+  <u>
+  everything else
+  </u>
+  <div class="modal-footer">
+  <button class="btn btn-outline-dark" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-warning" type="button">
+  Time Travel !
+  </button>
+  </div>
+  </p>
+  </p>
+  </p>
+  </div>
+  </button>
+  </div>
+</ng-container>
+<ng-container>
+  <b class="d-block">
+  Available colonies (global): {{ dataService.coloniesAvailable( }}
+  </b>
+  <b class="d-block">
+  Occupied colonies (global): {{ conf.colony_nb - dataService.coloniesAvailable( }}
+  </b>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Colony Bonus
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  </td>
+  <td>
+  colony
+  </td>
+  <td>
+  total
+  </td>
+  <tr>
+  <td class="text-gold">
+  <i>
+  </i>
+   Gold (empire)
+  <td class="text-gold">
+  {{ t }}
+  <td class="text-gold pl-1">
+  {{ i }}
+  <tr>
+  <td class="">
+  <i>
+  </i>
+   / 
+  <i>
+  </i>
+   (city)
+  <td class="text-gold">
+  {{ s }}
+  <td class="text-gold pl-1">
+  {{ u }} 
+  <tr>
+  <td class="text-happiness">
+  <i>
+  </i>
+   Happiness (empire)
+  <td class="text-happiness">
+  {{ r }}
+  <td class="text-happiness pl-1">
+   {{ a }} 
+  @if (dataService.hasPolicy("geographical") {
+    <tr>
+    <td class="text-science">
+    <i>
+    </i>
+     Science (empire)
+    <td class="text-science">
+    {{ t }}
+    <td class="text-science pl-1">
+    {{ i }} 
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  </td>
+  </td>
+  </td>
+  </tr>
+  </td>
+  </td>
+  </td>
+  </tr>
+  </td>
+  </td>
+  </td>
+  </tr>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+</div>
+</nav>

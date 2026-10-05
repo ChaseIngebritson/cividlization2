@@ -1,4 +1,12 @@
-<section class="page daily">
-  <h2>Daily</h2>
-  <p class="note">Stub view reconstructed from selector <code>app-daily</code>. Original template was AOT-compiled into the production bundle.</p>
-</section>
+<div class="p-3">
+  <h2>Daily Bonus !</h2>
+  <div class="card-deck d-flex flex-wrap">
+    @for (card of cards; track $index) {
+      <div class="card cursor-pointer border-primary m-3 rounded-lg text-primary daily-card">
+        <div class="card-body d-flex justify-content-center align-items-center h-100 text-300">
+          <i class="fas fa-gift fa-3x"></i>
+        </div>
+      </div>
+    }
+  </div>
+</div>

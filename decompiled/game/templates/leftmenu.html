@@ -1,0 +1,198 @@
+@if (!data.lefthidden) {
+  <div class="border-right position-relative overflow-hidden" style="min-width:230px">
+  <ul class="list-group">
+  @if (dataService.isUnlocked("menu_empire") {
+    <li class="list-group-item" routerLink="empire" routerLinkActive="active">
+     Empire 
+    </li>
+  }
+  <li class="list-group-item" routerLink="city" routerLinkActive="active">
+  @if (hasSomethingToBuild() {
+    <i>
+    </i>
+  }
+   City
+  <li class="list-group-item" routerLink="science" routerLinkActive="active">
+  @if (!dataService.player() {
+    <i>
+    </i>
+  }
+  Science
+  @if (dataService.isUnlocked("menu_policies") {
+    <li class="list-group-item" routerLink="policies" routerLinkActive="active">
+    @if (hasNewPolicy() {
+      <i>
+      </i>
+    }
+     Social Policies 
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="world" routerLinkActive="active">
+    World
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="attacks" routerLinkActive="active">
+    @if (getIncomings() {
+      <span class="badge badge-pill badge-danger">
+      {{ getIncomings( }}
+      </span>
+    }
+     Attacks & Transfers 
+    </li>
+  }
+  </li>
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="reports" routerLinkActive="active">
+    @if (hasNewReports() {
+      <i>
+      </i>
+    }
+     Battle reports
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_simulator") {
+    <li class="list-group-item" routerLink="simulator" routerLinkActive="active">
+    Battle simulator
+    </li>
+  }
+  </li>
+  <li class="list-group-item" routerLink="notifications" routerLinkActive="active">
+  Notifications
+  @if (dataService.isUnlocked("menu_diplomacy") {
+    <li class="list-group-item" routerLink="diplomacy" routerLinkActive="active">
+    Diplomacy
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_powers") {
+    <li class="list-group-item" routerLink="powers" routerLinkActive="active">
+    Powers 
+    @if (data.prestige) {
+      <span>
+      & Upgrades
+      </span>
+    }
+    </li>
+  }
+  </li>
+  <li class="list-group-item" routerLink="help" routerLinkActive="active">
+  Help
+  <li class="list-group-item" routerLink="options" routerLinkActive="active">
+  Options
+  <li class="list-group-item" routerLink="support" routerLinkActive="active">
+  Support & Credits
+  <li class="list-group-item text-secondary">
+  <i>
+  </i>
+   Minimize 
+  </li>
+  </li>
+  </li>
+  </li>
+  </ul>
+  </div>
+}
+@if (data.lefthidden) {
+  <div class="border-right position-relative overflow-hidden">
+  <ul class="list-group list-group-min">
+  @if (dataService.isUnlocked("menu_empire") {
+    <li class="list-group-item" routerLink="empire" routerLinkActive="active" title="Empire">
+    <i>
+    </i>
+    </li>
+  }
+  <li class="list-group-item" routerLink="city" routerLinkActive="active" title="City">
+  @if (hasSomethingToBuild() {
+    <i>
+    </i>
+  }
+  <i>
+  </i>
+  <li class="list-group-item" routerLink="science" routerLinkActive="active" title="Science">
+  @if (!dataService.player() {
+    <i>
+    </i>
+  }
+  <i>
+  </i>
+  @if (dataService.isUnlocked("menu_policies") {
+    <li class="list-group-item" routerLink="policies" routerLinkActive="active" title="Social Policies">
+    @if (hasNewPolicy() {
+      <i>
+      </i>
+    }
+    <i>
+    </i>
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="world" routerLinkActive="active" title="World">
+    <i>
+    </i>
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="attacks" routerLinkActive="active" title="Attacks & Transfers">
+    @if (getIncomings() {
+      <span class="badge badge-pill badge-danger">
+      {{ getIncomings( }}
+      </span>
+    }
+    <i>
+    </i>
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <li class="list-group-item" routerLink="reports" routerLinkActive="active" title="Battle Reports">
+    @if (hasNewReports() {
+      <i>
+      </i>
+    }
+    <i>
+    </i>
+    </li>
+  }
+  </li>
+  @if (dataService.isUnlocked("menu_simulator") {
+    <li class="list-group-item" routerLink="simulator" routerLinkActive="active" title="Battle Simulator">
+    <i>
+    </i>
+    </li>
+  }
+  <li class="list-group-item" routerLink="notifications" routerLinkActive="active" title="Notifications">
+  <i>
+  </i>
+  @if (dataService.isUnlocked("menu_diplomacy") {
+    <li class="list-group-item" routerLink="diplomacy" routerLinkActive="active" title="Diplomacy">
+    <i>
+    </i>
+    </li>
+  }
+  @if (dataService.isUnlocked("menu_powers") {
+    <li class="list-group-item" routerLink="powers" routerLinkActive="active" title="Powers">
+    <i>
+    </i>
+    </li>
+  }
+  <li class="list-group-item" routerLink="help" routerLinkActive="active" title="Help">
+  <i>
+  </i>
+  <li class="list-group-item" routerLink="options" routerLinkActive="active" title="Options">
+  <i>
+  </i>
+  <li class="list-group-item" routerLink="support" routerLinkActive="active" title="Support & Credits">
+  <i>
+  </i>
+  <li class="list-group-item text-secondary" title="Expand">
+  <i>
+  </i>
+  </li>
+  </li>
+  </li>
+  </li>
+  </li>
+  </li>
+  </ul>
+  </div>
+}

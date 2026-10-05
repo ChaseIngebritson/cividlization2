@@ -1,2 +1,17 @@
-<app-toasts></app-toasts>
-<router-outlet></router-outlet>
+@if (!error && !badDomain) {
+  <router-outlet />
+}
+@if (error && !badDomain) {
+  <div class="bg-dark p-3 text-light">
+    <i class="fas fa-times"></i>
+    {{ error }}
+  </div>
+}
+@if (badDomain) {
+  <div class="text-dark text-150 p-4">
+    This game is available for free on
+    <a class="text-danger" href="https://www.kongregate.com/games/to_change_later/cividlization-2">
+      Kongregate.com
+    </a>
+  </div>
+}

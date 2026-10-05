@@ -1,0 +1,426 @@
+<div>
+<app-topbar>
+</app-topbar>
+<div class="container-fluid px-0 flex-fill">
+<div class="d-flex h-100">
+<div>
+<app-leftmenu>
+</app-leftmenu>
+<div class="flex-fill" style="height:auto!important;width:0;">
+<router-outlet>
+</router-outlet>
+<app-toasts aria-atomic="true" aria-live="polite">
+</app-toasts>
+</div>
+</div>
+@if (dataService.isDailyAllowed() {
+  <div class="bounce" routerLink="/game/daily" style="position:absolute;right:225px;bottom:10px">
+  <i>
+  </i>
+  </div>
+}
+@if (dataService.isDeitySelectionAllowed() {
+  <div class="bounce" routerLink="/game/deity" style="position:absolute;right:300px;bottom:10px">
+  <i>
+  </i>
+  </div>
+}
+@if (!data.tuto_done) {
+  <div class="position-fixed vh-100 w-100" style="top:0;left:0;z-index:50;">
+  @if (0 == tuto_step) {
+    <div class="tuto_bg d-flex justify-content-center align-items-center text-light text-150" style="top:0;left:0">
+    <div>
+    <h4>
+    Welcome to Cividlization II !
+    </h4>
+    <p>
+    This is a short tutorial to help you get started with this game.
+    </p>
+    <p class="text-90">
+    It will not cover every feature of this game, you will need to refer to the help section to get more information.
+    </p>
+    <p>
+    <a class="btn mr-2 btn-danger">
+    Skip
+    </a>
+    <a class="btn mr-2 btn-primary">
+    Next
+    </a>
+    </p>
+    </div>
+    </div>
+  }
+  @if (1 == tuto_step) {
+    <div class="tuto_bg d-flex justify-content-center align-items-top text-light text-120" style="top:47px;left:0">
+    <div>
+    <i class="fas fa-long-arrow-alt-up text-200 ml-4">
+    </i>
+    <p>
+    This is the topbar where you can see how your empire is going.
+    </p>
+    <div>
+     There's already a few interesting information to look at: 
+    <ul>
+    <li>
+    <span class="text-pop">
+    <i>
+    </i>
+     represents the total population of your empire. The more population you have, the more you will be able to produce.
+    </span>
+    <li>
+    <span class="text-happiness">
+    <i>
+    </i>
+     Next to your population is the average happiness of your people. Happy citizens are more efficient so keep it up!
+    </span>
+    <li>
+    <span class="text-science">
+    <i>
+    </i>
+     represents your science production. you can see that you are not researching anything at the moment. Try to keep it active as much as possible or you will be left behind!
+    </span>
+    <li>
+    <i>
+    </i>
+     allows you to pause the game.
+    <li>
+    <i>
+    </i>
+     allows you to switch between full screen and windowed.
+    <li>
+    <button class="btn mr-2 btn-primary btn-sm">
+    Save
+    </button>
+    allows you to save your game locally. The game will save every 10s so you don't really have to actively save. You can also export your save to use it on another computer or if you play in private mode.
+    <p>
+    There will be more stuff in it when you will progress in the game.
+    </p>
+    </li>
+    </li>
+    </li>
+    <p>
+    <a class="btn mr-2 btn-danger">
+    Skip
+    </a>
+    <a class="btn mr-2 btn-secondary">
+    Previous
+    </a>
+    <a class="btn mr-2 btn-primary">
+    Next
+    </a>
+    </p>
+    </li>
+    </li>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  }
+  @if (2 == tuto_step) {
+    <div class="tuto_bg d-flex justify-content-center align-items-top text-light text-120" style="top:47px;left:16.6666666667%;width:83.3333333333%">
+    <div class="tuto_bg" style="top:0;left:0;height:47px">
+    </div>
+    <i class="fas fa-long-arrow-alt-left text-200 mt-4 mr-4">
+    </i>
+    <div>
+    <p>
+    This is the main menu that will help you access the different screens you need to manage your empire.
+    </p>
+    <div>
+     There's not much at the moment but there will be more options in it when you will progress in the game: 
+    <ul>
+    <li>
+    <b>
+    City
+    </b>
+     is the current screen. It allows you to manage your cities which is the core of your empire
+    <li>
+    <b>
+    Science
+    </b>
+     is where you will be able to select a science to work on. You can see a small icon 
+    <i>
+    </i>
+     which means that your attention is required. In this case it means that there is no science selected and that you should choose one.
+    <li>
+    <b>
+    Notifications
+    </b>
+     allows you to check all your previous notifications that appeared on screen. You will be notified every time an interesting event happens
+    <li>
+    <b>
+    Help
+    </b>
+     is a very important section since 
+    <u>
+    there will not be any other tutorial
+    </u>
+    . It allows you to find all the information you need to play this game.
+    <li>
+    <b>
+    Support & Credits
+    </b>
+     This game is completly free but if you like it, you can support the dev there !
+    <p>
+    <a class="btn mr-2 btn-danger">
+    Skip
+    </a>
+    <a class="btn mr-2 btn-secondary">
+    Previous
+    </a>
+    <a class="btn mr-2 btn-primary">
+    Next
+    </a>
+    </p>
+    </li>
+    </li>
+    </li>
+    </li>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  }
+  @if (3 == tuto_step) {
+    <div style="top:0;left:0;width:100%;height:100vh;">
+    <div class="tuto_bg" style="top:0;left:0;width:16.7%">
+    </div>
+    <div class="tuto_bg" style="top:0;left:0;height:47px">
+    </div>
+    <div class="tuto_bg d-flex justify-content-left align-items-top text-120 text-light pl-3" style="top:200px;left:16.6666666667%;width:83.3333333333%">
+    <div>
+    <p>
+    And this is the City Screen where you will be able to manage your cities
+    </p>
+    <p>
+    Let's see what we have in the menu on the left part of this screen
+    </p>
+    <ul>
+    <li>
+     You already know those icons: 
+    <span class="text-pop">
+    <i>
+    </i>
+    <span class="text-science">
+    <i>
+    </i>
+    <span class="text-happiness">
+    <i>
+    </i>
+     They have the same meaning but at the city level. 
+    </span>
+    </span>
+    </span>
+    <li>
+    <span class="text-food">
+    <i>
+    </i>
+     represents the food. If you want you city to grow, you will need to meet the requirements for food.
+    </span>
+    <li>
+    <span class="text-health">
+    <i>
+    </i>
+     represents the health of your citizens. Be careful not to let it go too low or disease will strike.
+    </span>
+    <li>
+    <span class="text-gold">
+    <i>
+    </i>
+     represents the gold in this city's treasury. You will need it for a lot of things that you will discover later in this game. There is a maximum amount that you can hold.
+    </span>
+    <p>
+    And now the central part of this screen shows your citizens and what they are doing. There are not a lot of roles at the moment but you will unlock others when you will progress.
+    </p>
+    <p>
+    You can find more information about the roles in the help menu.
+    </p>
+    </li>
+    <p>
+    The autoassign option allows you to let the game allocate citizens automatically. You will find more information about it in the Help section 
+    </p>
+    </li>
+    <p>
+    <a class="btn mr-2 btn-danger">
+    Skip
+    </a>
+    <a class="btn mr-2 btn-secondary">
+    Previous
+    </a>
+    <a class="btn mr-2 btn-primary">
+    Next
+    </a>
+    </p>
+    </li>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  }
+  @if (4 == tuto_step) {
+    <div class="tuto_bg d-flex justify-content-center align-items-center text-light text-150" style="top:0;left:0">
+    <div>
+    <p>
+    Alright, now you are ready to start. Just click on Start and watch your food accumulate, your city grow and your empire prosper... or fall appart
+    </p>
+    <p>
+    Don't forget to look at the help pages if you need any help !
+    </p>
+    <p>
+    <a class="btn mr-2 btn-secondary">
+    Previous
+    </a>
+    <a class="btn mr-2 btn-primary">
+    Start !
+    </a>
+    </p>
+    </div>
+    </div>
+  }
+  </div>
+}
+@if (dataService.player() {
+  <app-spells>
+  </app-spells>
+}
+@if (data.death_modal) {
+  <div class="tuto_bg d-flex justify-content-center align-items-center" style="top:0;left:0;z-index:49;">
+  <div class="bg-light">
+  <div class="modal-header">
+  @if (1 == data.death_modal) {
+    <h4 class="modal-title">
+    You've just been reincarnated !
+    </h4>
+  }
+  @if (2 == data.death_modal) {
+    <h4 class="modal-title">
+    You've just traveled back in time !
+    </h4>
+  }
+  <div class="modal-body">
+  @if (1 == data.death_modal) {
+    <div>
+    @if (data.favors[0]) {
+      <div>
+      You now have: 
+      @for (item of et(n, 3, 0, ei(n, 4; track $index) {
+        <span class="ml-2">
+        <i>
+        <b>
+        {{ n.context.$implicit.value }}
+        </b>
+        </i>
+        </span>
+      }
+      <br />
+       You can use those to buy helpful powers ! 
+      </div>
+    }
+    </div>
+  }
+  @if (2 == data.death_modal) {
+    <div>
+    @if (data.prestige) {
+      <div>
+      You now have: 
+      <i>
+      </i>
+      <b>
+      {{ data.prestige }}
+      </b>
+      <p>
+      Each 
+      <i>
+      </i>
+       gives you a +1% bonus in 
+      <i>
+      </i>
+       & 
+      <i>
+      </i>
+      <br />
+       You can also use them to buy special 
+      <b class="text-special">
+      upgrade
+      </b>
+       !
+      </p>
+      </div>
+    }
+    </div>
+  }
+  <hr />
+  <h5>
+  Please select your next civilization
+  </h5>
+  <p>
+  Choose well, you will not be able to change until next reincarnation !
+  </p>
+  <div class="overflow-auto d-flex flex-column border rounded mb-1" style="max-height: 250px;">
+  @for (item of et(n, 19, 0, ei(n, 20; track $index) {
+    <div>
+    <div>
+    <b>
+    {{ n.context.$implicit.value.name }}
+    </b>
+    <div>
+    </div>
+    </div>
+    </div>
+  }
+  <div class="modal-footer">
+  <button class="btn btn-outline-dark" type="button">
+  Ok, cool !
+  </button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+}
+</div>
+@if (!dataService.player() {
+  <div class="tuto_bg d-flex justify-content-center align-items-center" style="top:0;left:0;z-index:49;">
+  <div class="bg-light">
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Welcome to v{{ dataService.getStrVersion( }} !
+  </h4>
+  <div class="modal-body">
+  <h5>
+  You now get to select a civilization !
+  </h5>
+  <p>
+  Choose well, you will not be able to change until next reincarnation !
+  </p>
+  <div class="overflow-auto d-flex flex-column border rounded mb-1" style="max-height: 250px;">
+  @for (item of et(n, 12, 0, ei(n, 13; track $index) {
+    <div>
+    @if (!civExists(n.context.$implicit.key) {
+      <div>
+      <b>
+      {{ n.parent.context.$implicit.value.name }}
+      </b>
+      <div>
+      </div>
+      </div>
+    }
+    </div>
+  }
+  <div class="modal-footer">
+  <button class="btn btn-outline-dark" type="button">
+  Select
+  </button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+}
+</div>
+</div>

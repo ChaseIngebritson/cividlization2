@@ -107,7 +107,8 @@ export class DataService {
     return 0;
   }
   isUnlocked(..._args: any[]): boolean {
-    return false;
+    // Reconstruction: unlock menus so recovered navigation is visible
+    return true;
   }
   hasUpgrade(..._args: any[]): boolean {
     return false;
@@ -229,8 +230,8 @@ export class DataService {
   revoltRisks(..._args: any[]): void {
     return;
   }
-  happiness(..._args: any[]): void {
-    return;
+  happiness(..._args: any[]): number {
+    return 0;
   }
   influenceEffectTotal(..._args: any[]): number {
     return 0;
@@ -902,6 +903,6 @@ export class DataService {
     return;
   }
   getStrVersion(..._args: any[]): string {
-    return '';
+    return '1.3.7';
   }
 }

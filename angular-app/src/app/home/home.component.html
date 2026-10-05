@@ -1,9 +1,154 @@
-<div class="home">
-  <h1>Cividlization II</h1>
-  <p>Reconstructed Angular project from the Kongregate production bundle.</p>
-  <p class="stats">{{ civCount }} civilizations · {{ techCount }} sciences · {{ buildingCount }} buildings</p>
-  <div class="actions">
-    <button type="button" class="btn" (click)="start()">New Game</button>
-    <a routerLink="/game/options" class="btn secondary">Options</a>
+<div class="homepage d-flex justify-content-center align-items-center vh-100">
+  <div>
+    <h1 class="display-1 font-weight-bold">
+      Cividlization II
+      <div class="text-muted text-center mb-2" style="margin-top:-20px;font-size:40%">
+        Industrial Revolution Update
+      </div>
+      @if (error) {
+        <div class="bg-danger text-light my-2 p-2">{{ error }}</div>
+      }
+    </h1>
+
+    @if (!loading && !creating && !loadText) {
+      <div>
+        <button type="button" class="btn btn-dark btn-block" (click)="startNew()">New game</button>
+        <button type="button" class="btn btn-dark btn-block" (click)="continueGame()" [disabled]="!canContinue">
+          Continue
+        </button>
+        <button type="button" class="btn btn-dark btn-block" (click)="showLoad()">Load game</button>
+        <button type="button" class="btn btn-dark btn-block" (click)="showLoadText()">
+          Load an exported save
+        </button>
+      </div>
+    }
+
+    @if (loadText) {
+      <div>
+        <div>Paste your exported save here and click on the load button</div>
+        <textarea
+          class="form-control mb-2 bg-dark text-light border-dark"
+          rows="8"
+          [(ngModel)]="importText"
+        ></textarea>
+        <button type="button" class="btn btn-dark btn-block" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-dark btn-block" (click)="loadExported()">Load</button>
+      </div>
+    }
+
+    @if (creating && !step2) {
+      <div>
+        @if (nameConflict) {
+          <div class="bg-danger text-light font-weight-bold px-2 py-1 mb-1 rounded">
+            A save with the same name already exists and will be overwritten if the same name is chosen.
+          </div>
+        }
+        <input
+          class="form-control"
+          placeholder="Name"
+          required
+          autofocus
+          [(ngModel)]="saveName"
+        />
+        <div class="d-flex">
+          @for (diff of difficulties; track diff.key) {
+            <div
+              class="flex-fill p-2 m-1 border rounded cursor-pointer"
+              [class.border-primary]="selectedDifficulty === diff.key"
+              [class.bg-dark]="selectedDifficulty === diff.key"
+              [class.text-light]="selectedDifficulty === diff.key"
+              (click)="selectedDifficulty = diff.key"
+            >
+              <b class="text-center d-block">{{ diff.name }}</b>
+              <p class="mb-0 small" [innerHTML]="diff.description"></p>
+            </div>
+          }
+        </div>
+        <div class="d-flex">
+          <button type="button" class="btn btn-secondary w-50" (click)="cancel()">Cancel</button>
+          <button type="button" class="btn btn-dark w-50" (click)="nextStep()" [disabled]="!saveName">
+            Next
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (creating && step2) {
+      <div>
+        <h4>Choose your civilization</h4>
+        <div
+          class="overflow-auto d-flex flex-column bg-dark text-light border rounded mb-1"
+          style="max-height: 250px"
+        >
+          @for (civ of civilizations; track civ.key) {
+            <div
+              class="p-2 border-bottom cursor-pointer"
+              [class.bg-primary]="selectedCiv === civ.key"
+              (click)="selectedCiv = civ.key"
+            >
+              <div>
+                <b>{{ civ.name }}</b>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="d-flex">
+          <button type="button" class="btn btn-secondary w-50" (click)="step2 = false">Back</button>
+          <button type="button" class="btn btn-dark w-50" (click)="start()" [disabled]="!selectedCiv">
+            Start
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (loading) {
+      <div>
+        <div class="card-container overflow-auto">
+          @if (!saves.length) {
+            <div class="text-muted p-2">No local saves found.</div>
+          }
+          @for (save of saves; track save.name) {
+            <div
+              class="card cursor-pointer border-0 my-1"
+              hover-class="bg-dark text-light"
+              (click)="loadSave(save)"
+            >
+              <div class="d-flex align-items-stretch">
+                <div class="text-300 text-light bg-dark d-flex align-items-center px-3">
+                  <i class="fas fa-save"></i>
+                </div>
+                <div class="card-body d-flex flex-fill align-items-center">
+                  <div class="flex-fill">
+                    <h5 class="card-title">
+                      {{ save.name }}
+                      @if (save.civ) {
+                        <span class="text-90"> - {{ civName(save.civ) }}</span>
+                      }
+                    </h5>
+                    @if (save.era != null) {
+                      <div class="card-text">Era: {{ eraName(save.era) }}</div>
+                    }
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="deleteSave(save, $event)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <button type="button" class="btn btn-dark btn-block" (click)="cancel()">Cancel</button>
+      </div>
+    }
+
+    <div class="position-absolute text-secondary" style="bottom:5px;right:5px">
+      Version: {{ data.getStrVersion() }}
+    </div>
   </div>
 </div>

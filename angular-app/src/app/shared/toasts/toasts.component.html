@@ -1,8 +1,8 @@
-<div class="toasts">
+<div class="position-absolute toasts-wrap" style="bottom:0;right:0;z-index:5">
   @for (t of toasts.toasts(); track t.id) {
-    <div class="toast" [class]="t.type" (click)="toasts.dismiss(t.id)">
-      @if (t.title) { <strong>{{ t.title }}</strong> }
-      <span>{{ t.message }}</span>
+    <div class="toast-item d-flex cursor-pointer m-2 p-2 bg-dark text-light border" [class]="t.type" (click)="toasts.dismiss(t.id)">
+      <div class="font-weight-bold ml-2 flex-fill">{{ t.title || t.message }}</div>
+      <div class="text-150" title="close">×</div>
     </div>
   }
 </div>

@@ -1,0 +1,289 @@
+<div class="overflow-auto h-100">
+<table class="table">
+<thead>
+<th>
+Origin
+</th>
+<th>
+Destination
+</th>
+<th>
+Speed
+</th>
+<th>
+</th>
+<th>
+Gold
+</th>
+<th>
+Remaining Time
+</th>
+<th>
+Troops
+</th>
+<th>
+</th>
+<tbody>
+@for (item of attacks; track $index) {
+  @if (0 == n.context.$implicit.ownerid || 0 == n.context.$implicit.destid && !n.context.$implicit.returning) {
+    <tr>
+    <td>
+    @if (0 != n.parent.context.$implicit.ownerid) {
+      <span class="badge badge-pill badge-danger mr-2">
+      !
+      </span>
+    }
+    <city>
+    </city>
+    <td>
+    <city>
+    </city>
+    <td>
+    {{ n.parent.context.$implicit.speed }}
+    </td>
+    </td>
+    <td>
+    {{ n.parent.context.$implicit.returning ? "Returning" : n.parent.context.$implicit.agressive ? "Attacking" : "Moving" }}
+    </td>
+    </td>
+    <td>
+    {{ t }}
+    <td>
+    {{ i }}
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <td>
+      @for (item of et(n, 2, 0, ei(n, 3; track $index) {
+        @if (n.context.$implicit.value) {
+          <span class="mr-2">
+          {{ conf.troops[n.parent.context.$implicit.key].name(dataService.player(n.parent.parent.parent.parent.context.$implicit.ownerid }}: {{ ? }}
+          </span>
+        }
+        <ng-container>
+
+        </ng-container>
+      }
+      </td>
+    }
+    </td>
+    </td>
+    @if (0 != n.parent.context.$implicit.ownerid) {
+      <td>
+      ?
+      </td>
+    }
+    <td>
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <button class="btn btn-danger" title="Cancel">
+      <i>
+      </i>
+      </button>
+    }
+    </td>
+    </tr>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+@for (item of data.spies; track $index) {
+  <tr>
+  <td>
+  <city>
+  </city>
+  <td>
+  <city>
+  </city>
+  <td>
+  {{ n.context.$implicit.speed }}
+  </td>
+  </td>
+  </td>
+  <td>
+  {{ n.context.$implicit.returning ? "Returning" : "Spying" }}
+  </td>
+  <td>
+  </td>
+  <td>
+  {{ t }}
+  @if (0 == n.context.$implicit.ownerid) {
+    <td>
+    Spy: {{ n.parent.context.$implicit.spies }}
+    </td>
+  }
+  </td>
+  @if (0 != n.context.$implicit.ownerid) {
+    <td>
+    ?
+    </td>
+  }
+  <td>
+  @if (0 == n.context.$implicit.ownerid) {
+    <button class="btn btn-danger" title="Cancel">
+    <i>
+    </i>
+    </button>
+  }
+  </td>
+  </tr>
+}
+@for (item of data.scouts; track $index) {
+  @if (0 == n.context.$implicit.ownerid) {
+    <tr>
+    <td>
+    <city>
+    </city>
+    <td>
+    <a routerLink="/game/world">
+    {{ coords(n.parent.context.$implicit.to }}
+    <td>
+    {{ n.parent.context.$implicit.speed }}
+    </td>
+    </a>
+    <td>
+    {{ n.parent.context.$implicit.returning ? "Returning" : "Scouting" }}
+    </td>
+    <td>
+    </td>
+    <td>
+    {{ t }}
+    <td>
+    {{ n.parent.context.$implicit.explorer ? "Explorer" : "Scout" }}: 1
+    </td>
+    </td>
+    <td>
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <button class="btn btn-danger" title="Cancel">
+      <i>
+      </i>
+      </button>
+    }
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+@for (item of data.workers; track $index) {
+  @if (0 == n.context.$implicit.ownerid) {
+    <tr>
+    <td>
+    <city>
+    </city>
+    <td>
+    <a routerLink="/game/world">
+    {{ coords(n.parent.context.$implicit.to }}
+    <td>
+    {{ n.parent.context.$implicit.speed }}
+    </td>
+    </a>
+    <td>
+    {{ n.parent.context.$implicit.construction_progress ? "Constructing" : "Moving" }}
+    </td>
+    <td>
+    </td>
+    <td>
+    {{ t }}
+    <td>
+    </td>
+    <td>
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <button class="btn btn-danger" title="Cancel">
+      <i>
+      </i>
+      </button>
+    }
+    </td>
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+@for (item of data.archeologists; track $index) {
+  @if (0 == n.context.$implicit.ownerid) {
+    <tr>
+    <td>
+    <city>
+    </city>
+    <td>
+    <a routerLink="/game/world">
+    {{ coords(n.parent.context.$implicit.to }}
+    <td>
+    {{ n.parent.context.$implicit.speed }}
+    </td>
+    </a>
+    <td>
+    Moving
+    </td>
+    <td>
+    </td>
+    <td>
+    {{ t }}
+    <td>
+    </td>
+    <td>
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <button class="btn btn-danger" title="Cancel">
+      <i>
+      </i>
+      </button>
+    }
+    </td>
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+@for (item of data.goldtransfers; track $index) {
+  @if (0 == n.context.$implicit.ownerid || 0 == n.context.$implicit.destid) {
+    <tr>
+    <td>
+    <city>
+    </city>
+    <td>
+    <city>
+    </city>
+    <td>
+    {{ n.parent.context.$implicit.speed }}
+    </td>
+    </td>
+    </td>
+    <td>
+    Gold transfer
+    </td>
+    <td>
+    {{ t }}
+    <td>
+    {{ i }}
+    <td>
+    </td>
+    <td>
+    @if (0 == n.parent.context.$implicit.ownerid) {
+      <button class="btn btn-danger" title="Cancel">
+      <i>
+      </i>
+      </button>
+    }
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+</tbody>
+</thead>
+</table>
+</div>

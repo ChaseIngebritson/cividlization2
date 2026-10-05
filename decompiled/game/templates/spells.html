@@ -1,0 +1,95 @@
+@if (dataService.player() {
+  <div>
+  @if (!data.spellshidden && display() {
+    <div class="position-absolute" style="left:50%;bottom:10px;z-index:5">
+    <div class="spells-deck position-relative bg-dark text-light text-150 rounded d-flex border border-light px-2 py-1" style="left:-50%">
+    @if (dataService.player() {
+      <div class="rounded-circle text-center position-relative border border-danger cursor-pointer">
+       A 
+      </div>
+    }
+    @for (item of et(n, 5, 0, ei(n, 6; track $index) {
+      @if (n.context.$implicit.value.deity == dataService.player() {
+        <div container="body" triggers="manuel">
+        <i>
+        </i>
+        @if (!data.spelltime[n.parent.context.$implicit.key] && !isLocked(n.parent.context.$implicit.value) {
+          <i>
+          </i>
+        }
+        @if (data.spelltime[n.parent.context.$implicit.key]) {
+          <i>
+          </i>
+        }
+        <ng-container>
+
+        </ng-container>
+        </div>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    <div class="rounded-circle text-center cursor-pointer position-relative text-light hoverable">
+    <i style="left:12px">
+    </i>
+    </div>
+    </div>
+    </div>
+  }
+  @if (data.spellshidden && display() {
+    <div class="position-absolute" style="left:50%;bottom:0">
+    <div class="spells-hidden rounded-circle bg-dark text-light text-130 text-center position-relative cursor-pointer border border-light">
+    <i>
+    </i>
+    </div>
+    </div>
+  }
+  </div>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  <div>
+  </div>
+  @if (data.charging[n.context.id]) {
+    <div class="border-top text-success">
+    Charge: {{ data.charging[n.parent.context.id] }}
+    </div>
+  }
+  @if (data.spelltime[n.context.id]) {
+    <div class="border-top text-success">
+    Active: {{ t }}
+    </div>
+  }
+  @if (!data.spelltime[n.context.id] && data.cooldowns[n.context.id]) {
+    <div class="border-top text-primary">
+    Cooldown: {{ t }}
+    </div>
+  }
+  @if (n.context.lockDesc) {
+    <div class="border-top">
+    <b class="text-danger">
+    Locked
+    </b>
+     {{ n.parent.context.lockDesc }} to unlock
+    </div>
+  }
+  <div class="border-top">
+  Hotkey: 
+  <b>
+  {{ n.context.level }}
+  </b>
+  </div>
+</ng-container>
+<ng-container>
+  <div>
+  Hide
+  </div>
+</ng-container>
+<ng-container>
+  <div>
+  Show
+  </div>
+</ng-container>

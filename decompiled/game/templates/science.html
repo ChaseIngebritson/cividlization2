@@ -1,0 +1,135 @@
+<div class="bg-dark p-4" style="overflow:auto">
+<:svg:svg>
+<:svg:defs>
+<:svg:marker id="head" markerHeight="8" markerWidth="4" orient="auto" refX="0" refY="4">
+<:svg:path d="M0,0 V8 L4,4 Z">
+</:svg:path>
+<:svg:linearGradient id="blue" x1="0%" x2="100%" y1="100%" y2="0%">
+<:svg:stop offset="0%" style="stop-color:#2E86C1;stop-opacity:1">
+</:svg:stop>
+<:svg:stop offset="100%" style="stop-color:#5DADE2;stop-opacity:1">
+</:svg:stop>
+<:svg:linearGradient id="gold" x1="0%" x2="100%" y1="100%" y2="0%">
+<:svg:stop offset="0%" style="stop-color:#D4AC0D;stop-opacity:1">
+</:svg:stop>
+<:svg:stop offset="100%" style="stop-color:#F4D03F;stop-opacity:1">
+</:svg:stop>
+<:svg:linearGradient id="green" x1="0%" x2="100%" y1="100%" y2="0%">
+<:svg:stop offset="0%" style="stop-color:#196F3D;stop-opacity:1">
+</:svg:stop>
+<:svg:stop offset="100%" style="stop-color:#27AE60;stop-opacity:1">
+</:svg:stop>
+<:svg:linearGradient id="black" x1="0%" x2="100%" y1="100%" y2="0%">
+<:svg:stop offset="0%" style="stop-color:#17202A;stop-opacity:1">
+</:svg:stop>
+<:svg:stop offset="100%" style="stop-color:#34495E;stop-opacity:1">
+</:svg:stop>
+<:svg:linearGradient id="lightblue" x1="0%" x2="100%" y1="100%" y2="0%">
+<:svg:stop offset="0%" style="stop-color:#17202A;stop-opacity:1">
+</:svg:stop>
+<:svg:stop offset="100%" style="stop-color:#2E86C1;stop-opacity:1">
+</:svg:stop>
+@for (item of et(n, 24, 0, ei(n, 25; track $index) {
+  <:svg:g>
+  <:svg:rect rx="5" ry="5" stroke="black">
+  </:svg:rect>
+  <:svg:text dominant-baseline="middle" fill="white" font-size="14" font-weight="bold" text-anchor="middle">
+  {{ n.context.$implicit.value.name }}
+  </:svg:text>
+  @if (!isEraUnlocked(n.context.$implicit.key) {
+    <:svg:text fill="#888" font-size="400" font-weight="bold" text-anchor="middle">
+    ?
+    </:svg:text>
+  }
+  <ng-container>
+
+  </ng-container>
+  </:svg:g>
+}
+@for (item of svg_data.nodes; track $index) {
+  <:svg:g container="body" triggers="manuel">
+  <:svg:rect rx="5" ry="5" stroke="black">
+  </:svg:rect>
+  <:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+  {{ label(n.context.$implicit.id }}
+  </:svg:text>
+  <ng-container>
+
+  </ng-container>
+  </:svg:g>
+}
+</:svg:linearGradient>
+@for (item of svg_data.links; track $index) {
+  <:svg:path fill="transparent" marker-end="url(#head)">
+  </:svg:path>
+}
+</:svg:linearGradient>
+<:svg:g>
+<:svg:rect rx="5" ry="5" stroke="black" x="0">
+</:svg:rect>
+<:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+Current
+</:svg:text>
+<:svg:g>
+<:svg:rect rx="5" ry="5" stroke="black">
+</:svg:rect>
+<:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+Locked
+</:svg:text>
+<:svg:g>
+<:svg:rect rx="5" ry="5" stroke="black">
+</:svg:rect>
+<:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+Available
+</:svg:text>
+<:svg:g>
+<:svg:rect rx="5" ry="5" stroke="black">
+</:svg:rect>
+<:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+Done
+</:svg:text>
+@if (dataService.isUnlocked("queue_science") {
+  <:svg:g>
+  <:svg:rect rx="5" ry="5" stroke="black">
+  </:svg:rect>
+  <:svg:text dominant-baseline="middle" fill="white" font-size="16" font-weight="bold" text-anchor="middle">
+  In queue
+  </:svg:text>
+  </:svg:g>
+}
+@if (dataService.isUnlocked("queue_science") {
+  <div>
+  <i>
+  </i>
+   Use ctrl + click to add to queue
+  </div>
+}
+</:svg:g>
+<button class="btn btn-secondary">
+Clear queue
+</button>
+</:svg:g>
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+</:svg:g>
+<ng-container>
+  <div>
+  </div>
+  <div class="border-top mt-1">
+  <span class="text-science">
+  <i>
+  </i>
+   {{ t }}
+   ({{ i }})
+  </span>
+  </div>
+</ng-container>
+</:svg:g>
+</:svg:linearGradient>
+</:svg:linearGradient>
+</:svg:linearGradient>
+</:svg:marker>
+</:svg:defs>
+</:svg:svg>
+</div>

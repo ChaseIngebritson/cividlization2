@@ -1,0 +1,206 @@
+<ngb-tabset>
+<ngb-tab title="Powers">
+<ng-container>
+  <h3>
+  Powers
+  </h3>
+  @for (item of et(n, 3, 0, ei(n, 4; track $index) {
+    <span class="mr-3 text-center text-favor" style="width: 85px">
+    <i>
+     {{ e }} 
+    </i>
+    </span>
+  }
+  <table class="table table-borderless w-auto table-sm">
+  <tbody>
+  <tr>
+  <td>
+  </td>
+  <td class="font-weight-bold" colspan="2">
+  {{ dataService.player( }}
+  </td>
+  <td>
+  <select>
+  @for (item of data.players; track $index) {
+    @if (n.context.$implicit.id > 1) {
+      <option>
+      {{ n.parent.context.$implicit.name }}
+      </option>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  @for (item of et(n, 21, 0, ei(n, 22; track $index) {
+    <tr placement="right" triggers="manual">
+    <td>
+    {{ n.context.$implicit.value.name }}
+    </td>
+    <td class="font-weight-bold">
+    {{ dataService.player( }}
+    </td>
+    <td>
+    <button class="btn btn-primary btn-sm line-height-1 font-weight-bold">
+    +
+    </button>
+    <td class="text-center">
+    @if (aiid) {
+      <span>
+      {{ dataService.player(aiid }}
+      </span>
+    }
+    <ng-container>
+
+    </ng-container>
+    </td>
+    </td>
+    </tr>
+  }
+  </select>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+@if (data.prestige) {
+  <ngb-tab id="tab_prestige" title="Upgrades">
+  <ng-container>
+    <h5>
+    You have 
+    <span class="text-prestige">
+    {{ t }} 
+    <i>
+    </i>
+    <div>
+    Current bonus : 
+    <span class="text-success">
+    + {{ i }} 
+    <i>
+    </i>
+    <i>
+    </i>
+    <h5>
+    Available Upgrades
+    </h5>
+    </span>
+    <div style="width:450px">
+    @for (item of et(n, 17, 0, ei(n, 18; track $index) {
+      @if (isUpgradeVisible(n.context.$implicit.key, n.context.$implicit.value) {
+        <div class="p-2 d-flex align-items-center border m-1">
+        <div class="flex-fill" style="height:auto!important">
+        <b>
+        {{ n.parent.context.$implicit.value.name }}
+        </b>
+        <br />
+        <span>
+        </span>
+        <br />
+         Cost: 
+        <span class="text-prestige">
+        <i>
+        </i>
+         {{ t }}
+        <div>
+        <button class="btn btn-primary">
+        Buy
+        </button>
+        </div>
+        </span>
+        </div>
+        </div>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    <h5>
+    Purchased Upgrades
+    </h5>
+    <div style="width:450px">
+    @for (item of et(n, 23, 0, ei(n, 24; track $index) {
+      @if (dataService.hasUpgrade(n.context.$implicit.key) {
+        <div class="p-2 d-flex align-items-center border m-1">
+        <div class="flex-fill" style="height:auto!important">
+        <b>
+        {{ n.parent.context.$implicit.value.name }}
+        </b>
+        <br />
+        <span>
+        </span>
+        </div>
+        </div>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    </div>
+    </div>
+    </div>
+    </span>
+    </h5>
+  </ng-container>
+  </ngb-tab>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  <div>
+  </div>
+  <div class="border-top">
+  @for (item of et(n, 3, 0, ei(n, 4; track $index) {
+    <span class="mr-2">
+    <i>
+     {{ dataService.powerCost(0, n.parent.context.power.id }} 
+    </i>
+    </span>
+  }
+  </div>
+</ng-container>
+</ngb-tab>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Upgrade
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <b>
+  Are you sure you want to buy {{ up.name }} ?
+  </b>
+  <br />
+  <div>
+  This upgrade costs 
+  <span class="text-prestige">
+  <i>
+  </i>
+   {{ t }}
+   which is more than 10% of your total.
+  <div>
+  Are you sure this upgrade is worth the loss of so much 
+  <i>
+  </i>
+   ? 
+  <div class="modal-footer">
+  <button class="btn btn-outline-dark" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-warning" type="button">
+  Shut up and take my 
+  <i>
+  </i>
+   !
+  </button>
+  </div>
+  </div>
+  </span>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+</ngb-tabset>

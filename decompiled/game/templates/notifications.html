@@ -1,0 +1,17 @@
+<h3>
+Notifications
+</h3>
+<div class="overflow-auto vh-100">
+@for (item of data.notifications.slice(; track $index) {
+  <div>
+   {{ e }} 
+  <a>
+  @if (n.context.$implicit.icon) {
+    <i>
+    </i>
+  }
+   {{ n.context.$implicit.text }}
+  </a>
+  </div>
+}
+</div>

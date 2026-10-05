@@ -1,4 +1,18 @@
-<section class="page world">
-  <h2>World</h2>
-  <p class="note">Stub view reconstructed from selector <code>app-world</code>. Original template was AOT-compiled into the production bundle.</p>
-</section>
+<div class="position-relative h-100 bg-dark world-page">
+  <canvas #mapCanvas class="world-canvas"></canvas>
+  <div class="position-absolute d-flex flex-column world-tools">
+    <button type="button" class="btn btn-sm btn-light mb-1" title="Zoom in"><i class="fas fa-plus"></i></button>
+    <button type="button" class="btn btn-sm btn-light mb-1" title="Zoom out"><i class="fas fa-minus"></i></button>
+    <button type="button" class="btn btn-sm btn-light" title="Recenter"><i class="fas fa-crosshairs"></i></button>
+  </div>
+  <div class="position-absolute d-flex world-filters">
+    <div class="bg-dark text-light px-1 mr-1">
+      <input id="showtraderoutes" type="checkbox" [(ngModel)]="hideTradeRoutes" />
+      <label class="m-0" for="showtraderoutes">Hide Trade Routes</label>
+    </div>
+    <div class="bg-dark text-light px-1">
+      <input id="showtroops" type="checkbox" [(ngModel)]="hideTroops" />
+      <label class="m-0" for="showtroops">Hide Troops</label>
+    </div>
+  </div>
+</div>

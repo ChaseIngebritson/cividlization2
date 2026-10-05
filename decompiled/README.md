@@ -85,11 +85,16 @@ See [CONTENT.md](./CONTENT.md) for label lists.
 - Saves use **pako** (zlib) + **crypto-js** (AES/HMAC family modules under `vendor/`).
 - `kongregate_api.js` at repo root is still referenced; in-app calls are noted in `game/kongregate-refs.js`.
 
+## Templates
+
+View Engine AOT view defs were decompiled to HTML under [`game/templates/`](./game/templates/).
+Those feeds were cleaned/polished into `angular-app/src/app/**/*.html` (home, shell, menus, city, …).
+Raw dumps can still be imperfect (bindings/tag nesting); polish before trusting as pixel-perfect.
+
 ## Limits
 
 - Identifiers inside logic are still minified (`l`, `n`, `og`, class `l`, …).
-- Angular component classes are minified; templates are AOT-compiled into the bundle.
-- This is **not** a runnable Angular source tree — data modules are readable ES exports for study/patching.
+- Angular component classes are minified; some template bindings remain approximate.
 - Original authors retain rights; this is archival / re-host support only.
 
 ## Regenerating

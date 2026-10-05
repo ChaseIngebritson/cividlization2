@@ -1,0 +1,2009 @@
+<nav class="d-flex bg-dark px-2 py-1 font-weight-bold flex-wrap" style="margin-top: -1px;">
+@if (city.bonus) {
+  <div class="mr-2" placement="bottom">
+  <span>
+  <i>
+  </i>
+  <ng-container>
+
+  </ng-container>
+  </span>
+  </div>
+}
+@if (!edit) {
+  <div class="bg-dark text-light mr-2">
+  @if (city.capital) {
+    <i>
+    </i>
+  }
+  @if (dataService.cityConnectedToCapital(city) {
+    <i placement="bottom" triggers="mouseenter:mouseleave">
+    </i>
+    <ng-container>
+
+    </ng-container>
+  }
+  <b>
+  {{ city.name }}
+  </b>
+  <button class="btn btn-dark btn-sm line-height-1 ml-2" title="Rename">
+  <i>
+  </i>
+  </button>
+  </div>
+}
+@if (edit) {
+  <div class="bg-dark text-light input-group  form-inline mr-2" style="width:200px">
+  <input class="form-control form-control-sm" type="text" />
+  <button class="btn btn-sm btn-secondary">
+  <i>
+  </i>
+  <button class="btn btn-sm btn-primary">
+  <i>
+  </i>
+  </button>
+  </button>
+  </div>
+}
+<div class="text-pop mr-2" placement="bottom">
+<i>
+</i>
+ {{ dataService.pop(city }} 
+<div class="text-food mr-2" placement="bottom">
+<i>
+</i>
+<span>
+ {{ t, i }} / {{ ? }}
+ (
+<span>
+{{ s }})
+<div class="text-health mr-2" placement="bottom">
+<i>
+</i>
+ {{ u }}
+@if (dataService.isUnlocked("buildings") {
+  <div class="text-prod mr-2" placement="bottom">
+  <i>
+  </i>
+   {{ t }}
+  <ng-container>
+
+  </ng-container>
+  </div>
+}
+<div class="text-gold mr-2" placement="bottom">
+<i>
+</i>
+ {{ r, a }} / {{ ? }} (
+<span>
+{{ o }}
+) 
+@if (city.gold == dataService.maxGold(city) {
+  <i>
+  </i>
+}
+<div class="text-science mr-2" placement="bottom">
+<i>
+</i>
+ {{ c }}
+@if (dataService.hasScience("art") {
+  <div class="text-culture mr-2" placement="bottom">
+  <i>
+  </i>
+   {{ t }}
+  <ng-container>
+
+  </ng-container>
+  </div>
+}
+@if (dataService.hasScience("spirituality") {
+  <div class="text-faith mr-2" placement="bottom">
+  <i>
+  </i>
+   {{ t }}
+  <ng-container>
+
+  </ng-container>
+  </div>
+}
+</div>
+</span>
+<div class="text-happiness mr-2" placement="bottom">
+<i>
+</i>
+ {{ d }}
+@if (dataService.isUnlocked("troops") {
+  <div class="text-gold mr-2" placement="bottom">
+  <i>
+  </i>
+  /
+  <i>
+  </i>
+   {{ t }}
+  <ng-container>
+
+  </ng-container>
+  </div>
+}
+@if (dataService.isUnlocked("menu_world") {
+  <div class="text-light mr-2" placement="bottom">
+  <i>
+  </i>
+   {{ t }}
+  <ng-container>
+
+  </ng-container>
+  </div>
+}
+</div>
+@if (data.dailys.length) {
+  <div class="d-inline-block" container="body" ngbDropdown="">
+  <button aria-haspopup="true" class="btn btn-warning btn-sm p-0 dropdown-toggle" id="bonusdd" ngbDropdownToggle="">
+  Use a bonus
+  <div aria-labelledby="bonusdd" class="bg-warning text-dark" ngbDropdownMenu="">
+  @for (item of data.dailys; track $index) {
+    <button class="dropdown-item" ngbDropdownItem="">
+    <i>
+    </i>
+     {{ n.context.$implicit.quantity }} 
+    </button>
+  }
+  </div>
+  </button>
+  </div>
+}
+<ng-container>
+  @if (dataService.foodDiff(city) {
+    <span>
+    New citizen in {{ t }}
+    </span>
+  }
+  @if (dataService.foodDiff(city) {
+    <span>
+    Loosing citizen in {{ t }}
+    </span>
+  }
+  <ng-container>
+
+  </ng-container>
+</ng-container>
+<ng-container>
+  @if ("food" == city.bonus) {
+    <span>
+    <span class="text-food">
+    Food
+    </span>
+     bonus: 
+    <span class="text-food">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("prod" == city.bonus) {
+    <span>
+    <span class="text-prod">
+    Industry
+    </span>
+     bonus: 
+    <span class="text-prod">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("science" == city.bonus) {
+    <span>
+    <span class="text-science">
+    Science
+    </span>
+     bonus: 
+    <span class="text-science">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("gold" == city.bonus) {
+    <span>
+    <span class="text-gold">
+    Gold
+    </span>
+     bonus: 
+    <span class="text-gold">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("culture" == city.bonus) {
+    <span>
+    <span class="text-culture">
+    Culture
+    </span>
+     bonus: 
+    <span class="text-culture">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("faith" == city.bonus) {
+    <span>
+    <span class="text-faith">
+    Faith
+    </span>
+     bonus: 
+    <span class="text-faith">
+    <i>
+    </i>
+     +20%
+    </span>
+    </span>
+  }
+  @if ("recruitment" == city.bonus) {
+    <span>
+    <span class="text-dark">
+    Recruitment
+    </span>
+     bonus: recruitment speed +25%
+    </span>
+  }
+  <ng-container>
+
+  </ng-container>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Food
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td>
+  1
+  </td>
+  <tr>
+  <td class="text-pop">
+  Idle
+  </td>
+  <td>
+  <tr>
+  <td class="text-pop">
+  {{ conf.citizens.farmers.name(dataService }}: 
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "palace") {
+    <tr>
+    <td class="text-prod">
+    Palace: 
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "granary") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.granary.label(dataService.player( }}: 
+    </td>
+    <td class="text-success">
+    + {{ dataService.buildingBonus("granary", 0 }}
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "port") {
+    <tr>
+    <td class="text-prod">
+    Harbor: 
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  </tr>
+  </td>
+  @if (dataService.hasBuilding(city, "mill") {
+    <tr>
+    <td class="text-prod">
+    Mill: 
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "hanging_gardens") {
+    <tr>
+    <td class="text-prod">
+    Hanging Gardens: 
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  </tr>
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  <tr>
+  <td>
+  Happiness
+  </td>
+  <td>
+  @if ("food" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasPolicy("monopoly") {
+    <tr>
+    <td>
+    Monopoly
+    </td>
+    <td class="text-success">
+    + 10%
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Feathered Serpent
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  </td>
+  @if (data.spelltime.abundance) {
+    <tr>
+    <td>
+    Abundance
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Third Eye
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  </tr>
+  @if (data.prestige) {
+    <tr>
+    <td>
+    Prestige
+    </td>
+    <td class="text-success">
+    + {{ t }} %
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total gains: 
+  </td>
+  <td>
+  <tr>
+  <td>
+  Citizens
+  </td>
+  <td>
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </td>
+  </tr>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Gold
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td class="text-pop">
+  Merchants
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "palace") {
+    <tr>
+    <td class="text-prod">
+    Palace
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "cop") {
+    <tr>
+    <td class="text-prod">
+    Copper mine
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "go") {
+    <tr>
+    <td class="text-prod">
+    Gold mine
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "coa") {
+    <tr>
+    <td class="text-prod">
+    Coal mine
+    </td>
+    <td class="text-success">
+    + 25
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "castle") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.castle.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "colossus") {
+    <tr>
+    <td class="text-special">
+    Colossus
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  @if (city.capital && dataService.hasPolicy("aristocracy") {
+    <tr>
+    <td class="text-culture">
+    Aristocracy
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasPolicy("meritocracy") {
+    <tr>
+    <td class="text-culture">
+    Meritocracy
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.cityConnectedToCapital(city) {
+    <tr>
+    <td class="text-special">
+    Connected to capital
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  </tr>
+  <tr>
+  <td>
+  Happiness
+  </td>
+  <td>
+  @if (dataService.colonyNb() {
+    <tr>
+    <td class="text-colony">
+    Colonies
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </td>
+  @if ("gold" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  @if (dataService.upgradeGoldMult(0) {
+    <tr>
+    <td>
+    Upgrades
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.isUnlocked("trade") {
+    <tr>
+    <td>
+    Trade
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total gains: 
+  </td>
+  <td>
+  @if (dataService.isUnlocked("troops") {
+    <tr>
+    <td>
+    Troop maintenance
+    </td>
+    <td class="text-danger">
+    - {{ t }} 
+    </td>
+    </tr>
+  }
+  </td>
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Science
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td class="text-pop">
+  Population
+  </td>
+  <td>
+  @if (dataService.isUnlocked("citizen_scientists") {
+    <tr>
+    <td class="text-pop">
+    Scientists
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "palace") {
+    <tr>
+    <td class="text-prod">
+    Palace
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "library") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.library.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + {{ dataService.buildingBonus("library", 0 }}
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "uni") {
+    <tr>
+    <td class="text-prod">
+    University
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "school") {
+    <tr>
+    <td class="text-prod">
+    Public School
+    </td>
+    <td class="text-success">
+    + 25
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "monastery") {
+    <tr>
+    <td class="text-culture">
+    Monastery (Reformation)
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "uni") {
+    <tr>
+    <td class="text-culture">
+    University (Scientific State)
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  @if (city.capital && dataService.hasPolicy("wisdom_ancients") {
+    <tr>
+    <td class="text-culture">
+    Wisdom of the Ancients
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "oxford") {
+    <tr>
+    <td class="text-special">
+    Oxford University
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  <tr>
+  <td>
+  Happiness
+  </td>
+  <td>
+  @if (dataService.colonyNb() {
+    <tr>
+    <td class="text-colony">
+    Colonies
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </td>
+  @if ("science" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  @if (dataService.isUnlocked("trade") {
+    <tr>
+    <td>
+    Trade
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Clairvoyance
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (data.charging.enlightment) {
+    <tr>
+    <td>
+    Enlightment
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (data.spelltime.bacchanalia) {
+    <tr>
+    <td>
+    Bacchanalia
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (data.charging.punisher) {
+    <tr>
+    <td>
+    The Punisher
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.upgradeScienceMult(0) {
+    <tr>
+    <td>
+    Upgrades
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Culture
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td class="text-pop">
+  Artists
+  </td>
+  <td>
+  @if (conf.citizens.idle.culture(dataService) {
+    <tr>
+    <td class="text-pop">
+    Idle
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "palace") {
+    <tr>
+    <td class="text-prod">
+    Palace
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "monument") {
+    <tr>
+    <td class="text-prod">
+    Monument
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "amphitheatre") {
+    <tr>
+    <td class="text-prod">
+    Amphitheatre
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "opera") {
+    <tr>
+    <td class="text-prod">
+    Opera
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "museum") {
+    <tr>
+    <td class="text-prod">
+    Museum
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "castle") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.castle.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "zoo") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.zoo.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + 10
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "pyramid") {
+    <tr>
+    <td class="text-special">
+    Pyramids
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "mausoleum") {
+    <tr>
+    <td class="text-special">
+    Mausoleum
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "forbidden") {
+    <tr>
+    <td class="text-special">
+    Forbidden City
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "sistine") {
+    <tr>
+    <td class="text-special">
+    Sistine Chapel
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "versailles") {
+    <tr>
+    <td class="text-special">
+    Versailles
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  @if (dataService.hasWonder(city.ownerid, "hermitage") {
+    <tr>
+    <td class="text-special">
+    Hermitage
+    </td>
+    <td class="text-success">
+    + {{ 5 * city.relics }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "library") {
+    <tr>
+    <td class="text-culture">
+    Library (Philosophy)
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (city.capital && dataService.hasPolicyGroup("traditionalism") {
+    <tr>
+    <td class="text-culture">
+    Traditionalism
+    </td>
+    <td class="text-success">
+    + 15 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicyGroup("imperialism") {
+    <tr>
+    <td class="text-culture">
+    Imperialism
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  </tr>
+  <tr>
+  <td>
+  Happiness
+  </td>
+  <td>
+  @if ("culture" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Ouroboros
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.isUnlocked("trade") {
+    <tr>
+    <td>
+    Trade routes
+    </td>
+    <td class="text-success">
+    + {{ t }} 
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (data.spelltime.dionysia) {
+    <tr>
+    <td>
+    Dionysia
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Faith
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td class="text-pop">
+  Priests
+  </td>
+  <td>
+  @if (dataService.player() {
+    <tr>
+    <td class="text-pop">
+    Population (Orphic Mysteries)
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "shrine") {
+    <tr>
+    <td class="text-prod">
+    Shrine
+    </td>
+    <td class="text-success">
+    + {{ dataService.hasPolicyGroup("piety" }}
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "temple") {
+    <tr>
+    <td class="text-prod">
+    Temple
+    </td>
+    <td class="text-success">
+    + 5
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "monastery") {
+    <tr>
+    <td class="text-prod">
+    Monastery
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "pyramid") {
+    <tr>
+    <td class="text-prod">
+    Pyramids
+    </td>
+    <td class="text-success">
+    + {{ 2 * dataService.wondersNbInCity(city }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "monastery") {
+    <tr>
+    <td class="text-culture">
+    Monastery (Reformation)
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "uni") {
+    <tr>
+    <td class="text-culture">
+    University (Scientific State)
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  @if (city.capital && dataService.hasPolicy("landed_elite") {
+    <tr>
+    <td class="text-culture">
+    Landed Elite
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasPolicy("colonialism") {
+    <tr>
+    <td class="text-culture">
+    State Religion
+    </td>
+    <td class="text-success">
+    + 15 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("proselytism") {
+    <tr>
+    <td class="text-culture">
+    Proselytism
+    </td>
+    <td class="text-success">
+    + {{ dataService.player( }} %
+    </td>
+    </tr>
+  }
+  @if (data.spelltime.bacchanalia) {
+    <tr>
+    <td>
+    Bacchanalia
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (data.charging.punisher) {
+    <tr>
+    <td>
+    The Punisher
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr>
+  <td>
+  Happiness
+  </td>
+  <td>
+  @if ("faith" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.isUnlocked("trade") {
+    <tr>
+    <td>
+    Trade
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  @if (data.difficulty) {
+    <tr>
+    <td class="text-special">
+    Difficulty
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Production
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td class="text-pop">
+  Builders: 
+  </td>
+  <td>
+  @if (dataService.hasBuilding(city, "palace") {
+    <tr>
+    <td class="text-prod">
+    Palace
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "workshop") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.workshop.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + {{ dataService.buildingBonus("workshop", 0 }}
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "furnace") {
+    <tr>
+    <td class="text-prod">
+    Furnace
+    </td>
+    <td class="text-success">
+    + 15
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "ironworks") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.ironworks.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + {{ dataService.buildingBonus("ironworks", 0 }}
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "factory") {
+    <tr>
+    <td class="text-prod">
+    Factory
+    </td>
+    <td class="text-success">
+    + 50
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "hydro") {
+    <tr>
+    <td class="text-prod">
+    Hydro Plant
+    </td>
+    <td class="text-success">
+    + 50
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total production: 
+  </td>
+  <td>
+  @if (dataService.hasPolicy("administration") {
+    <tr>
+    <td class="text-culture">
+    Administration
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasPolicy("liberalism") {
+    <tr>
+    <td class="text-culture">
+    Liberalism
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasWonder(0, "ruhr") {
+    <tr>
+    <td class="text-culture">
+    Ruhr Valley
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (2 == dataService.cityConnectedToCapital(city) {
+    <tr>
+    <td class="text-special">
+    Connected to capital
+    </td>
+    <td class="text-success">
+    + 25 %
+    </td>
+    </tr>
+  }
+  <tr>
+  <td>
+  Happiness: 
+  </td>
+  <td>
+  @if ("prod" == city.bonus) {
+    <tr>
+    <td>
+    City bonus
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Gateway to Eternity
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Third Eye
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (data.prestige) {
+    <tr>
+    <td>
+    Prestige
+    </td>
+    <td class="text-success">
+    + {{ t }} %
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Health
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td class="text-success">
+  100 %
+  </td>
+  <tr>
+  <td>
+  Population
+  </td>
+  <td class="text-danger">
+  - {{ t }}
+  @if (conf.citizens.scientists.health(dataService) {
+    <tr>
+    <td class="text-pop">
+    Scientists
+    </td>
+    <td class="text-success">
+     +{{ t }} 
+    </td>
+    </tr>
+  }
+  </td>
+  @if (city.plague && city.plague > 0) {
+    <tr>
+    <td class="text-danger">
+    Plague !
+    </td>
+    <td class="text-danger">
+    - 30%
+    </td>
+    </tr>
+  }
+  @if (dataService.hasScience("pottery") {
+    <tr>
+    <td class="text-science">
+    Pottery
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "well") {
+    <tr>
+    <td class="text-prod">
+    Well
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "aqueduct") {
+    <tr>
+    <td class="text-prod">
+    Aqueduct
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "hospital") {
+    <tr>
+    <td class="text-prod">
+    Hospital
+    </td>
+    <td class="text-success">
+    + {{ dataService.hasPolicy("procedures" }} %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "dispensary") {
+    <tr>
+    <td class="text-prod">
+    Dispensary
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "quarantine") {
+    <tr>
+    <td class="text-prod">
+    Quarantine Station
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("organized_religion") {
+    <tr>
+    <td class="text-prod">
+    Temple (Organized Religion)
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("isolationism") {
+    <tr>
+    <td class="text-culture">
+    Isolationism
+    </td>
+    <td class="text-success">
+    + 15 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("nih") {
+    <tr>
+    <td class="text-culture">
+    National Institute of Health
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.upgradeHealth(0) {
+    <tr>
+    <td>
+    Upgrades
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  {{ i }}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+</div>
+</div>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Happiness
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td class="text-success">
+  100 %
+  </td>
+  <tr>
+  <td>
+  Population
+  </td>
+  <td class="text-danger">
+  - {{ t }}
+  <tr>
+  <td>
+  Artists
+  </td>
+  <td class="text-success">
+  + {{ i }}
+  @if (conf.citizens.idle.happiness(dataService) {
+    <tr>
+    <td class="text-pop">
+    Idle
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  </td>
+  <tr>
+  <td>
+  Number of Cities
+  </td>
+  <td class="text-danger">
+  - {{ s }}
+  @if (!city.capital) {
+    <tr>
+    <td>
+    Distance from capital
+    </td>
+    <td class="text-danger">
+    - {{ t }}
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.colonyNb() {
+    <tr>
+    <td class="text-colony">
+    Colonies
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @for (item of data.players; track $index) {
+    @if (n.context.$implicit.id > 1 && dataService.haveRelation(0, n.context.$implicit.id) {
+      <tr>
+      <td>
+      Infl. from {{ n.parent.context.$implicit.name }} 
+      @if (city.rightful_ownerid == n.parent.context.$implicit.id) {
+        <span>
+        (Rightful)
+        </span>
+      }
+      <td class="text-danger">
+      - {{ t }}
+      </td>
+      </td>
+      </tr>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  @if (dataService.hasPolicy("patriotism") {
+    <tr>
+    <td class="text-culture">
+    Patriotism
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasBuilding(city, "gardens") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.gardens.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + {{ 100 * dataService.buildingBonus("gardens", 0 }} %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "theatre") {
+    <tr>
+    <td class="text-prod">
+    Theatre
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  </tr>
+  </td>
+  @if (dataService.hasBuilding(city, "hanging_gardens") {
+    <tr>
+    <td class="text-prod">
+    Hanging Gardens
+    </td>
+    <td class="text-success">
+    + 10 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "circus") {
+    <tr>
+    <td class="text-prod">
+    Circus
+    </td>
+    <td class="text-success">
+    + 15 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "zoo") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.zoo.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + 15 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasPolicy("monopoly") {
+    <tr>
+    <td>
+    Monopoly
+    </td>
+    <td class="text-success">
+    + 5%
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasPolicy("theocracy", city.ownerid) {
+    <tr>
+    <td class="text-prod">
+    Monastery (Theocracy)
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("secularism", city.ownerid) {
+    <tr>
+    <td class="text-prod">
+    Shrine (Secularism)
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("despotism", city.ownerid) {
+    <tr>
+    <td class="text-prod">
+    Barracks (Despotism)
+    </td>
+    <td class="text-success">
+    + 5 %
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Bliss
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Eye of Horus
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td>
+    Valhalla
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (data.charging.newfire) {
+    <tr>
+    <td>
+    New Fire
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.upgradeHappiness(0) {
+    <tr>
+    <td>
+    Upgrades
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  {{ u }}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Defense
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td class="text-success">
+  100 %
+  </td>
+  <tr>
+  <td>
+  Population
+  </td>
+  <td class="text-success">
+  + {{ t }}
+  @if (dataService.hasBuilding(city, "walls") {
+    <tr>
+    <td class="text-prod">
+    Walls
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.hasBuilding(city, "castle") {
+    <tr>
+    <td class="text-prod">
+    {{ conf.buildings.castle.label(dataService.player( }}
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "fortress") {
+    <tr>
+    <td class="text-prod">
+    Fortress
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasBuilding(city, "temple_artemis") {
+    <tr>
+    <td class="text-special">
+    Temple of Artemis
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasWonder(city.ownerid, "great_wall") {
+    <tr>
+    <td class="text-special">
+    Great Wall
+    </td>
+    <td class="text-success">
+    + 50 %
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (city.capital && dataService.hasPolicy("city_state", city.ownerid) {
+    <tr>
+    <td class="text-culture">
+    City-state
+    </td>
+    <td class="text-success">
+    + 20 %
+    </td>
+    </tr>
+  }
+  @if (dataService.player() {
+    <tr>
+    <td class="text-culture">
+    Stone Skin
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  {{ i }}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+</span>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Troop unitary maintenance cost
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td class="text-danger">
+  {{ t }}
+  @if (dataService.hasBuilding(city, "armory") {
+    <tr>
+    <td class="text-prod">
+    Armory
+    </td>
+    <td class="text-success">
+    - 50 %
+    </td>
+    </tr>
+  }
+  </td>
+  @if (city.capital && dataService.hasPolicy("oligarchy", city.ownerid) {
+    <tr>
+    <td class="text-culture">
+    Oligarchy
+    </td>
+    <td class="text-success">
+    - 50 %
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("professional_army", city.ownerid) {
+    <tr>
+    <td class="text-culture">
+    Professional Army
+    </td>
+    <td class="text-success">
+    - 50 %
+    </td>
+    </tr>
+  }
+  @if (data.charging.warpath) {
+    <tr>
+    <td class="text-magic">
+    Warpath
+    </td>
+    <td class="text-success">
+    - {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  {{ i }}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+</span>
+</div>
+</div>
+</nav>

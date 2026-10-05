@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DataService } from '../../../core/services/data.service';
 
-/** Reconstructed from production selector `app-citybuildings`. */
 @Component({
   selector: 'app-citybuildings',
   standalone: true,
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './city-buildings.component.scss',
 })
 export class CityBuildingsComponent {
-  readonly title = 'City Buildings';
+  private readonly data = inject(DataService);
+  buildingList = Object.values(this.data.conf.buildings)
+    .slice(0, 25)
+    .map((b: any) => ({
+      id: b.id,
+      label: typeof b.label === 'function' ? b.label() : b.label,
+    }));
 }

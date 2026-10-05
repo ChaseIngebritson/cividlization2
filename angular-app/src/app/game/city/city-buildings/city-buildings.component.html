@@ -1,4 +1,12 @@
-<section class="page city-buildings">
-  <h2>City Buildings</h2>
-  <p class="note">Stub view reconstructed from selector <code>app-citybuildings</code>. Original template was AOT-compiled into the production bundle.</p>
-</section>
+<div class="border-left h-100 d-flex flex-column city-buildings">
+  <div class="h-40 d-flex flex-column p-2">
+    <h3>Buildings</h3>
+    <div class="flex-fill overflow-auto">
+      @for (b of buildingList; track b.id) {
+        <div class="d-flex justify-content-between building-row">
+          <span>{{ b.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

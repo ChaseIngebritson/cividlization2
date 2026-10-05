@@ -1,4 +1,6 @@
-<section class="page city-topmenu">
-  <h2>City Topmenu</h2>
-  <p class="note">Stub view reconstructed from selector <code>app-citytopmenu</code>. Original template was AOT-compiled into the production bundle.</p>
-</section>
+<nav class="d-flex bg-dark px-2 py-1 font-weight-bold flex-wrap city-topmenu">
+  <div class="bg-dark text-light mr-2">
+    <b>{{ cityName }}</b>
+  </div>
+  <a class="btn btn-link text-primary" routerLink="/game/world">Show on map</a>
+</nav>

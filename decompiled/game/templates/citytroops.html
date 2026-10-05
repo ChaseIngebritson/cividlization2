@@ -1,0 +1,254 @@
+<div class="border-left h-100 d-flex flex-column">
+<div class="h-40 d-flex flex-column">
+<h3>
+Troops
+</h3>
+@if (dataService.isUnlocked("recruit_x10") {
+  <div class="text-primary">
+  <i>
+  </i>
+   Ctrl for x10 
+  @if (dataService.isUnlocked("recruit_x100") {
+    <span>
+     & Shift for x100
+    </span>
+  }
+  </div>
+}
+<div class="flex-fill overflow-auto">
+@for (item of et(n, 10, 0, ei(n, 11; track $index) {
+  @if (n.context.$implicit.value > 0) {
+    <div class="d-flex p-1" placement="left" triggers="manual">
+    <div class="flex-fill">
+    {{ conf.troops[n.parent.context.$implicit.key].name(dataService.player( }}: {{ ? }}
+    </div>
+    @if (isUpgradable(conf.troops[n.parent.context.$implicit.key]) {
+      <button triggers="manuel">
+      <i>
+      </i>
+      <ng-container>
+
+      </ng-container>
+      </button>
+    }
+    @if (conf.troops[n.parent.context.$implicit.key].citizen) {
+      <button class="btn btn-sm btn-danger bg-pop mr-1" title="Populate (only if city population less than 20)">
+      <i>
+      </i>
+       +{{ troopsNb(n.parent.parent.context.$implicit.key }}
+      </button>
+    }
+    @if ("worker" == n.parent.context.$implicit.key && dataService.hasPolicy("wonder_builder") {
+      <button class="btn btn-sm btn-danger bg-pop mr-1" title="Whip !">
+      <i>
+      </i>
+       +{{ t }}
+      </button>
+    }
+    @if (!conf.troops[n.parent.context.$implicit.key].citizen) {
+      <button class="btn btn-sm btn-danger mr-1" title="Disband">
+      - {{ troopsNb(n.parent.parent.context.$implicit.key }}
+      </button>
+    }
+    <ng-container>
+
+    </ng-container>
+    </div>
+  }
+  <ng-container>
+
+  </ng-container>
+}
+<div class="h-60 border-top d-flex flex-column">
+@if (!city.troop_queue.length) {
+  <div>
+  <i>
+  </i>
+  Recruiting nothing
+  </div>
+}
+@if (city.troop_queue.length) {
+  <div class="overflow-auto flex-fill">
+  Recruiting 
+  @if (city.autorecruit) {
+    <span>
+    (
+    <i>
+    </i>
+     auto-recruiting)
+    </span>
+  }
+  <ul class="list-unstyled">
+  @for (item of city.troop_queue; track $index) {
+    <li class="d-flex align-items-center px-1">
+    <div class="flex-fill" style="height:auto!important">
+     {{ conf.troops[n.context.$implicit.id].name(dataService.player( }} 
+    @if (n.context.$implicit.nb > 1) {
+      <span>
+      (x{{ n.parent.context.$implicit.nb }})
+      </span>
+    }
+    : {{ t }} 
+    @if (dataService.isUnlocked("prod_purchase") {
+      <button style="width:68px" triggers="manuel">
+      <i>
+      </i>
+       x{{ nb(n.parent.context.index }}
+      <ng-container>
+
+      </ng-container>
+      </button>
+    }
+    @if (isQueueAllowed() {
+      <button class="btn btn-sm btn-danger mr-1" style="width:40px">
+      -{{ nb(n.parent.context.index }}
+      </button>
+    }
+    </div>
+    </li>
+  }
+  </ul>
+  </div>
+}
+<button class="btn btn-primary">
+{{ isQueueAllowed( }}
+</button>
+@if (troopSelection && isAnythingVisible() {
+  <div class="overflow-auto flex-fill" style="height:0">
+  @for (item of et(n, 2, 0, ei(n, 3; track $index) {
+    @if (isVisible(n.context.$implicit.value) {
+      <div class="border px-2" placement="left-bottom" triggers="manual">
+      <div class="d-flex">
+      <div class="flex-fill">
+      {{ t }}
+      </div>
+      <button class="btn btn-sm btn-primary mr-1">
+      +{{ "governor" == n.parent.context.$implicit.key ? 1 : anb( }}
+      </button>
+      @if (!n.parent.context.$implicit.value.noautorecruit && dataService.isUnlocked("recruit_x10") {
+        <button title="Auto-recruit">
+        <i>
+        </i>
+        </button>
+      }
+      <div class="d-flex">
+      <div class="text-gold mr-2">
+      {{ i }} 
+      <i>
+      </i>
+      <div class="mr-2">
+      <i>
+      </i>
+       {{ s }} 
+      @if (n.parent.context.$implicit.value.citizen) {
+        <div class="text-pop">
+        <i>
+        </i>
+         {{ n.parent.parent.context.$implicit.value.citizen }} 
+        </div>
+      }
+      <ng-container>
+
+      </ng-container>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  </div>
+}
+@if (troopSelection && !isAnythingVisible() {
+  <div>
+   There is no troop available for recruit in this city 
+  </div>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  <div>
+  </div>
+  @if ("caravan" == n.context.troop.id) {
+    <div class="border-top mt-1">
+     Range: {{ dataService.tradeRouteMaxDist( }} 
+    </div>
+  }
+  <div class="border-top mt-1">
+  @if (t) {
+    <span class="mr-2">
+    <i>
+    </i>
+    </span>
+  }
+  @if (n.context.troop.siege) {
+    <span class="mr-2">
+    <i>
+    </i>
+    </span>
+  }
+  <span class="mr-2">
+  <i>
+  </i>
+   {{ t }}
+  <span class="mr-2">
+  <i>
+  </i>
+   {{ i }}
+  <span class="mr-2">
+  <i>
+  </i>
+   {{ s }}
+  <span class="mr-2">
+  <i>
+  </i>
+   {{ n.context.troop.capacity }}
+  <div class="border-top mt-1">
+  <span class="text-gold mr-2">
+  <i>
+  </i>
+   {{ u }}
+  <span class="text-time mr-2">
+  <i>
+  </i>
+   ({{ r }})
+  @if (n.context.troop.citizen) {
+    <span class="text-pop">
+    <i>
+    </i>
+     ({{ n.parent.context.troop.citizen }})
+    </span>
+  }
+  </span>
+  </span>
+  </div>
+  </span>
+  </span>
+  </span>
+  </span>
+  </div>
+</ng-container>
+<ng-container>
+   Buy {{ nb(n.context.idx }} for 
+  <i>
+  </i>
+  {{ t }}
+</ng-container>
+<ng-container>
+   Upgrade to 
+  <span class="text-troop">
+  {{ n.context.upgrade }}
+  </span>
+   for 
+  <i>
+  </i>
+  {{ t }}
+</ng-container>
+</div>
+</div>
+</div>
+</div>

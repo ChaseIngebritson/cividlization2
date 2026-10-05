@@ -1,0 +1,61 @@
+@if (id) {
+  <div class="d-flex flex-column h-100">
+  <div class="flex-fill overflow-auto" style="height:0">
+  <h3>
+  {{ help.name }}
+  </h3>
+  <div>
+  </div>
+  @if (parent && isAvailable(parent) {
+    <nav class="border-top d-flex">
+    <div class="bg-dark text-light p-2" style="width:95px">
+    Parent
+    </div>
+    <div class="nav">
+    <a class="nav-link">
+    {{ parent.name }}
+    </a>
+    </div>
+    </nav>
+  }
+  @if (children.length) {
+    <nav class="border-top d-flex">
+    <div class="bg-dark text-light p-2" style="width:95px">
+    Children
+    </div>
+    <div class="nav">
+    @for (item of children; track $index) {
+      @if (isAvailable(n.context.$implicit) {
+        <a class="nav-link">
+        {{ n.parent.context.$implicit.name }}
+        </a>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    </div>
+    </nav>
+  }
+  </div>
+  @if (siblings.length) {
+    <nav class="border-top d-flex">
+    <div class="bg-dark text-light p-2" style="width:95px">
+    Related
+    </div>
+    <div class="nav">
+    @for (item of siblings; track $index) {
+      @if (isAvailable(n.context.$implicit) {
+        <a>
+        {{ n.parent.context.$implicit.name }}
+        </a>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    </div>
+    </nav>
+  }
+  </div>
+}

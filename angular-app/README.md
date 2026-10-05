@@ -12,7 +12,7 @@ are stubbed; `DataService` method bodies are stubs ready to be ported from
 | Original (inferred) | This project |
 |---------------------|--------------|
 | Angular ~8 View Engine + NgModules | Angular 19 standalone components |
-| AOT templates in bundle | Stub HTML per `app-*` selector |
+| AOT templates in bundle | Recovered via View Engine decompile → polished HTML (see `../decompiled/game/templates/`) |
 | Minified `dataService` class | `DataService` with recovered API surface |
 | Data tables `ug`/`dg`/`og`/… | `src/app/data/*.ts` |
 

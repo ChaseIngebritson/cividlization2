@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DataService } from '../../../core/services/data.service';
 
-/** Reconstructed from production selector `app-citytroops`. */
 @Component({
   selector: 'app-citytroops',
   standalone: true,
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './city-troops.component.scss',
 })
 export class CityTroopsComponent {
-  readonly title = 'City Troops';
+  private readonly data = inject(DataService);
+  unitList = Object.values(this.data.conf.units).map((u: any) => ({
+    id: u.id,
+    name: typeof u.name === 'function' ? u.name({ civ_id: this.data.player().civ_id }) : u.name,
+  }));
 }

@@ -1,0 +1,19 @@
+<div class="position-absolute" style="bottom:0;right:0;z-index:5">
+@for (item of toastService.toasts; track $index) {
+  <ngb-toast aria-atomic="true" role="alert">
+  <div class="d-flex cursor-pointer">
+  <div>
+  @if (n.context.$implicit.icon) {
+    <i>
+    </i>
+  }
+  <div class="font-weight-bold ml-2 flex-fill" style="height:auto!important">
+  </div>
+  <div class="text-150 font-wieght-bold line-height-1" title="close">
+   ×
+  </div>
+  </div>
+  </div>
+  </ngb-toast>
+}
+</div>

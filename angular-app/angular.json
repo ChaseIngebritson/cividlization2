@@ -54,6 +54,8 @@
               }
             ],
             "styles": [
+              "src/styles.original.css",
+              "src/component-styles.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -120,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

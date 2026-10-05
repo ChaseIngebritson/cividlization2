@@ -1,9 +1,37 @@
-<div class="game-shell">
+<div class="d-flex flex-column vh-100">
   <app-topbar></app-topbar>
-  <div class="game-body">
-    <app-leftmenu></app-leftmenu>
-    <main class="game-content">
-      <router-outlet></router-outlet>
-    </main>
+  <div class="container-fluid px-0 flex-fill">
+    <div class="d-flex h-100">
+      <div>
+        <app-leftmenu></app-leftmenu>
+      </div>
+      <div class="flex-fill" style="height:auto!important;width:0;">
+        <router-outlet></router-outlet>
+        <app-toasts aria-atomic="true" aria-live="polite"></app-toasts>
+      </div>
+    </div>
   </div>
+
+  @if (data.isDailyAllowed()) {
+    <div
+      class="bounce"
+      routerLink="/game/daily"
+      style="position:absolute;right:225px;bottom:10px"
+    >
+      <i class="fas fa-gift text-warning text-300"></i>
+    </div>
+  }
+  @if (data.isDeitySelectionAllowed()) {
+    <div
+      class="bounce"
+      routerLink="/game/deity"
+      style="position:absolute;right:300px;bottom:10px"
+    >
+      <i class="fas fa-ankh text-danger text-300"></i>
+    </div>
+  }
+
+  @if (data.player().deity) {
+    <app-spells></app-spells>
+  }
 </div>

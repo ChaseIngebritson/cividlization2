@@ -1,0 +1,202 @@
+<ngb-tabset>
+<ngb-tab title="Game Options">
+<ng-container>
+  <h2>
+  Game options
+  </h2>
+  <h5>
+  Difficulty
+  </h5>
+  <div class="d-flex">
+  @for (item of et(n, 6, 0, ei(n, 7; track $index) {
+    <div>
+    <b class="text-center">
+    {{ n.context.$implicit.value.name }}
+    </b>
+    <p class="mb-1">
+    </p>
+    </div>
+  }
+  <h5>
+  Offline
+  </h5>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-save" type="checkbox" />
+  <label class="form-check-label" for="a-save">
+  Prevent progress when offline
+  </label>
+  <h5>
+  Barbarians
+  </h5>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="no_respawn" type="checkbox" />
+  <label class="form-check-label" for="no_respawn">
+  Prevent city respawn
+  </label>
+  <h5>
+  Stats & highscore
+  </h5>
+  <div class="form-group form-check">
+  <input class="form-check-input" id="nostats" type="checkbox" />
+  <label class="form-check-label" for="nostats">
+  Do not send stats & highscores
+  </label>
+  <button class="btn btn-primary">
+  Save
+  </button>
+  @if (saved) {
+    <div class="text-success">
+    Changes saved succesfully !
+    </div>
+  }
+  <h5>
+  Restart this run
+  </h5>
+  <p>
+  Like a reincarnation but without any gain from this run !
+  </p>
+  </div>
+  <button class="btn btn-danger">
+  Restart this run
+  </button>
+  </div>
+  </div>
+  </div>
+</ng-container>
+<ngb-tab title="UI Options">
+<ng-container>
+  <h2>
+  UI options
+  </h2>
+  <h5>
+  Theme
+  </h5>
+  <div class="form-group form-check">
+  <input class="form-check-input" id="darktheme" type="checkbox" />
+  <label class="form-check-label" for="darktheme">
+  Dark theme (experimental)
+  </label>
+  <h5>
+  Auto-pause
+  </h5>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-citizen" type="checkbox" />
+  <label class="form-check-label" for="a-citizen">
+  New citizen
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-building" type="checkbox" />
+  <label class="form-check-label" for="a-building">
+  New building
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-science" type="checkbox" />
+  <label class="form-check-label" for="a-science">
+  New science
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-incoming" type="checkbox" />
+  <label class="form-check-label" for="a-incoming">
+  Incoming attack
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-city_captured" type="checkbox" />
+  <label class="form-check-label" for="a-city_captured">
+  City captured
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-city_lost" type="checkbox" />
+  <label class="form-check-label" for="a-city_lost">
+  City lost
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-city_joined" type="checkbox" />
+  <label class="form-check-label" for="a-city_joined">
+  City joined
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="a-plague" type="checkbox" />
+  <label class="form-check-label" for="a-plague">
+  Plague
+  </label>
+  <h5>
+  Notifications
+  </h5>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="notif_pop" type="checkbox" />
+  <label class="form-check-label" for="notif_pop">
+  New Citizen
+  </label>
+  <div class="form-group form-check d-inline-block mr-1">
+  <input class="form-check-input" id="notif_building" type="checkbox" />
+  <label class="form-check-label" for="notif_building">
+  New Building
+  </label>
+  <h5>
+  History
+  </h5>
+  <div>
+  <label class="form-label" for="max_rpt">
+  Battle Report History
+  </label>
+  <input class="form-input" id="max_rpt" min="5" type="number" />
+  <label class="form-label ml-2" for="max_notif">
+  Notification History
+  </label>
+  <input class="form-input" id="max_notif" min="5" type="number" />
+  <button class="btn btn-primary">
+  Save
+  </button>
+  @if (saved) {
+    <div class="text-success">
+    Changes saved succesfully !
+    </div>
+  }
+  <ng-container>
+
+  </ng-container>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</ng-container>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Restart this run
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <div class="text-danger">
+  <b>
+  Are you sure you want to restart ?
+  </b>
+  <br />
+   All progress from this run will be lost !
+  <div class="modal-footer">
+  <button class="btn btn-secondary" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-danger" type="button">
+  Restart
+  </button>
+  </div>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+</ngb-tab>
+</ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,276 @@
+<div class="h-100 overflow-auto">
+<h2>
+Battle reports
+</h2>
+@if (!report) {
+  <button class="btn btn-sm btn-danger">
+  Mark all as read
+  </button>
+}
+@if (!report) {
+  <div class="d-flex flex-column h-100">
+  <div class="flex-fill" style="height:0">
+  <table class="table table-sm">
+  <thead>
+  <th>
+  </th>
+  <th>
+  Date
+  </th>
+  <th>
+  From
+  </th>
+  <th>
+  To
+  </th>
+  <th>
+  Status
+  </th>
+  <th>
+  </th>
+  <tbody>
+  @for (item of data.reports.slice(; track $index) {
+    <tr>
+    <td>
+    @if (!n.context.$implicit.read) {
+      <i>
+      </i>
+    }
+    <i>
+    </i>
+    <td>
+    {{ t }}
+    <td>
+    <city>
+    </city>
+    <td>
+    @if (dataService.city(n.context.$implicit.to_id) {
+      <city>
+      </city>
+    }
+    @if (n.context.$implicit.name && !dataService.city(n.context.$implicit.to_id) {
+      <span>
+      {{ n.parent.context.$implicit.name }}
+      </span>
+    }
+    <td>
+    {{ reportStatus(n.context.$implicit }}
+    </td>
+    <td class="btn-link cursor-pointer">
+    <i>
+    </i>
+     Details 
+    </td>
+    </td>
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  </tbody>
+  </thead>
+  </table>
+  </div>
+  </div>
+}
+@if (report) {
+  <div>
+  <h4>
+  Battle 
+  @if (to) {
+    <span>
+    of {{ to.name }}
+    </span>
+  }
+  @if (!to && report.name) {
+    <span>
+    of {{ report.name }}
+    </span>
+  }
+  <small class="text-muted ml-2">
+  {{ t }}
+  <div>
+  <b>
+  {{ reportStatus(report }} {{ ? }}
+  </b>
+  @if (report.walls_destroyed) {
+    <div>
+    Walls have been destroyed
+    </div>
+  }
+  </div>
+  </small>
+  @if (report.castle_destroyed) {
+    <div>
+    Castle has been destroyed
+    </div>
+  }
+  @if (report.defense) {
+    <div>
+    Defense: {{ t }}
+    </div>
+  }
+  @if (report.influence) {
+    <div>
+    Influence: -{{ t }} defense
+    </div>
+  }
+  @if (report.spyScience) {
+    <div>
+    <b>
+    <i>
+    </i>
+     {{ t }} stolen !
+    </b>
+    </div>
+  }
+  </h4>
+  <div class="d-flex text-center">
+  <div class="mr-3">
+  <div>
+  <player>
+  </player>
+  <div>
+  <city>
+  </city>
+  <table class="table table-sm">
+  <tbody>
+  @for (item of et(n, 34, 0, ei(n, 35; track $index) {
+    @if (n.context.$implicit.value) {
+      <tr>
+      <td>
+      {{ conf.troops[n.parent.context.$implicit.key].name(dataService.player(from.ownerid }}
+      </td>
+      <td>
+      {{ n.parent.context.$implicit.value }}
+      </td>
+      <td class="text-danger">
+      - {{ n.parent.context.$implicit.value - report.troops.remaining.attacker[n.parent.context.$implicit.key] }} 
+      </td>
+      <td class="text-info">
+      {{ report.troops.remaining.attacker[n.parent.context.$implicit.key] }}
+      </td>
+      </tr>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  <div>
+  <div>
+  @if (report.to_pid) {
+    <player>
+    </player>
+  }
+  @if (!report.to_pid && to) {
+    <player>
+    </player>
+  }
+  <div>
+  @if (to) {
+    <city>
+    </city>
+  }
+  @if (!to && report.name) {
+    <span>
+    {{ report.name }}
+    </span>
+  }
+  @if (!report.spy) {
+    <table class="table table-sm">
+    <tbody>
+    @for (item of et(n, 3, 0, ei(n, 4; track $index) {
+      @if (n.context.$implicit.value) {
+        <tr>
+        <td>
+        {{ conf.troops[n.parent.context.$implicit.key].name(dataService.player(to.ownerid }}
+        </td>
+        <td>
+        {{ nb(n.parent.context.$implicit.value }}
+        </td>
+        <td class="text-danger">
+        - {{ nb(n.parent.context.$implicit.value - report.troops.remaining.defender[n.parent.context.$implicit.key] }} 
+        </td>
+        <td class="text-info">
+        {{ nb(report.troops.remaining.defender[n.parent.context.$implicit.key] }}
+        </td>
+        </tr>
+      }
+      <ng-container>
+
+      </ng-container>
+    }
+    @if (isEmpty(report.troops.initial.defender) {
+      <tr>
+       Empty 
+      </tr>
+    }
+    </tbody>
+    </table>
+  }
+  @if (report.spy) {
+    <div>
+    <div>
+    Population: {{ report.spyPop ? report.spyPop : "?" }}
+    </div>
+    <div>
+    Gold: {{ t }}
+    <div class="d-flex">
+    @if (report.spyData.buildings) {
+      <div class="border p-2 m-2">
+      <h5>
+      Buildings
+      </h5>
+      @for (item of et(n, 4, 0, ei(n, 5; track $index) {
+        @if (n.context.$implicit.value.done) {
+          <div>
+           {{ conf.buildings[n.parent.context.$implicit.key].label(dataService.player(to.ownerid }}
+          </div>
+        }
+        <ng-container>
+
+        </ng-container>
+      }
+      </div>
+    }
+    @if (report.spyData.troops) {
+      <div class="border p-2 m-2">
+      <h5>
+      Troops
+      </h5>
+      @for (item of et(n, 4, 0, ei(n, 5; track $index) {
+        @if (n.context.$implicit.value) {
+          <div>
+          {{ conf.troops[n.parent.context.$implicit.key].name(dataService.player(to.ownerid }} : {{ ? }}
+          </div>
+        }
+        <ng-container>
+
+        </ng-container>
+      }
+      </div>
+    }
+    </div>
+    </div>
+    </div>
+  }
+  </div>
+  <button class="btn btn-secondary">
+  Back to list
+  </button>
+  </div>
+  @if (dataService.isUnlocked("menu_simulator") {
+    <button class="btn btn-primary">
+    Send to Battle Simulator
+    </button>
+  }
+  </div>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+}
+</div>

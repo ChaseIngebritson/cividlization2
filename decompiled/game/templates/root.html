@@ -1,0 +1,22 @@
+@if (!error && !baddomain) {
+  <router-outlet>
+  </router-outlet>
+  <ng-container>
+
+  </ng-container>
+}
+@if (error && !baddomain) {
+  <div class="bg-dark p-3 text-light">
+  <i class="fas fa-times">
+  </i>
+   {{ error }}
+  </div>
+}
+@if (baddomain) {
+  <div class="text-dark text-150">
+  This game is available for free on 
+  <a class="text-danger" href="https://www.kongregate.com/games/to_change_later/cividlization-2">
+  Kongregate.com
+  </a>
+  </div>
+}

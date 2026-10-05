@@ -1,6 +1,6 @@
-<section class="page science">
-  <h2>{{ title }}</h2>
-  <p class="note">Tech tree recovered from production data (`sciences` / original var <code>dg</code>).</p>
+<div class="science-page bg-dark p-4 overflow-auto">
+  <h2>Science</h2>
+  <p class="text-muted">Technology tree recovered from production data (original SVG map template also extracted).</p>
   <ul class="tech-list">
     @for (tech of techs; track tech.id) {
       <li>
@@ -12,4 +12,4 @@
       </li>
     }
   </ul>
-</section>
+</div>

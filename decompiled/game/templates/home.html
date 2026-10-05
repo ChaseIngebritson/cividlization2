@@ -1,0 +1,163 @@
+<div class="homepage d-flex justify-content-center align-items-center vh-100">
+<div>
+<h1 class="display-1 font-weight-bold">
+Cividlization II 
+<div class="text-muted text-center mb-2" style="margin-top:-20px;font-size:40%">
+Industrial Revolution Update
+</div>
+@if (error) {
+  <div class="bg-danger text-light my-2 p-2">
+  {{ error }}
+  </div>
+}
+</h1>
+@if (!load && !new && !loadText) {
+  <div>
+  <button class="btn btn-dark btn-block">
+  New game
+  </button>
+  <button class="btn btn-dark btn-block">
+  Continue
+  </button>
+  <button class="btn btn-dark btn-block">
+  Load game
+  </button>
+  <button class="btn btn-dark btn-block">
+  Load an exported save
+  </button>
+  </div>
+}
+@if (loadText) {
+  <div>
+  <div>
+  Paste your exported save here and click on the load button
+  </div>
+  <textarea class="form-control mb-2 bg-dark text-light border-dark">
+  <button class="btn btn-dark btn-block">
+  Cancel
+  </button>
+  <button class="btn btn-dark btn-block">
+  Load
+  </button>
+  </textarea>
+  </div>
+}
+@if (new && !step2) {
+  <div>
+  @if (warning() {
+    <div class="bg-danger text-light font-weight-bold px-2 py-1 mb-1 rounded">
+     A save with the same name already exists and will be overwritten if the same name is chosen. 
+    </div>
+  }
+  <input autofocus="" class="form-control" placeholder="Name" required="" type="text" />
+  <div class="d-flex">
+  @for (item of et(n, 13, 0, ei(n, 14; track $index) {
+    <div>
+    <b class="text-center">
+    {{ n.context.$implicit.value.name }}
+    </b>
+    <p>
+    </p>
+    </div>
+  }
+  <button class="btn btn-secondary w-50">
+  Cancel
+  </button>
+  <button class="btn btn-dark w-50">
+  Next
+  </button>
+  </div>
+  </div>
+}
+@if (new && step2) {
+  <div>
+  <h4>
+  Choose your civilization
+  </h4>
+  <div class="overflow-auto d-flex flex-column bg-dark text-light border rounded mb-1" style="max-height: 250px;">
+  @for (item of et(n, 5, 0, ei(n, 6; track $index) {
+    <div>
+    <div>
+    <b>
+    {{ n.context.$implicit.value.name }}
+    </b>
+    <div>
+    </div>
+    </div>
+    </div>
+  }
+  <button class="btn btn-secondary w-50">
+  Back
+  </button>
+  <button class="btn btn-dark w-50">
+  Start
+  </button>
+  </div>
+  </div>
+}
+@if (load) {
+  <div>
+  <div class="card-container overflow-auto">
+  @for (item of saves; track $index) {
+    <div class="card cursor-pointer border-0 my-1" hover-class="bg-dark text-light">
+    <div class="d-flex align-items-stretch">
+    <div class="text-300 text-light bg-dark d-flex align-items-center px-3">
+    <i>
+    </i>
+    <div class="card-body d-flex flex-fill align-items-center">
+    <div class="flex-fill">
+    <h5 class="card-title">
+    {{ n.context.$implicit.name }} 
+    @if (n.context.$implicit.civ) {
+      <span class="text-90">
+       - {{ conf.civilizations[n.parent.context.$implicit.civ].name }}
+      </span>
+    }
+    <h6 class="card-subtitle mb-2 text-muted">
+    {{ t }}
+    <div class="card-text">
+    Era: {{ conf.eras[n.context.$implicit.era].name }}
+    </div>
+    </h6>
+    </h5>
+    @if (n.context.$implicit.deity && "tech" != n.context.$implicit.deity) {
+      <div class="card-text">
+       Deity: {{ conf.deities[n.parent.context.$implicit.deity].name }} 
+      <i>
+      </i>
+      </div>
+    }
+    @if (n.context.$implicit.deity && "tech" == n.context.$implicit.deity) {
+      <div class="card-text">
+       Orientation: 
+      <i>
+      </i>
+      </div>
+    }
+    @if (n.context.$implicit.rebirths) {
+      <div class="card-text">
+      Reincarnations: {{ n.parent.context.$implicit.rebirths }}
+      </div>
+    }
+    <div>
+    <button class="btn btn-danger">
+    Delete
+    </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  }
+  <button class="btn btn-dark btn-block">
+  Cancel
+  </button>
+  </div>
+  </div>
+}
+<div class="position-absolute text-secondary" style="bottom:5px;right:5px">
+Version: {{ dataService.getStrVersion( }} 
+</div>
+</div>
+</div>

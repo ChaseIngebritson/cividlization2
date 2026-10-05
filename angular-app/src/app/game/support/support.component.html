@@ -1,4 +1,16 @@
-<section class="page support">
-  <h2>Support</h2>
-  <p class="note">Stub view reconstructed from selector <code>app-support</code>. Original template was AOT-compiled into the production bundle.</p>
-</section>
+<div class="p-3 overflow-auto h-100">
+  <h3>Support</h3>
+  <p>
+    This game is <u>completely free</u> and provided <u>without ads</u>.
+    <br />
+    However, if you wish to support it, you can still offer a gift!
+  </p>
+  <h5>Buy those useless items</h5>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    @for (amt of kredAmounts; track amt) {
+      <button type="button" class="btn btn-outline-info m-1">Give {{ amt }} Kreds</button>
+    }
+  </div>
+  <h3>Thanks</h3>
+  <p>Many thanks to the community that kept this game alive.</p>
+</div>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-/** Reconstructed from production selector `app-daily`. */
 @Component({
   selector: 'app-daily',
   standalone: true,
@@ -8,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './daily.component.scss',
 })
 export class DailyComponent {
-  readonly title = 'Daily';
+  cards = [1, 2, 3];
 }

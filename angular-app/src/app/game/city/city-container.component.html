@@ -1,7 +1,18 @@
-<section class="city">
-  <app-citytopmenu></app-citytopmenu>
-  <div class="city-panels">
-    <app-citybuildings></app-citybuildings>
-    <app-citytroops></app-citytroops>
+<section class="city h-100 d-flex flex-column p-relative">
+  <app-citytopmenu />
+  <div class="row flex-fill no-gutters pl-2 city-panels">
+    <div class="col-6 city-main">
+      <h3 class="mb-2">City</h3>
+      <p class="text-muted">
+        Recovered city shell from the production View Engine template (<code>app-citycontainer</code>).
+        Citizen assignment, buildings, and troops panels are wired below.
+      </p>
+    </div>
+    <div class="col-3">
+      <app-citybuildings />
+    </div>
+    <div class="col-3">
+      <app-citytroops />
+    </div>
   </div>
 </section>

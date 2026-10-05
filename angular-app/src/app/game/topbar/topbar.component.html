@@ -1,8 +1,26 @@
-<header class="topbar">
-  <div class="brand">Cividlization II</div>
-  <div class="resources">
-    <span class="res gold" title="Gold"><i class="fas fa-coins"></i> {{ data.goldTotal() | number:'1.0-0' }}</span>
-    <span class="res science" title="Science"><i class="fas fa-flask"></i> {{ data.scienceDiff() | number:'1.0-0' }}</span>
-    <span class="res food" title="Food"><i class="fas fa-apple-alt"></i> {{ data.foodDiff() | number:'1.0-0' }}</span>
+<nav
+  class="d-flex bg-dark text-light p-2 text-110 font-weight-bold overflow-hidden"
+  style="height:47px;"
+>
+  <div class="mr-2 text-center text-pop">
+    <i class="fas fa-users"></i>
+    {{ data.pop() | number: '1.0-0' }}
   </div>
-</header>
+  <div class="mr-2 text-center text-happiness" style="width: 75px">
+    <i class="fas fa-smile"></i>
+    {{ data.happiness() | number: '1.0-0' }}
+  </div>
+  <div class="mr-2 text-center text-science">
+    <i class="fas fa-flask"></i>
+    {{ data.scienceDiff() | number: '1.0-0' }}
+  </div>
+  <div class="mr-2 text-center text-gold">
+    <i class="fas fa-coins"></i>
+    {{ data.goldTotal() | number: '1.0-0' }}
+  </div>
+  <div class="flex-fill"></div>
+  <button type="button" class="btn btn-sm btn-outline-light mr-2" (click)="data.persist()">
+    Save
+  </button>
+  <a class="btn btn-sm btn-outline-light" routerLink="/home">Exit</a>
+</nav>

@@ -1,0 +1,111 @@
+<div class="h-100 overflow-auto">
+<h5>
+Policy cost: 
+<span class="text-culture">
+<i>
+</i>
+ {{ t }}
+<div class="d-flex flex-wrap p-relative">
+<bgicon icon="culture">
+</bgicon>
+@for (item of et(n, 12, 0, ei(n, 13; track $index) {
+  <div style="width:225px">
+  <h4 triggers="manual">
+   {{ n.context.$implicit.value.name }} 
+  </h4>
+  <div class="list-group">
+  @for (item of policies(n.context.$implicit.key; track $index) {
+    <div container="body" triggers="manual">
+     {{ n.context.$implicit.name }} 
+    </div>
+    <ng-container>
+
+    </ng-container>
+  }
+  </div>
+  </div>
+}
+<div class="policy-container border m-2 rounded-lg policy-unlocked" style="max-width:1430px">
+<h4 class="px-3 py-2 m-0 text-dark">
+Mixed policies 
+<span class="text-70 text-secondary">
+(Policies that require 2 groups)
+</span>
+@for (item of policies(; track $index) {
+  <span container="body" style="width:236px" triggers="manual">
+   {{ n.context.$implicit.name }} 
+  </span>
+  @if (n.context.index % 6 == 5) {
+    <br />
+  }
+  <ng-container>
+
+  </ng-container>
+}
+</h4>
+<div class="d-flex">
+<div class="border p-3 text-success">
+Available for purchase
+</div>
+<div class="border p-3 text-primary">
+Purchased
+</div>
+<div class="border p-3 text-secondary">
+Unavailable
+</div>
+<div class="border p-3 policy-locked text-danger">
+Locked
+</div>
+@if (data.rebirths > 0) {
+  <button class="btn btn-success ml-4">
+   Reset Policies (
+  <i>
+   {{ dataService.cultureResetCost( }})
+  </i>
+  </button>
+}
+@if (data.prestige) {
+  <button class="btn btn-success ml-4">
+   Reset Policies (
+  <i>
+  </i>
+   {{ 5 * dataService.cultureResetCost( }})
+  </button>
+}
+@if (dataService.hasPolicy("conscription") {
+  <div class="form-group form-check mb-0">
+  <input class="form-check-input" id="emp_noconscription" type="checkbox" />
+  <label class="form-check-label" for="emp_noconscription">
+  Disable conscription
+  </label>
+  </div>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  @if (n.context.groups && n.context.groups.length > 1) {
+    <div class="border-top font-weight-bold">
+    Required: 
+    @for (item of n.parent.context.groups; track $index) {
+      <span class="text-culture">
+      {{ conf.policies.groups[n.context.$implicit].name + (0 == n.context.index ? " and " : "" }}
+      </span>
+    }
+    </div>
+  }
+  <div>
+  </div>
+  <div class="border-top">
+  Required: 
+  <span class="text-science">
+  {{ conf.sciences[n.context.require].label }}
+  </span>
+  </div>
+</ng-container>
+</div>
+</div>
+</div>
+</span>
+</h5>
+</div>

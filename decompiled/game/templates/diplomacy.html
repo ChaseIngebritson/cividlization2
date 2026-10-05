@@ -1,0 +1,828 @@
+<ngb-tabset class="d-block h-100 pl-2">
+<ngb-tab title="Diplomacy">
+<ng-container>
+  @if (!nego && !hasDiplo) {
+    <div class="bg-info text-light p-3">
+     You haven't discovered any civilization yet ! 
+    </div>
+  }
+  @if (!nego && hasDiplo) {
+    <table class="table">
+    <tbody>
+    @for (item of dataService.getRelations(0; track $index) {
+      <tr>
+      <td>
+      <b>
+      <player>
+      </player>
+      <td>
+      <city>
+      </city>
+      <td container="body" triggers="manuel">
+      <span>
+      </span>
+       (
+      <span>
+      )
+      </span>
+      <td>
+      </td>
+      <td>
+      @if (dataService.isUnlocked("deity_selection") {
+        <span>
+         {{ conf.deities[p(n.parent.context.$implicit }} 
+        </span>
+      }
+      <td class="text-trade">
+      <i>
+      </i>
+       {{ tradeRoutesNumber(p(n.context.$implicit }} 
+      <i>
+      </i>
+      <td class="text-trade">
+      <i>
+      </i>
+       {{ tradeRoutesNumber(p(n.context.$implicit }} 
+      <i>
+      </i>
+      @if (dataService.isUnlocked("colonization") {
+        <td class="text-colony">
+        <i>
+        </i>
+         {{ dataService.colonyNb(p(n.parent.context.$implicit }} 
+        </td>
+      }
+      <td>
+      @if (0 == n.context.$implicit.status || 2 == n.context.$implicit.status) {
+        <button class="btn btn-danger mr-1">
+         Declare war ! 
+        @if (!isWarAllowed(n.parent.context.$implicit) {
+          <span>
+          (Allowed in {{ e }})
+          </span>
+        }
+        </button>
+      }
+      @if (1 == n.context.$implicit.status) {
+        <button class="btn btn-primary mr-1">
+         Negociate peace 
+        @if (n.parent.context.$implicit.cooldown) {
+          <span>
+          (Allowed in {{ e }})
+          </span>
+        }
+        </button>
+      }
+      @if (0 == n.context.$implicit.status && dataService.isUnlocked("alliance") {
+        <button class="btn btn-success mr-1">
+         Offer Defensive Pact 
+        </button>
+      }
+      @if (3 == n.context.$implicit.status) {
+        <button class="btn btn-primary">
+         Leave Defensive Pact 
+        @if (n.parent.context.$implicit.cooldown) {
+          <span>
+          (Allowed in {{ e }})
+          </span>
+        }
+        </button>
+      }
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </b>
+      </td>
+      </tr>
+    }
+    </tbody>
+    </table>
+  }
+  @if (nego) {
+    <div>
+    <div>
+    {{ offerResponse( }}
+    </div>
+    <div class="d-flex align-items-stretch overflow-auto" style="height:300px">
+    <div class="d-flex flex-column align-items-stretch border overflow-auto" style="width:20%">
+    <div class="p-2 bg-dark text-light">
+    Your cities
+    </div>
+    @for (item of nego.player.available; track $index) {
+      <div class="p-2 p-2 cursor-pointer" hover-class="bg-dark text-light">
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    <div class="px-4 d-flex align-items-center text-200">
+    <i>
+    </i>
+    <div class="d-flex flex-column align-items-stretch border overflow-auto" style="width:20%">
+    <div class="p-2 bg-dark text-light">
+    Your offers
+    </div>
+    @for (item of nego.player.giving; track $index) {
+      <div class="p-2 cursor-pointer" hover-class="bg-dark text-light">
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    <div class="d-flex flex-column align-items-stretch border overflow-auto" style="width:20%">
+    <div class="p-2 bg-dark text-light">
+    Your demands
+    </div>
+    @for (item of nego.ai.giving; track $index) {
+      <div class="p-2 cursor-pointer" hover-class="bg-dark text-light">
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    <div class="px-4 d-flex align-items-center text-200">
+    <i>
+    </i>
+    <div class="d-flex flex-column align-items-stretch border overflow-auto" style="width:20%">
+    <div class="p-2 bg-dark text-light">
+    {{ dataService.player(nego.ai.id }} cities
+    </div>
+    @for (item of nego.ai.available; track $index) {
+      <div class="p-2 cursor-pointer" hover-class="bg-dark text-light">
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    @if (nego.ai.giving.length) {
+      <div class="bg-warning font-weight-bold d-inline-block p-2 m-2 text-dark">
+      <i>
+      </i>
+      @if (1 == nego.ai.giving.length) {
+        <span>
+        You will need 1 governor to administer the new city.
+        </span>
+      }
+      @if (nego.ai.giving.length > 1) {
+        <span>
+        You will need {{ nego.ai.giving.length }} governors to administer the new cities.
+        </span>
+      }
+      </div>
+    }
+    <br />
+    <button class="btn btn-secondary mr-3">
+    Cancel
+    </button>
+    </div>
+    </div>
+    <button ngClass="btn btn-primary">
+    Offer peace
+    </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  }
+  <ng-container>
+
+  </ng-container>
+</ng-container>
+@if (dataService.isUnlocked("diplo_global") {
+  <ngb-tab id="tab_global" title="Global Diplomacy">
+  <ng-container>
+    <div class="d-flex">
+    @if (svg) {
+      <:svg:svg class="diplo-global">
+      @for (item of svg.relations; track $index) {
+        <:svg:line>
+        </:svg:line>
+      }
+      @for (item of svg.nodes; track $index) {
+        <:svg:g>
+        <:svg:circle r="45">
+        </:svg:circle>
+        <:svg:text dy=".3em" text-anchor="middle">
+        {{ n.context.$implicit.name }}
+        </:svg:text>
+        </:svg:g>
+      }
+      </:svg:svg>
+    }
+    <div>
+    <div>
+    <div class="line bg-primary">
+    </div>
+     Peace 
+    <div>
+    <div class="line bg-danger">
+    </div>
+     War 
+    <div>
+    <div class="line bg-secondary">
+    </div>
+     Truce 
+    <div>
+    <div class="line bg-success">
+    </div>
+     Alliance 
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </ng-container>
+  </ngb-tab>
+}
+@if (hasDiplo) {
+  <ngb-tab id="tab_influence" title="Influence">
+  <ng-container>
+    @if (!nego && hasDiplo) {
+      <table class="table">
+      <tbody>
+      @for (item of dataService.getRelations(0; track $index) {
+        <tr>
+        <td>
+        <b>
+        <player>
+        </player>
+        <td>
+        <span class="text-influence text-120">
+        <i>
+        </i>
+        <span>
+         {{ t }}% 
+         (
+        </span>
+        </span>
+        <span>
+        ) 
+        </span>
+        @if (dataService.isUnlocked("promotion") {
+          <td>
+          <button class="btn btn-warning">
+          Promote culture 
+          @if (isPromotionAllowed(p(n.parent.context.$implicit) {
+            <span>
+             (
+            <span class="text-culture">
+            <i>
+            </i>
+             {{ t }}
+            ) 
+            </span>
+            </span>
+          }
+          @if (!isPromotionAllowed(p(n.parent.context.$implicit) {
+            <span>
+            (Allowed in {{ t }})
+            </span>
+          }
+          </button>
+          </td>
+        }
+        </td>
+        </b>
+        </td>
+        </tr>
+      }
+      </tbody>
+      </table>
+    }
+    <ng-container>
+
+    </ng-container>
+  </ng-container>
+  </ngb-tab>
+}
+@if (dataService.isUnlocked("trade") {
+  <ngb-tab id="tab_trade" title="Trade Routes">
+  <ng-container>
+    <b class="d-inline-block m-3" container="body">
+    Maximum nb of trade routes : {{ dataService.maxTradeRoute( }}
+    </b>
+    <table class="table table-sm">
+    <thead>
+    <tr>
+    <th>
+    From
+    </th>
+    <th>
+    To
+    </th>
+    <th class="text-gold">
+    <i>
+    </i>
+    <th class="text-culture">
+    <i>
+    </i>
+    <th class="text-diplomacy">
+    <i>
+    </i>
+    <th class="text-science">
+    <i>
+    </i>
+    <th class="text-faith">
+    <i>
+    </i>
+    <th>
+    </th>
+    <tbody>
+    @for (item of trades; track $index) {
+      <tr>
+      <td>
+      <city>
+      </city>
+      <td>
+      <city>
+      </city>
+      <td class="text-gold">
+      <i>
+      </i>
+       +{{ t }}
+      <td class="text-culture">
+      <i>
+      </i>
+       +{{ i }} 
+      <td class="text-diplomacy">
+      <i>
+      </i>
+       +{{ s }}
+      <td class="text-science">
+      <i>
+      </i>
+       +{{ u }} 
+      <td class="text-faith">
+      <i>
+      </i>
+       +{{ r }}
+      <td>
+      <button class="btn btn-danger">
+      Delete route
+      </button>
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </td>
+      </tr>
+    }
+    <div class="p-2 d-inline-block">
+    <i>
+    </i>
+    Deleting a trade route results in loosing the associated caravan. 
+    </div>
+    </tbody>
+    </th>
+    </th>
+    </th>
+    </th>
+    </th>
+    </tr>
+    </thead>
+    </table>
+  </ng-container>
+  </ngb-tab>
+}
+</ngb-tab>
+<ngb-tab id="tab_wonders" title="Wonders">
+<ng-container>
+  <table class="table table-sm">
+  <thead>
+  <tr>
+  <th>
+  Wonder
+  </th>
+  <th>
+  Owner
+  </th>
+  <th>
+  City
+  </th>
+  <tbody>
+  @for (item of wonders(; track $index) {
+    <tr>
+    <td>
+    {{ n.context.$implicit.label }}
+    </td>
+    <td>
+    <player>
+    </player>
+    <td>
+    @if (-1 != n.context.$implicit.cityid) {
+      <city>
+      </city>
+    }
+    @if (-1 == n.context.$implicit.cityid) {
+      <span>
+      <span style="color: #999">
+      <i>
+      </i>
+       Unknown city 
+      </span>
+      </span>
+    }
+    </td>
+    </td>
+    </tr>
+  }
+  </tbody>
+  </tr>
+  </thead>
+  </table>
+</ng-container>
+@if (dataService.isUnlocked("colonization") {
+  <ngb-tab id="tab_colonies" title="Colonies">
+  <ng-container>
+    <table class="table table-sm">
+    <thead>
+    <tr>
+    <th>
+    Owner
+    </th>
+    <th>
+    City
+    </th>
+    <th class="text-colony">
+    <i>
+    </i>
+     Colonies
+    <tbody>
+    @for (item of colonies(; track $index) {
+      <tr>
+      <td>
+      <player>
+      </player>
+      <td>
+      @if (-1 != n.context.$implicit.cityid) {
+        <city>
+        </city>
+      }
+      @if (-1 == n.context.$implicit.cityid) {
+        <span>
+        <span style="color: #999">
+        <i>
+        </i>
+         Unknown city 
+        </span>
+        </span>
+      }
+      <td class="text-colony">
+      <i>
+      </i>
+       {{ n.context.$implicit.nb }}
+      </td>
+      </td>
+      </td>
+      </tr>
+    }
+    </tbody>
+    </th>
+    </tr>
+    </thead>
+    </table>
+  </ng-container>
+  </ngb-tab>
+}
+<ngb-tab id="tab_stats" title="Stats">
+<ng-container>
+  <div class="d-flex border-bottom">
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Global cities:
+  </span>
+   {{ globalCities }}
+  @for (item of cityRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (n.context.$implicit.id <= 1 || dataService.haveRelation(0, n.context.$implicit.id) {
+      <span>
+       {{ n.parent.context.$implicit.cities }}
+      </span>
+    }
+    </div>
+  }
+  </div>
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Global population:
+  </span>
+   {{ globalPop }}
+  @for (item of popRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (n.context.$implicit.id <= 1 || dataService.haveRelation(0, n.context.$implicit.id) {
+      <span>
+      {{ n.parent.context.$implicit.pop }}
+      </span>
+    }
+    </div>
+  }
+  </div>
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Global troops number:
+  </span>
+   {{ t }}
+  @for (item of troopRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (0 == n.context.$implicit.id) {
+      <span>
+       {{ e }}
+      </span>
+    }
+    </div>
+  }
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  Science
+  </div>
+  @for (item of scienceRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (0 == n.context.$implicit.id) {
+      <span>
+       {{ n.parent.context.$implicit.sciences }}
+      </span>
+    }
+    </div>
+  }
+  <div class="d-flex">
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Global gold:
+  </span>
+   {{ i }}
+  @for (item of goldRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (0 == n.context.$implicit.id) {
+      <span>
+       {{ e }}
+      </span>
+    }
+    </div>
+  }
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Global trade:
+  </span>
+   {{ s }}
+  @for (item of tradeRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    @if (0 == n.context.$implicit.id || dataService.haveRelation(0, n.context.$implicit.id) {
+      <span>
+       {{ e }}
+      </span>
+    }
+    </div>
+  }
+  <div class="mr-4 border-left pl-2" style="width:220px">
+  <div class="d-flex">
+  <span class="flex-fill">
+  Wonders:
+  </span>
+   {{ globalWonders }}
+  @for (item of wonderRanks; track $index) {
+    <div class="d-flex">
+     {{ n.context.index + 1 }}. 
+    <player class="flex-fill">
+    </player>
+    <span>
+    {{ n.context.$implicit.nb }}
+    </span>
+    </div>
+  }
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Relations
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td>
+  @if (dataService.atWar(n.context.id, 0) {
+    <tr>
+    <td>
+    War
+    </td>
+    <td class="text-danger">
+    - 1
+    </td>
+    </tr>
+  }
+  </td>
+  @if (dataService.diploTrade(n.context.id, 0) {
+    <tr>
+    <td>
+    Trade routes
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.diploProximity(n.context.id, 0) {
+    <tr>
+    <td>
+    Proximity
+    </td>
+    <td class="text-danger">
+    - {{ t }}
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.diploDeity(n.context.id, 0) {
+    <tr>
+    <td>
+    Religion
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  @if (dataService.diploRelations(n.context.id, 0) {
+    <tr>
+    <td>
+    Relations
+    </td>
+    <td>
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+<ng-container>
+   {{ dataService.city(n.context.id }} ({{ ? }})
+</ng-container>
+<ng-container>
+  <b class="text-center d-block border-bottom bg-dark text-light">
+  Maximum Nb of trade routes
+  </b>
+  <table class="popover-table">
+  <tbody>
+  <tr>
+  <td>
+  Base
+  </td>
+  <td>
+  1
+  </td>
+  @if (dataService.hasScience("diplomacy") {
+    <tr>
+    <td class="text-science">
+    Diplomacy: 
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  @if (dataService.hasScience("optics") {
+    <tr>
+    <td class="text-science">
+    Optics: 
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  </tr>
+  @if (dataService.hasScience("engineering") {
+    <tr>
+    <td class="text-science">
+    Engineering: 
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicyGroup("pacifism") {
+    <tr>
+    <td class="text-culture">
+    Pacifism: 
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  @if (dataService.hasPolicy("academy") {
+    <tr>
+    <td class="text-culture">
+    Platonic Academy: 
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  @if (data.charging.tradenode) {
+    <tr>
+    <td>
+    Trade Node
+    </td>
+    <td class="text-success">
+    + {{ t }}
+    </td>
+    </tr>
+  }
+  @if (dataService.hasWonder(0, "colossus") {
+    <tr>
+    <td class="text-culture">
+    Colossus: 
+    </td>
+    <td class="text-success">
+    + 1
+    </td>
+    </tr>
+  }
+  @if (dataService.hasWonder(0, "panama") {
+    <tr>
+    <td class="text-culture">
+    Panama Canal: 
+    </td>
+    <td class="text-success">
+    + 2
+    </td>
+    </tr>
+  }
+  @if (dataService.upgradeTrade(0) {
+    <tr>
+    <td class="text-culture">
+    Upgrades: 
+    </td>
+    <td class="text-success">
+    + {{ dataService.upgradeTrade(0 }}
+    </td>
+    </tr>
+  }
+  <tr class="border-top">
+  <td>
+  Total
+  </td>
+  <td>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</ng-container>
+</ngb-tab>
+</ngb-tab>
+</ngb-tabset>

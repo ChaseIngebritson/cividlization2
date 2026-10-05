@@ -1,0 +1,144 @@
+<div class="h-100 overflow-auto">
+<div>
+<i>
+</i>
+ Civilizations might have various bonuses that are not included in this simulation. Results might be different in a real situation.
+<div>
+<b>
+Defender: 
+</b>
+<div class="form-group form-check d-inline-block mr-1">
+<input class="form-check-input" id="type-0" name="def" type="radio" />
+<label class="form-check-label" for="type-0">
+Barbarian
+</label>
+<div class="form-group form-check d-inline-block mr-1">
+<input class="form-check-input" id="type-1" name="def" type="radio" />
+<label class="form-check-label" for="type-1">
+Civilization
+</label>
+<div class="d-flex">
+<div>
+<h4>
+Attacker
+</h4>
+<table class="table table-sm">
+<thead>
+<th>
+Troop
+</th>
+<th>
+Number
+</th>
+<th>
+Remaining
+</th>
+<tbody>
+@for (item of et(n, 41, 0, ei(n, 42; track $index) {
+  <tr class="form-group">
+  <td>
+  <label>
+  {{ conf.troops[n.context.$implicit.key].name(dataService.player( }}
+  </label>
+  <td>
+  <input class="form-control form-control-sm" min="0" type="number" />
+  <td class="text-danger">
+  {{ attacking_results[n.context.$implicit.key] }}
+  </td>
+  </td>
+  </td>
+  </tr>
+}
+<div class="ml-2 pl-2 border-left">
+<h4>
+Defender
+</h4>
+<table class="table table-sm">
+<thead>
+<th>
+Troop
+</th>
+<th>
+Number
+</th>
+<th>
+Remaining
+</th>
+<tbody>
+@for (item of et(n, 56, 0, ei(n, 57; track $index) {
+  <tr class="form-group">
+  <td>
+  <label>
+  {{ n.context.$implicit.key }}
+  </label>
+  <td>
+  <input class="form-control form-control-sm" min="0" type="number" />
+  <td class="text-danger">
+  {{ defending_results[n.context.$implicit.key] }}
+  </td>
+  </td>
+  </td>
+  </tr>
+}
+<tr>
+<td>
+<label for="d-pop">
+Population
+</label>
+<td>
+<input class="form-control form-control-sm" min="0" name="d-pop" type="number" />
+<td>
+</td>
+<tr>
+<td>
+Walls
+</td>
+<td>
+<input id="walls" type="checkbox" />
+<td>
+<input disabled="" id="walls_result" type="checkbox" />
+<tr>
+<td>
+Castle
+</td>
+<td>
+<input id="castle" type="checkbox" />
+<td>
+<input disabled="" id="castle_result" type="checkbox" />
+<tr>
+<td>
+Fortress
+</td>
+<td>
+<input id="fortress" type="checkbox" />
+<td>
+<input disabled="" id="fortress_result" type="checkbox" />
+<button class="btn btn-primary">
+Simulate
+</button>
+</td>
+</td>
+</tr>
+</td>
+</td>
+</tr>
+</td>
+</td>
+</tr>
+</td>
+</td>
+</tr>
+</tbody>
+</thead>
+</table>
+</div>
+</tbody>
+</thead>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

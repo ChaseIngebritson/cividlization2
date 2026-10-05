@@ -1,0 +1,170 @@
+<div class="border-left h-100 d-flex flex-column">
+<div class="h-40 d-flex flex-column">
+<h3>
+Buildings
+</h3>
+<div class="flex-fill overflow-auto">
+@for (item of et(n, 8, 0, ei(n, 9; track $index) {
+  <div>
+  @if (n.context.$implicit.value.done) {
+    <div class="d-flex justify-content-between" placement="left" triggers="manuel">
+    <span>
+    {{ conf.buildings[n.parent.context.$implicit.key].label(dataService.player( }}
+    @if (conf.buildings[n.parent.context.$implicit.key].desc) {
+      <span>
+      </span>
+    }
+    <ng-container>
+
+    </ng-container>
+    </span>
+    </div>
+  }
+  </div>
+}
+<div class="h-60 border-top d-flex flex-column">
+@if (dataService.isUnlocked("auto_building") {
+  <div class="form-group form-check mb-0">
+  <input class="form-check-input" id="autobuild" type="checkbox" />
+  <label class="form-check-label" for="autobuild">
+  Auto build (cheapest)
+  </label>
+  </div>
+}
+@if (!city.building_queue.length) {
+  <div>
+  <i>
+  </i>
+  Building nothing
+  </div>
+}
+@if (city.building_queue.length) {
+  <div class="overflow-auto flex-fill">
+  Building: 
+  <ul class="list-unstyled">
+  @for (item of city.building_queue; track $index) {
+    <li class="d-flex align-items-center px-1" placement="left" triggers="manuel">
+    <div class="flex-fill" style="height:auto!important">
+     {{ t, i }} : {{ ? }} 
+    @if (!conf.buildings[n.context.$implicit].wonder && dataService.isUnlocked("prod_purchase") {
+      <button triggers="manuel">
+      <i>
+      </i>
+      <ng-container>
+
+      </ng-container>
+      </button>
+    }
+    </div>
+    <button class="btn btn-sm btn-danger mr-1" ngbPopover="Remove from queue">
+    <i>
+    </i>
+    <ng-container>
+
+    </ng-container>
+    </button>
+    </li>
+  }
+  </ul>
+  </div>
+}
+<button class="btn btn-primary">
+{{ isQueueAllowed( }}
+</button>
+@if (buildingSelection && isAnythingVisible() {
+  <div class="list-group overflow-auto flex-fill">
+  @for (item of visibleBuildings(; track $index) {
+    <div>
+    <div placement="left-bottom" triggers="manual">
+    <span>
+    {{ t }}
+     - 
+    <span class="text-gold">
+    <i>
+    </i>
+     {{ i }}
+     - 
+    <i>
+    </i>
+     {{ s }} 
+    </span>
+    </span>
+    </div>
+    </div>
+  }
+  </div>
+}
+@if (buildingSelection && !isAnythingVisible() {
+  <div>
+   There is nothing we can build in this city 
+  </div>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  <div>
+  </div>
+  <div class="border-top mt-1">
+  <span class="text-gold mr-2">
+  <i>
+  </i>
+   {{ t }}
+  <span class="text-prod mr-2">
+  <i>
+  </i>
+   {{ i }}
+  @if (!isDone(n.context.building) {
+    <span class="text-time">
+    <i>
+    </i>
+     ({{ e }})
+    </span>
+  }
+  @if (n.context.req.length) {
+    <div class="border-top mt-1">
+     Required: 
+    @for (item of n.parent.context.req; track $index) {
+      <span>
+       {{ n.context.$implicit }} 
+      </span>
+    }
+    </div>
+  }
+  </span>
+  @if (n.context.building.industrial && n.context.building.wonder) {
+    <div>
+    Required: 
+    <span class="text-tech">
+    <i>
+    </i>
+     +75
+    </span>
+    </div>
+  }
+  </span>
+  @if (n.context.building.industrial && !n.context.building.wonder) {
+    <div>
+    Required: 
+    <span class="text-tech">
+    <i>
+    </i>
+     +25
+    </span>
+    </div>
+  }
+  <ng-container>
+
+  </ng-container>
+  </div>
+</ng-container>
+<ng-container>
+   Buy for 
+  <i>
+  </i>
+  {{ t }}
+</ng-container>
+</div>
+</div>
+</div>
+</div>

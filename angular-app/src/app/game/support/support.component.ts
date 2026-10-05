@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-/** Reconstructed from production selector `app-support`. */
 @Component({
   selector: 'app-support',
   standalone: true,
@@ -8,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './support.component.scss',
 })
 export class SupportComponent {
-  readonly title = 'Support';
+  kredAmounts = [10, 20, 50, 100, 200, 500, 1000];
 }

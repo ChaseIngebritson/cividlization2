@@ -1,8 +1,55 @@
-<nav class="leftmenu">
-  @for (item of items; track item.path) {
-    <a [routerLink]="item.path" routerLinkActive="active">
-      <i [class]="item.icon"></i>
-      <span>{{ item.label }}</span>
-    </a>
-  }
-</nav>
+@if (!data.data['lefthidden']) {
+  <div class="border-right position-relative overflow-hidden" style="min-width:230px">
+    <ul class="list-group">
+      @if (data.isUnlocked('menu_empire')) {
+        <li class="list-group-item" routerLink="empire" routerLinkActive="active">Empire</li>
+      }
+      <li class="list-group-item" routerLink="city" routerLinkActive="active">City</li>
+      <li class="list-group-item" routerLink="science" routerLinkActive="active">Science</li>
+      @if (data.isUnlocked('menu_policies')) {
+        <li class="list-group-item" routerLink="policies" routerLinkActive="active">Social Policies</li>
+      }
+      @if (data.isUnlocked('menu_world')) {
+        <li class="list-group-item" routerLink="world" routerLinkActive="active">World</li>
+        <li class="list-group-item" routerLink="attacks" routerLinkActive="active">Attacks &amp; Transfers</li>
+        <li class="list-group-item" routerLink="reports" routerLinkActive="active">Battle reports</li>
+      }
+      @if (data.isUnlocked('menu_simulator')) {
+        <li class="list-group-item" routerLink="simulator" routerLinkActive="active">Battle simulator</li>
+      }
+      <li class="list-group-item" routerLink="notifications" routerLinkActive="active">Notifications</li>
+      @if (data.isUnlocked('menu_diplomacy')) {
+        <li class="list-group-item" routerLink="diplomacy" routerLinkActive="active">Diplomacy</li>
+      }
+      @if (data.isUnlocked('menu_powers')) {
+        <li class="list-group-item" routerLink="powers" routerLinkActive="active">Powers</li>
+      }
+      <li class="list-group-item" routerLink="help" routerLinkActive="active">Help</li>
+      <li class="list-group-item" routerLink="options" routerLinkActive="active">Options</li>
+      <li class="list-group-item" routerLink="support" routerLinkActive="active">Support &amp; Credits</li>
+      <li class="list-group-item text-secondary" (click)="toggle()">
+        <i class="fas fa-angle-double-left"></i> Minimize
+      </li>
+    </ul>
+  </div>
+} @else {
+  <div class="border-right position-relative overflow-hidden">
+    <ul class="list-group list-group-min">
+      <li class="list-group-item" routerLink="city" routerLinkActive="active" title="City">
+        <i class="fas fa-city"></i>
+      </li>
+      <li class="list-group-item" routerLink="science" routerLinkActive="active" title="Science">
+        <i class="fas fa-flask"></i>
+      </li>
+      <li class="list-group-item" routerLink="help" routerLinkActive="active" title="Help">
+        <i class="fas fa-question-circle"></i>
+      </li>
+      <li class="list-group-item" routerLink="options" routerLinkActive="active" title="Options">
+        <i class="fas fa-cog"></i>
+      </li>
+      <li class="list-group-item text-secondary" title="Expand" (click)="toggle()">
+        <i class="fas fa-angle-double-right"></i>
+      </li>
+    </ul>
+  </div>
+}

@@ -1,0 +1,543 @@
+<div class="position-relative h-100 bg-dark">
+<canvas style="position:absolute;z-index:1;">
+</canvas>
+<canvas style="position:absolute;z-index:2;">
+</canvas>
+<div class="position-absolute d-flex flex-column" style="right:10px;top:10px;z-index:5">
+<button class="btn btn-sm btn-light mb-1">
+<i>
+</i>
+<button class="btn btn-sm btn-light mb-1">
+<i>
+</i>
+<button class="btn btn-sm btn-light">
+<i>
+</i>
+<div class="position-absolute d-flex" style="right:10px;bottom:10px;z-index:5">
+<div class="bg-dark text-light px-1">
+<input id="showtraderoutes" type="checkbox" />
+<label class="m-0" for="showtraderoutes">
+Hide Trade Routes
+</label>
+<div class="bg-dark text-light px-1">
+<input id="showtroops" type="checkbox" />
+<label class="m-0" for="showtroops">
+Hide Troops
+</label>
+<div class="bg-dark text-light px-1">
+<input id="showter" type="checkbox" />
+<label class="m-0" for="showter">
+Hide Terrain
+</label>
+@if (label) {
+  <div class="position-absolute d-flex bg-dark p-2 text-light" style="left:10px;bottom:10px;z-index:5">
+  <span>
+  </span>
+  </div>
+}
+@if (worker) {
+  <div class="position-absolute d-flex d-flex flex-column justify-content-center p-1 rounded imp-menu" style="left:10px;top:10%;z-index:5">
+  @for (item of et(n, 2, 0, ei(n, 3; track $index) {
+    @if (dataService.isImprovementVisible(n.context.$implicit.value, worker.level, 0) {
+      <div container="body" hover-class="bg-light" placement="right" triggers="manuel">
+      <img />
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    @if (dataService.isImprovementVisible(n.context.$implicit.value, worker.level, 0) {
+      <div container="body" hover-class="bg-light" placement="right" triggers="manuel">
+      <img />
+      <ng-container>
+
+      </ng-container>
+      </div>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  </div>
+}
+@if (scout) {
+  <div class="bg-dark text-warning px-1 position-absolute d-flex" style="left:40%;top:10px;z-index:5">
+   Keep Ctrl or Command to create a waypoint 
+  </div>
+}
+@if (menu.show) {
+  <div class="map-menu position-absolute">
+  <div class="menu-list d-flex mx-3">
+  @if (0 == menu.ownerId) {
+    <div>
+    <i>
+    </i>
+    @if (dataService.player() {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    </div>
+    @if (dataService.player() {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    <div>
+    <i>
+    </i>
+    <div style="font-size: 90%;height: 90%;">
+    <i>
+    A
+    </i>
+    @if (dataService.isUnlocked("trade") {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    @if (dataService.isUnlocked("trade") {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    @if (dataService.isUnlocked("archeology") {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    </div>
+    @if (dataService.isUnlocked("colonization") {
+      <div>
+      <i>
+      </i>
+      </div>
+    }
+    <ng-container>
+
+    </ng-container>
+    </div>
+  }
+  @if (0 != menu.ownerId) {
+    <div>
+    <i>
+    </i>
+    </div>
+  }
+  @if (0 != menu.ownerId && dataService.isUnlocked("spy") {
+    <div>
+    <i>
+    </i>
+    </div>
+  }
+  @if (menu.city.ownerid > 1) {
+    <div>
+    <i>
+    </i>
+    </div>
+  }
+  <div class="menu-desc">
+  <b>
+  {{ menu.desc }}
+  </b>
+  </div>
+  </div>
+  </div>
+}
+</div>
+@if (attack) {
+  <div class="pl-2 overflow-auto h-100 pb-4">
+  @if (0 != menu.ownerId) {
+    <h5>
+    Attacking {{ dataService.city(attack.to }}
+    </h5>
+  }
+  @if (0 == menu.ownerId) {
+    <h5>
+    Transfer to {{ dataService.city(attack.to }}
+    </h5>
+  }
+  <button class="btn btn-sm btn-secondary">
+  Return
+  </button>
+  <div>
+  <i>
+  </i>
+   Click on a troop number to select all.
+  @if (0 != menu.city.ownerid) {
+    <div class="form-group form-check mb-1">
+    <input class="form-check-input" id="burn" type="checkbox" />
+    <label class="form-check-label" for="burn">
+    Burn down on conquest ! (requires a governor, will not be consumed)
+    </label>
+    </div>
+  }
+  </div>
+  @if (0 != menu.city.ownerid) {
+    <div class="form-group form-check mb-1">
+    <input class="form-check-input" id="noreturn" type="checkbox" />
+    <label class="form-check-label" for="noreturn">
+    Do not return troops if city is conquered (be careful about maintenance!)
+    </label>
+    </div>
+  }
+  <table class="table-sm">
+  <thead>
+  <tr>
+  <th>
+  City
+  </th>
+  @for (item of troops(0 == menu.ownerId; track $index) {
+    <th>
+     {{ e }} 
+    </th>
+  }
+  <th>
+  Distance
+  </th>
+  <th>
+  Time
+  </th>
+  <th>
+  </th>
+  <tbody>
+  @for (item of orderedCities(attack.to; track $index) {
+    @if ((n.context.index + 1) {
+      <tr>
+      <th>
+      City
+      </th>
+      @for (item of troops(0 == menu.ownerId; track $index) {
+        <th>
+         {{ e }} 
+        </th>
+      }
+      <th>
+      Distance
+      </th>
+      <th>
+      Time
+      </th>
+      <th>
+      </th>
+      </tr>
+    }
+    <tr>
+    <td>
+    {{ n.context.$implicit.name }}
+    </td>
+    @for (item of troops(0 == menu.ownerId; track $index) {
+      <td>
+      <input class="d-inline" min="0" style="width:64px" type="number" />
+      <span>
+      ({{ n.parent.context.$implicit.troops[n.context.$implicit.id] || 0 }})
+      </span>
+      </td>
+    }
+    <td>
+    {{ t }}
+    <td>
+    @if (attack.troops[n.context.$implicit.id]) {
+      <span>
+       {{ t }} 
+      </span>
+    }
+    <td>
+    @if (0 != menu.ownerId) {
+      <button class="btn btn-danger btn-sm">
+      Attack
+      </button>
+    }
+    @if (0 == menu.ownerId) {
+      <button class="btn btn-primary btn-sm">
+      Transfer
+      </button>
+    }
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  </tbody>
+  </tr>
+  </thead>
+  </table>
+  </div>
+}
+@if (spy) {
+  <div class="pl-2 overflow-auto h-100 pb-4">
+  <h5>
+  Spying {{ dataService.city(spy.to }}
+  </h5>
+  <button class="btn btn-sm btn-secondary">
+  Return
+  </button>
+  <div>
+  <i>
+  </i>
+   Click on a spy nb to send all.
+  <table class="table-sm">
+  <thead>
+  <tr>
+  <th>
+  City
+  </th>
+  <th>
+  Spy
+  </th>
+  <th>
+  Distance
+  </th>
+  <th>
+  Time
+  </th>
+  <th>
+  </th>
+  <tbody>
+  @for (item of orderedCities(spy.to; track $index) {
+    @if (n.context.$implicit.troops.spy) {
+      <tr>
+      <td>
+      {{ n.parent.context.$implicit.name }}
+      </td>
+      <td>
+      <input class="d-inline" min="0" style="width:64px" type="number" />
+      <span>
+      ({{ n.parent.context.$implicit.troops.spy || 0 }})
+      </span>
+      <td>
+      {{ t }}
+      <td>
+       {{ i }} 
+      <td>
+      <button class="btn btn-primary btn-sm">
+      Send
+      </button>
+      </td>
+      </td>
+      </td>
+      </td>
+      </tr>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  </tbody>
+  </tr>
+  </thead>
+  </table>
+  </div>
+  </div>
+}
+@if (gold) {
+  <div class="pl-2 overflow-auto h-100 pb-4">
+  <h5>
+  Sending gold to {{ dataService.city(gold.to }}
+  </h5>
+  <button class="btn btn-sm btn-secondary">
+  Return
+  </button>
+  <div>
+  <i>
+  </i>
+   Click on a gold value to send all.
+  <table class="table-sm">
+  <thead>
+  <tr>
+  <th>
+  City
+  </th>
+  <th>
+  <i>
+  </i>
+   Gold
+  <th>
+  Distance
+  </th>
+  </th>
+  <th>
+  Time
+  </th>
+  @if (0 != dataService.city(gold.to) {
+    <th>
+    <i>
+    </i>
+     Relations gains (est.)
+    </th>
+  }
+  <th>
+  </th>
+  <th>
+  </th>
+  <tbody>
+  @for (item of orderedCities(gold.to; track $index) {
+    <tr>
+    <td>
+    {{ n.context.$implicit.name }}
+    </td>
+    <td class="cursor-pointer">
+    <i>
+    </i>
+     {{ t }}
+    <td>
+    {{ i }}
+    <td>
+     {{ s }} 
+    @if (0 != dataService.city(gold.to) {
+      <td>
+      @if (gold.gold[n.parent.context.$implicit.id]) {
+        <span class="text-diplomacy">
+        <i>
+        </i>
+         +{{ t }} 
+        </span>
+      }
+      </td>
+    }
+    </td>
+    </td>
+    <td>
+    <input min="0" style="width:180px" type="number" />
+    <td>
+    <button class="btn btn-primary btn-sm">
+    Send
+    </button>
+    </td>
+    </td>
+    </td>
+    </tr>
+  }
+  </tbody>
+  </tr>
+  </thead>
+  </table>
+  </div>
+  </div>
+}
+</div>
+@if (trade) {
+  <div class="h-100 overflow-auto pl-2">
+  <h2>
+  Create trade route from {{ trade.from.name }}
+  </h2>
+  @if (trade.cities.length) {
+    <div class="">
+    <div>
+    Maximum distance allowed: {{ dataService.tradeRouteMaxDist( }}
+    </div>
+    @for (item of trade.cities; track $index) {
+      <div class="card cursor-pointer" hover-class="bg-dark text-light" style="width:500px">
+      <div class="card-body p-2">
+      <div class="card-text d-flex align-items-center">
+      <div>
+      <div class="text-gold">
+      <i>
+      </i>
+       +{{ t }}
+      <div class="text-culture">
+      <i>
+      </i>
+       +{{ i }} 
+      <div class="text-diplomacy">
+      <i>
+      </i>
+       +{{ s }}
+      @if (trade.values[n.context.index].science) {
+        <div class="text-science">
+        <i>
+        </i>
+         +{{ t }}
+        </div>
+      }
+      @if (trade.values[n.context.index].faith) {
+        <div class="text-faith">
+        <i>
+        </i>
+         +{{ t }}
+        </div>
+      }
+      </div>
+      <div class="mx-4 text-200 text-secondary">
+      <i>
+      </i>
+      <div class="mx-3 flex-fill text-center" style="height:auto!important">
+      <div class="text-120">
+      {{ n.context.$implicit.name }}
+      </div>
+      <div>
+      <player>
+      </player>
+      <div class="mx-4 text-200 text-secondary">
+      <i>
+      </i>
+      <div>
+      <div class="text-gold">
+      <i>
+      </i>
+       +{{ u }}
+      <div class="text-culture">
+      <i>
+      </i>
+       +{{ r }}
+      <div class="text-diplomacy">
+      <i>
+      </i>
+       +{{ a }}
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    }
+    </div>
+  }
+  @if (!trade.cities.length) {
+    <div>
+     There is no available trade routes at the moment. 
+    </div>
+  }
+  <div class="d-flex">
+  <button class="btn btn-secondary">
+  Cancel
+  </button>
+  </div>
+  </div>
+}
+<ng-container>
+  {{ n.context.title }}
+</ng-container>
+<ng-container>
+  <div>
+  </div>
+  <div class="border-top mt-1">
+  <span class="text-gold mr-2">
+  <i>
+  </i>
+   {{ t }}
+  <i>
+  </i>
+   {{ i }} 
+  </span>
+  </div>
+</ng-container>
+</div>
+</div>
+</button>
+</button>
+</button>
+</div>
+</div>

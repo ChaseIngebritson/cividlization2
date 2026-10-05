@@ -1,0 +1,362 @@
+<div class="h-100 d-flex flex-column p-relative">
+<bgicon icon="city">
+</bgicon>
+@if (city) {
+  <app-citytopmenu>
+  </app-citytopmenu>
+}
+@if (city) {
+  <div class="row flex-fill no-gutters pl-2">
+  <div class="col-6">
+  <div class="d-flex border-bottom border-secondary">
+  @if (city.plague && city.plague > 0) {
+    <span class="text-plague">
+    <i>
+    </i>
+    </span>
+  }
+  @if (dataService.isUnlocked("menu_world") {
+    <a class="btn btn-link text-primary" routerLink="/game/world">
+    Show on map
+    </a>
+  }
+  @if (!city.capital && dataService.hasScience("state") {
+    <button>
+    Relocate capital
+    </button>
+    <ng-container>
+
+    </ng-container>
+  }
+  @if (!city.capital && city.rightful_ownerid > 1 && dataService.player(city.rightful_ownerid) {
+    <button class="btn btn-link text-primary">
+    Liberate the city
+    </button>
+  }
+  @if (!city.capital) {
+    <button class="btn btn-link text-danger">
+    Abandon the city
+    </button>
+  }
+  <table class="table table-borderless w-auto table-sm mr-5">
+  <tbody>
+  @for (item of et(n, 16, 0, ei(n, 17; track $index) {
+    @if (isAvailable(n.context.$implicit.key) {
+      <tr>
+      <td>
+      <b>
+      {{ t }}
+      </b>
+      <td>
+      @if (n.parent.context.$implicit.value.food) {
+        <span class="text-food mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (n.parent.context.$implicit.value.prod) {
+        <span class="text-prod mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (n.parent.context.$implicit.value.gold) {
+        <span class="text-gold mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (n.parent.context.$implicit.value.science) {
+        <span class="text-science mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (t) {
+        <span class="text-culture mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (i) {
+        <span class="text-faith mr-2">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (s) {
+        <span class="text-happiness">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      @if (u) {
+        <span class="text-health">
+        <i>
+        </i>
+         +{{ t }}
+        </span>
+      }
+      <td>
+      @if ("idle" != n.parent.context.$implicit.key && dataService.pop(city) {
+        <button class="btn btn-primary btn-sm line-height-1 font-weight-bold mr-1">
+        -5
+        </button>
+      }
+      @if ("idle" != n.parent.context.$implicit.key) {
+        <button class="btn btn-primary btn-sm line-height-1 font-weight-bold">
+        -
+        </button>
+      }
+      <td>
+      {{ city.citizens[n.parent.context.$implicit.key] }}
+      </td>
+      <td>
+      @if ("idle" != n.parent.context.$implicit.key) {
+        <button class="btn btn-primary btn-sm line-height-1 font-weight-bold">
+        +
+        </button>
+      }
+      @if ("idle" != n.parent.context.$implicit.key && dataService.pop(city) {
+        <button class="btn btn-primary btn-sm line-height-1 font-weight-bold ml-1">
+        +5
+        </button>
+      }
+      </td>
+      </td>
+      </td>
+      </td>
+      </tr>
+    }
+    <ng-container>
+
+    </ng-container>
+  }
+  <div class="form-group form-check mb-0">
+  <input class="form-check-input" id="autoassign_nogrowth" type="checkbox" />
+  <label class="form-check-label" for="autoassign_nogrowth">
+  Prevent growth
+  </label>
+  <div class="form-group form-check mb-0">
+  <input class="form-check-input" id="autoassign" type="checkbox" />
+  <label class="form-check-label" for="autoassign">
+  Auto-assign
+  </label>
+  @if (city.autoassign) {
+    <div class="form-group form-check mb-0">
+    <label class="form-check-label" for="autoassign_priority">
+    Priority
+    </label>
+    <select id="autoassign_priority">
+    <option value="">
+    None
+    </option>
+    <option value="farmers">
+    Food
+    </option>
+    @if (isAvailable("builders") {
+      <option value="builders">
+      Production
+      </option>
+    }
+    @if (isAvailable("merchants") {
+      <option value="merchants">
+      Gold
+      </option>
+    }
+    @if (isAvailable("scientists") {
+      <option value="scientists">
+      Science
+      </option>
+    }
+    @if (isAvailable("artists") {
+      <option value="artists">
+      Culture
+      </option>
+    }
+    @if (isAvailable("priests") {
+      <option value="priests">
+      Faith
+      </option>
+    }
+    </select>
+    </div>
+  }
+  @if (city.autoassign) {
+    <div class="form-group form-check mb-0">
+    <input class="form-check-input" id="autoassign_strong" type="checkbox" />
+    <label class="form-check-label" for="autoassign_strong">
+    Strong priority
+    </label>
+    </div>
+  }
+  @if (dataService.isUnlocked("troops") {
+    <div class="col-3">
+    <app-citytroops>
+    </app-citytroops>
+    </div>
+  }
+  @if (dataService.isUnlocked("buildings") {
+    <div class="col-3">
+    <app-citybuildings>
+    </app-citybuildings>
+    </div>
+  }
+  </div>
+  </div>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+}
+@if (city && dataService.isUnlocked("menu_empire") {
+  <div class="row border-top">
+  <div class="col-4">
+  <button class="btn btn-link">
+   < {{ prevCity.name }}
+  </button>
+  <div class="col-4">
+  <b class="text-150">
+  {{ city.name }}
+  </b>
+  <div class="col-4">
+  <button class="btn btn-link">
+  {{ nextCity.name }} >
+  </button>
+  </div>
+  </div>
+  </div>
+  </div>
+}
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Abandon {{ city.name }}
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <div class="text-danger">
+  <b>
+  Are you sure you want to abandon the city of {{ city.name }} to barbarians ?
+  </b>
+  <div class="modal-footer">
+  <button class="btn btn-secondary" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-danger" type="button">
+  Abandon
+  </button>
+  </div>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Liberate {{ city.name }}
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <div class="text-danger">
+  <b>
+  Are you sure you want to liberate the city of {{ city.name, dataService.player(city.rightful_ownerid }} and give it to {{ ? }} ?
+  </b>
+  <div class="modal-footer">
+  <button class="btn btn-secondary" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-primary" type="button">
+  Liberate
+  </button>
+  </div>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+<ng-container>
+  <div class="modal-header">
+  <h4 class="modal-title">
+  Relocate capital to {{ city.name }}
+  </h4>
+  <button class="close" type="button">
+  <span aria-hidden="true">
+  ×
+  </span>
+  <div class="modal-body">
+  <div class="text-danger">
+  <b>
+  Are you sure you want to relocate your capital to {{ city.name }} ?
+  </b>
+  <div>
+  <span class="text-prod">
+  Palace
+  </span>
+   will be destroyed if the current capital has one.
+  <div>
+  You will not be able to relocate again before {{ t }}.
+  <div>
+  <b class="mr-1">
+  Cost :
+  </b>
+  <i>
+  </i>
+   {{ i }}
+  <div class="modal-footer">
+  <button class="btn btn-secondary" type="button">
+  Cancel
+  </button>
+  <button class="btn btn-primary" type="button">
+  Relocate
+  </button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </button>
+  </div>
+</ng-container>
+<ng-container>
+  <b>
+  Relocate {{ city.name }} as capital
+  </b>
+  <br />
+  @if (!dataService.hasBuilding(city, "town_hall") {
+    <div class="text-danger">
+    A town hall is required
+    </div>
+  }
+  <div>
+  Cost: 
+  <i>
+  </i>
+   {{ t }}
+  @if (data.capitalchange_cooldown) {
+    <div>
+    Capital Relocation allowed in {{ t }} 
+    </div>
+  }
+  <ng-container>
+
+  </ng-container>
+  </div>
+</ng-container>
+</div>

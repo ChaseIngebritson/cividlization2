@@ -1,6 +1,17 @@
-.topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: .6rem 1rem; background: #0f1621; color: #f5f7fb;
-  .brand { font-weight: 700; letter-spacing: .02em; }
-  .resources { display: flex; gap: 1rem; }
+/* Topbar uses production utility classes; keep host full-width. */
+:host {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+.opacity-90:hover {
+  opacity: 1;
 }
