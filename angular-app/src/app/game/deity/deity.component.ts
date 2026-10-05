@@ -17,4 +17,12 @@ export class DeityComponent {
     color: d.color,
     icon: d.icon,
   }));
+
+  select(id: string): void {
+    this.data.player().deity = id;
+  }
+
+  get currentDeity(): string {
+    return this.data.player().deity;
+  }
 }

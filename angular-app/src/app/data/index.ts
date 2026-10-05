@@ -1,5 +1,6 @@
 // Re-exported game data tables recovered from the production bundle
 
+export { spells } from './spells';
 export { autoassign } from './autoassign';
 export { buildings } from './buildings';
 export { civilizations } from './civilizations';

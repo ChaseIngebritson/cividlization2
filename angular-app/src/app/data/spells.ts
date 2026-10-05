@@ -1,15 +1,14 @@
 // @ts-nocheck
 // Reverse-engineered from webpack module zUnb
 // Original variable: bg
-// Deity powers / abilities
+// Deity spells cast from the bottom spells bar
 // Entries (~): 18
-// Source range: 691678-705068
 import { icons as ug } from './icons';
 import { mg } from '../core/utils/mg';
 
-/** Reconstructed game data table (`powers`). Values may include runtime functions. */
+/** Reconstructed game data table (`spells`). Values may include runtime functions. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const powers: any = {
+export const spells: any = {
   abundance: {
     id: "abundance",
     name: "Abundance",

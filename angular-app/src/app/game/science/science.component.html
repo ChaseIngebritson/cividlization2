@@ -1,17 +1,250 @@
-<div class="bg-dark p-4 h-100" style="overflow: auto">
-  <h2 class="text-light">Science</h2>
-  <p class="text-muted">
-    Technology tree recovered from production data (original SVG map template also extracted).
-  </p>
-  <ul class="list-group">
-    @for (tech of techs; track tech.id) {
-      <li class="list-group-item bg-dark text-light border-secondary d-flex flex-wrap">
-        <strong class="mr-3">{{ tech.label }}</strong>
-        <span class="text-muted mr-3">rank {{ tech.rank }}</span>
-        @if (tech.require?.length) {
-          <span class="text-muted">requires {{ tech.require.join(', ') }}</span>
+<div #container class="bg-dark p-4 h-100" style="overflow: auto">
+  <svg [attr.width]="svgWidth" [attr.height]="svgHeight">
+    <defs>
+      <marker id="head" markerHeight="8" markerWidth="4" orient="auto" refX="0" refY="4">
+        <path d="M0,0 V8 L4,4 Z" [attr.fill]="link_color"></path>
+      </marker>
+      <linearGradient id="blue" x1="0%" x2="100%" y1="100%" y2="0%">
+        <stop offset="0%" style="stop-color: #2e86c1; stop-opacity: 1"></stop>
+        <stop offset="100%" style="stop-color: #5dade2; stop-opacity: 1"></stop>
+      </linearGradient>
+      <linearGradient id="gold" x1="0%" x2="100%" y1="100%" y2="0%">
+        <stop offset="0%" style="stop-color: #d4ac0d; stop-opacity: 1"></stop>
+        <stop offset="100%" style="stop-color: #f4d03f; stop-opacity: 1"></stop>
+      </linearGradient>
+      <linearGradient id="green" x1="0%" x2="100%" y1="100%" y2="0%">
+        <stop offset="0%" style="stop-color: #196f3d; stop-opacity: 1"></stop>
+        <stop offset="100%" style="stop-color: #27ae60; stop-opacity: 1"></stop>
+      </linearGradient>
+      <linearGradient id="black" x1="0%" x2="100%" y1="100%" y2="0%">
+        <stop offset="0%" style="stop-color: #17202a; stop-opacity: 1"></stop>
+        <stop offset="100%" style="stop-color: #34495e; stop-opacity: 1"></stop>
+      </linearGradient>
+      <linearGradient id="lightblue" x1="0%" x2="100%" y1="100%" y2="0%">
+        <stop offset="0%" style="stop-color: #17202a; stop-opacity: 1"></stop>
+        <stop offset="100%" style="stop-color: #2e86c1; stop-opacity: 1"></stop>
+      </linearGradient>
+    </defs>
+
+    @for (era of erasList; track era.key) {
+      <g>
+        <rect
+          rx="5"
+          ry="5"
+          stroke="black"
+          [attr.width]="eraWidth(era.value)"
+          [attr.height]="era_height"
+          [attr.x]="eraX(era.value)"
+          y="0"
+          [attr.fill]="era_color"
+        ></rect>
+        <text
+          dominant-baseline="middle"
+          fill="white"
+          font-size="14"
+          font-weight="bold"
+          text-anchor="middle"
+          [attr.x]="eraX(era.value) + eraWidth(era.value) / 2"
+          [attr.y]="era_height / 2"
+        >
+          {{ era.value.name }}
+        </text>
+        @if (!isEraUnlocked(era.key)) {
+          <text
+            fill="#888"
+            font-size="400"
+            font-weight="bold"
+            text-anchor="middle"
+            [attr.x]="eraX(era.value) + eraWidth(era.value) / 2"
+            [attr.y]="svg_data.height + era_height + node_height"
+          >
+            ?
+          </text>
         }
-      </li>
+      </g>
     }
-  </ul>
+
+    @for (link of svg_data.links; track $index) {
+      @if (link.d) {
+        <path
+          fill="transparent"
+          marker-end="url(#head)"
+          [attr.d]="link.d"
+          [attr.stroke]="link_color"
+        ></path>
+      }
+    }
+
+    @for (n of svg_data.nodes; track n.id) {
+      <g (click)="select(n.id)" (mouseenter)="mouseenter($event, n.id)" (mouseleave)="mouseleave()">
+        <rect
+          rx="5"
+          ry="5"
+          stroke="black"
+          [attr.width]="node_width"
+          [attr.height]="node_height"
+          [attr.x]="n.x"
+          [attr.y]="n.y"
+          [attr.fill]="color(n.id)"
+        ></rect>
+        <text
+          dominant-baseline="middle"
+          fill="white"
+          font-size="16"
+          font-weight="bold"
+          text-anchor="middle"
+          [attr.x]="n.x + node_width / 2"
+          [attr.y]="n.y + node_height / 2"
+        >
+          {{ label(n.id) }}
+        </text>
+      </g>
+    }
+
+    <!-- Legend -->
+    <g>
+      <rect
+        rx="5"
+        ry="5"
+        stroke="black"
+        x="0"
+        [attr.width]="node_width"
+        [attr.height]="node_height"
+        [attr.y]="legendY"
+        [attr.fill]="node_colors.current"
+      ></rect>
+      <text
+        dominant-baseline="middle"
+        fill="white"
+        font-size="16"
+        font-weight="bold"
+        text-anchor="middle"
+        [attr.x]="node_width / 2"
+        [attr.y]="legendY + node_height / 2"
+      >
+        Current
+      </text>
+    </g>
+    <g>
+      <rect
+        rx="5"
+        ry="5"
+        stroke="black"
+        [attr.width]="node_width"
+        [attr.height]="node_height"
+        [attr.x]="node_width + node_sep"
+        [attr.y]="legendY"
+        [attr.fill]="node_colors.locked"
+      ></rect>
+      <text
+        dominant-baseline="middle"
+        fill="white"
+        font-size="16"
+        font-weight="bold"
+        text-anchor="middle"
+        [attr.x]="node_width + node_sep + node_width / 2"
+        [attr.y]="legendY + node_height / 2"
+      >
+        Locked
+      </text>
+    </g>
+    <g>
+      <rect
+        rx="5"
+        ry="5"
+        stroke="black"
+        [attr.width]="node_width"
+        [attr.height]="node_height"
+        [attr.x]="2 * (node_width + node_sep)"
+        [attr.y]="legendY"
+        [attr.fill]="node_colors.available"
+      ></rect>
+      <text
+        dominant-baseline="middle"
+        fill="white"
+        font-size="16"
+        font-weight="bold"
+        text-anchor="middle"
+        [attr.x]="2 * (node_width + node_sep) + node_width / 2"
+        [attr.y]="legendY + node_height / 2"
+      >
+        Available
+      </text>
+    </g>
+    <g>
+      <rect
+        rx="5"
+        ry="5"
+        stroke="black"
+        [attr.width]="node_width"
+        [attr.height]="node_height"
+        [attr.x]="3 * (node_width + node_sep)"
+        [attr.y]="legendY"
+        [attr.fill]="node_colors.done"
+      ></rect>
+      <text
+        dominant-baseline="middle"
+        fill="white"
+        font-size="16"
+        font-weight="bold"
+        text-anchor="middle"
+        [attr.x]="3 * (node_width + node_sep) + node_width / 2"
+        [attr.y]="legendY + node_height / 2"
+      >
+        Done
+      </text>
+    </g>
+    @if (queueUnlocked) {
+      <g>
+        <rect
+          rx="5"
+          ry="5"
+          stroke="black"
+          [attr.width]="node_width"
+          [attr.height]="node_height"
+          [attr.x]="4 * (node_width + node_sep)"
+          [attr.y]="legendY"
+          [attr.fill]="node_colors.inqueue"
+        ></rect>
+        <text
+          dominant-baseline="middle"
+          fill="white"
+          font-size="16"
+          font-weight="bold"
+          text-anchor="middle"
+          [attr.x]="4 * (node_width + node_sep) + node_width / 2"
+          [attr.y]="legendY + node_height / 2"
+        >
+          In queue
+        </text>
+      </g>
+    }
+  </svg>
+
+  @if (queueUnlocked) {
+    <div class="text-light mt-2">
+      <i [class]="icons.info"></i>
+      Use ctrl + click to add to queue
+    </div>
+  }
+  <button type="button" class="btn btn-secondary mt-2" (click)="clearQueue()">Clear queue</button>
 </div>
+
+@if (tip) {
+  <div
+    class="science-tip popover bs-popover-right show"
+    [style.left.px]="tip.x"
+    [style.top.px]="tip.y"
+  >
+    <h3 class="popover-header">{{ tip.title }}</h3>
+    <div class="popover-body">
+      <div [innerHTML]="tip.desc"></div>
+      <div class="border-top mt-1">
+        <span class="text-science">
+          <i [class]="icons.science"></i>
+          {{ tip.cost }} ({{ formatTime(tip.time) }})
+        </span>
+      </div>
+    </div>
+  </div>
+}

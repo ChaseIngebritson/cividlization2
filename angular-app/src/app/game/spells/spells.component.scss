@@ -1,1 +1,45 @@
-/* Placeholder — page uses Bootstrap utilities from styles.original.css */
+/* Exact styles recovered from View Engine AOT (SpellsComponent). */
+:host {
+  display: contents;
+}
+
+.spells-deck > div {
+  width: 40px;
+  height: 40px;
+}
+
+.spells-deck > div i {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+}
+
+.spells-deck .hoverable {
+  cursor: pointer;
+}
+
+.spells-deck .hoverable:hover {
+  background-color: #f8f9fa !important;
+}
+
+.spells-deck .hoverable:hover i {
+  color: #343a40 !important;
+}
+
+.spells-hidden {
+  width: 40px;
+  height: 40px;
+  bottom: -20px;
+}
+
+.spells-hidden:hover {
+  bottom: -18px;
+}
+
+.spell-tip {
+  position: fixed;
+  z-index: 1060;
+  max-width: 280px;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+}

@@ -1,5 +1,17 @@
-/* Original science view is an SVG tech map; keep placeholder minimal (no invented colors). */
 :host {
   display: block;
   height: 100%;
+}
+
+g,
+rect,
+text {
+  cursor: pointer;
+}
+
+.science-tip {
+  position: fixed;
+  z-index: 1060;
+  max-width: 280px;
+  pointer-events: none;
 }

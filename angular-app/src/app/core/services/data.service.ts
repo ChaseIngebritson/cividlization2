@@ -12,6 +12,7 @@ import { jobs } from '../../data/jobs';
 import { eras } from '../../data/eras';
 import { deities } from '../../data/deities';
 import { powers } from '../../data/powers';
+import { spells } from '../../data/spells';
 import { mysteries } from '../../data/mysteries';
 import { difficulties } from '../../data/difficulties';
 import { upgrades } from '../../data/upgrades';
@@ -47,6 +48,7 @@ export class DataService {
     eras,
     deities,
     powers,
+    spells,
     mysteries,
     difficulties,
     upgrades,
@@ -71,9 +73,12 @@ export class DataService {
           civ_id: 'romans',
           name: 'Player',
           deity: '',
+          orientation: -75,
           sciences: {},
+          science_queue: [],
           policies: { policies: [] },
           gold: 0,
+          powers: {},
         },
       ],
       cities: [],
@@ -87,6 +92,13 @@ export class DataService {
       max_rpt: 50,
       max_notif: 100,
       difficulty: 2,
+      spellshidden: false,
+      cooldowns: {},
+      charging: {},
+      spelltime: {},
+      autocast: '',
+      plagueMaxCities: 0,
+      burnNb: 0,
       autopause: {
         citizen: false,
         building: false,
@@ -153,7 +165,7 @@ export class DataService {
     return 0;
   }
   goldTotal(..._args: any[]): number {
-    return 0;
+    return this.player().gold ?? 0;
   }
   maintenanceCost(..._args: any[]): number {
     return 0;
@@ -180,19 +192,32 @@ export class DataService {
     return;
   }
   scienceDiff(..._args: any[]): number {
-    return 0;
+    // Stub production rate until city science income is ported
+    return 1;
   }
   scienceProduction(..._args: any[]): number {
-    return 0;
+    return 1;
   }
   sciencePerPop(..._args: any[]): void {
     return;
   }
   sciencePercent(..._args: any[]): number {
-    return 0;
+    const p = this.player();
+    if (!p.science_queue?.length) return 0;
+    const id = p.science_queue[0];
+    const prog = p.sciences[id]?.progress ?? 0;
+    const cost = this.scienceCost(this.conf.sciences[id]);
+    return cost ? Math.floor((100 * prog) / cost) : 0;
   }
-  scienceTime(..._args: any[]): number {
-    return 0;
+  scienceTime(id?: string | null): number {
+    const p = this.player();
+    const rate = this.scienceDiff() || 1;
+    if (id) return this.scienceCost(this.conf.sciences[id]) / rate;
+    if (!p.science_queue?.length) return 0;
+    const cur = p.science_queue[0];
+    const remaining =
+      this.scienceCost(this.conf.sciences[cur]) - (p.sciences[cur]?.progress ?? 0);
+    return remaining / rate;
   }
   discoverScience(..._args: any[]): void {
     return;
@@ -203,20 +228,34 @@ export class DataService {
   hasPolicy(..._args: any[]): boolean {
     return false;
   }
-  hasScience(..._args: any[]): boolean {
-    return false;
+  hasScience(id: string, player: PlayerState | null = null): boolean {
+    const p = player ?? this.player();
+    return !!(p.sciences[id] && p.sciences[id].done);
   }
-  hasScienceRank(..._args: any[]): boolean {
-    return false;
+  hasScienceRank(rank: number): boolean {
+    return Object.keys(this.player().sciences).some(
+      (id) => (this.conf.sciences[id]?.rank ?? 0) >= rank && this.player().sciences[id]?.done,
+    );
   }
-  currentScienceRank(..._args: any[]): void {
-    return;
+  currentScienceRank(playerId = 0): number {
+    const p = this.player(playerId);
+    return Object.keys(p.sciences)
+      .filter((id) => p.sciences[id]?.done)
+      .map((id) => this.conf.sciences[id]?.rank ?? 0)
+      .reduce((a, b) => Math.max(a, b), 0);
   }
-  era(..._args: any[]): number {
-    return 0;
+  era(playerId = 0, rank = -1): string {
+    if (rank === -1) rank = this.currentScienceRank(playerId);
+    const found = Object.values(this.conf.eras).find(
+      (e: any) => e.rank_start <= rank && e.rank_end >= rank,
+    ) as { id: string } | undefined;
+    return found?.id ?? 'prehistory';
   }
-  isScienceAvailable(..._args: any[]): boolean {
-    return false;
+  isScienceAvailable(id: string, player: PlayerState | null = null): boolean {
+    const p = player ?? this.player();
+    const sci = this.conf.sciences[id];
+    if (!sci) return false;
+    return (sci.require as string[]).every((req) => this.hasScience(req, p));
   }
   foodDiff(..._args: any[]): number {
     return 0;
@@ -326,14 +365,36 @@ export class DataService {
   troopTime(..._args: any[]): number {
     return 0;
   }
-  isSpellAvailable(..._args: any[]): boolean {
-    return false;
+  isSpellAvailable(spell: { id: string; level: number; lock?: string }): boolean {
+    const orientation = this.player().orientation ?? -75;
+    return !(
+      (spell.level === 3 && orientation > -75) ||
+      (spell.level === 2 && orientation > -50) ||
+      (spell.level === 1 && orientation > -25) ||
+      !!this.data.cooldowns?.[spell.id] ||
+      this.isSpellLocked(spell)
+    );
   }
-  isSpellLocked(..._args: any[]): boolean {
-    return false;
+  isSpellLocked(spell: { lock?: string }): boolean {
+    return !!(spell.lock && !this.isUnlocked(spell.lock));
   }
-  useSpell(..._args: any[]): void {
-    return;
+  useSpell(spell: any, _engine?: unknown): void {
+    if (!this.isSpellAvailable(spell)) return;
+    this.data.cooldowns ??= {};
+    this.data.charging ??= {};
+    this.data.spelltime ??= {};
+
+    if (spell.charging) {
+      this.data.charging[spell.id] = (this.data.charging[spell.id] ?? 0) + 1;
+    } else if (spell.time) {
+      this.data.spelltime[spell.id] = spell.time;
+    } else if (typeof spell.run === 'function') {
+      if (!spell.run(this, _engine)) return;
+    }
+
+    this.data.cooldowns[spell.id] = spell.cooldown * this.coolDownMult();
+    this.changeOrientation(this.player(), -1);
+    this.checkLocks();
   }
   viewRange(..._args: any[]): number {
     return 0;
@@ -623,8 +684,12 @@ export class DataService {
   warChance(..._args: any[]): number {
     return 0;
   }
-  scienceCost(..._args: any[]): number {
-    return 0;
+  scienceCost(science: { id: string; rank: number } | null | undefined, playerId = 0): number {
+    if (!science) return 0;
+    let mult =
+      1 - 0.02 * this.data.players.filter((p) => this.hasScience(science.id, p)).length;
+    if (playerId === 1) mult = 1;
+    return Math.floor(mult * (5.5 * Math.pow(science.rank / 2, 7.8) - 10 + 20 * science.rank));
   }
   buildingGoldCost(..._args: any[]): number {
     return 0;
@@ -632,17 +697,32 @@ export class DataService {
   buildingProdCost(..._args: any[]): number {
     return 0;
   }
-  coolDownMult(..._args: any[]): number {
+  coolDownMult(playerId = 0): number {
+    return (
+      (this.hasWonder(playerId, 'mausoleum') ? 0.85 : 1) *
+      (this.hasWonder(playerId, 'taj') ? 0.85 : 1) *
+      (this.hasPolicy('miracles', playerId) ? 0.8 : 1) *
+      (1 - this.sequencerBonus(playerId))
+    );
+  }
+  sequencerBonus(_playerId = 0, _extra = 0): number {
     return 0;
   }
-  abundanceBonus(..._args: any[]): number {
-    return 0;
+  changeOrientation(player: PlayerState, delta: number): void {
+    player.orientation = (player.orientation ?? -75) + delta;
+    if (player.orientation < -100) player.orientation = -100;
+    if (player.orientation > 100) player.orientation = 100;
   }
-  newfireBonus(..._args: any[]): number {
-    return 0;
+  abundanceBonus(_playerId = 0): number {
+    return 0.2;
   }
-  sacrificeBonus(..._args: any[]): number {
-    return 0;
+  newfireBonus(playerId = 0): number {
+    if (playerId !== 0) return 0;
+    if (!this.data.charging?.['newfire'] || (this.player(playerId).orientation ?? 0) > 0) return 0;
+    return 0.44 * Math.log10(1 + 0.3 * this.data.charging['newfire']);
+  }
+  sacrificeBonus(): number {
+    return 10;
   }
   negociationBonus(..._args: any[]): number {
     return 0;
@@ -656,38 +736,38 @@ export class DataService {
   warpathMaintenanceBonus(..._args: any[]): number {
     return 0;
   }
-  berserkerAttackBonus(..._args: any[]): number {
-    return 0;
+  berserkerAttackBonus(): number {
+    return 0.25;
   }
-  berserkerSpeedBonus(..._args: any[]): number {
-    return 0;
+  berserkerSpeedBonus(): number {
+    return 0.25;
   }
-  appropriationBonus(..._args: any[]): number {
-    return 0;
+  appropriationBonus(): number {
+    return 1;
   }
-  timeshiftBonus(..._args: any[]): number {
-    return 0;
+  timeshiftBonus(): number {
+    return 60;
   }
   enlightmentBonus(..._args: any[]): number {
     return 0;
   }
-  mahaBonus(..._args: any[]): number {
-    return 0;
+  mahaBonus(): number {
+    return 100;
   }
-  idlersBonus(..._args: any[]): number {
-    return 0;
+  idlersBonus(): number {
+    return 1;
   }
   dionysiaBonus(..._args: any[]): number {
     return 0;
   }
-  bacchanaliaBonus(..._args: any[]): number {
-    return 0;
+  bacchanaliaBonus(): number {
+    return 0.25;
   }
-  underworldBonus(..._args: any[]): number {
-    return 0;
+  underworldBonus(): number {
+    return 0.1;
   }
-  punisherBonus(..._args: any[]): number {
-    return 0;
+  punisherBonus(): number {
+    return 0.05;
   }
   clairvoyanceBonus(..._args: any[]): number {
     return 0;
@@ -717,9 +797,6 @@ export class DataService {
     return 0;
   }
   blissBonus(..._args: any[]): number {
-    return 0;
-  }
-  sequencerBonus(..._args: any[]): number {
     return 0;
   }
   orphicBonus(..._args: any[]): number {
@@ -906,9 +983,6 @@ export class DataService {
     return 0;
   }
   changeOrientationFortech(..._args: any[]): void {
-    return;
-  }
-  changeOrientation(..._args: any[]): void {
     return;
   }
   initCivs(..._args: any[]): void {

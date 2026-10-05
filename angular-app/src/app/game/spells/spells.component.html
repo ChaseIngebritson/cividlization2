@@ -1,1 +1,99 @@
-<!-- Spells bar: full AOT template in decompiled/game/templates/spells.html -->
+@if (player.deity) {
+  <div>
+    @if (!data.spellshidden && display()) {
+      <div class="position-absolute" style="left: 50%; bottom: 10px; z-index: 5">
+        <div
+          class="spells-deck position-relative bg-dark text-light text-150 rounded d-flex border border-light px-2 py-1"
+          style="left: -50%"
+        >
+          @if (showAutocast) {
+            <div
+              class="rounded-circle text-center position-relative border border-danger cursor-pointer"
+              [ngStyle]="{ opacity: autocast ? 1 : 0.6 }"
+              (click)="toggleAutocastMode()"
+              title="Autocast"
+            >
+              A
+            </div>
+          }
+
+          @for (s of visibleSpells; track s.key) {
+            <div
+              class="rounded-circle text-center position-relative"
+              [ngClass]="{
+                'text-light hoverable': isAvailable(s.value),
+                'text-secondary': !isAvailable(s.value),
+                'border border-danger': data.autocast === s.key
+              }"
+              (click)="use(s.value)"
+              (mouseenter)="mouseenter($event, s.value)"
+              (mouseleave)="mouseleave()"
+            >
+              <i [class]="s.value.icon"></i>
+              @if (!data.spelltime?.[s.key] && !isLocked(s.value)) {
+                <i [class]="iconClass(s.value, s.key)" [ngStyle]="clipStyle(s.value)"></i>
+              }
+              @if (data.spelltime?.[s.key]) {
+                <i
+                  [class]="s.value.icon + ' text-success'"
+                  [ngStyle]="clipStyle(s.value)"
+                ></i>
+              }
+            </div>
+          }
+
+          <div
+            class="rounded-circle text-center cursor-pointer position-relative text-light hoverable"
+            (click)="hide()"
+            title="Hide"
+          >
+            <i [class]="icons.arrow_down" style="left: 12px"></i>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (data.spellshidden && display()) {
+      <div class="position-absolute" style="left: 50%; bottom: 0">
+        <div
+          class="spells-hidden rounded-circle bg-dark text-light text-130 text-center position-relative cursor-pointer border border-light"
+          (click)="show()"
+          title="Show"
+        >
+          <i [class]="icons.arrow_up"></i>
+        </div>
+      </div>
+    }
+  </div>
+}
+
+@if (tip) {
+  <div class="spell-tip popover bs-popover-top show" [style.left.px]="tip.x" [style.top.px]="tip.y">
+    <h3 class="popover-header">{{ tip.title }}</h3>
+    <div class="popover-body">
+      <div [innerHTML]="tip.desc"></div>
+      @if (data.charging?.[tip.id]) {
+        <div class="border-top text-success">Charge: {{ data.charging![tip.id] }}</div>
+      }
+      @if (data.spelltime?.[tip.id]) {
+        <div class="border-top text-success">
+          Active: {{ formatTime(data.spelltime![tip.id]) }}
+        </div>
+      }
+      @if (!data.spelltime?.[tip.id] && data.cooldowns?.[tip.id]) {
+        <div class="border-top text-primary">
+          Cooldown: {{ formatTime(data.cooldowns![tip.id]) }}
+        </div>
+      }
+      @if (tip.lockDesc) {
+        <div class="border-top">
+          <b class="text-danger">Locked</b>
+          {{ tip.lockDesc }} to unlock
+        </div>
+      }
+      <div class="border-top">
+        Hotkey: <b>{{ tip.level }}</b>
+      </div>
+    </div>
+  </div>
+}

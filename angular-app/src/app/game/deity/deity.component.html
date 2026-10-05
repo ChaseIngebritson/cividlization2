@@ -18,7 +18,14 @@
               <h5 class="card-title mb-1">{{ d.name }}</h5>
               <span class="card-text" [innerHTML]="d.description"></span>
             </div>
-            <button type="button" class="btn btn-primary ml-2">Select</button>
+            <button
+              type="button"
+              class="btn btn-primary ml-2"
+              [disabled]="!!currentDeity"
+              (click)="select(d.id)"
+            >
+              {{ currentDeity === d.id ? 'Selected' : 'Select' }}
+            </button>
           </div>
         </div>
       </div>

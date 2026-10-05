@@ -5,12 +5,16 @@ export interface PlayerState {
   civ_id: string;
   name?: string;
   deity: string;
+  orientation?: number;
   sciences: Record<string, { done?: boolean; progress?: number }>;
+  science_queue: string[];
   policies: { policies: string[]; groups?: string[] };
   gold?: number;
+  culture?: number;
   prestige?: number;
   favor?: number;
   upgrades?: Record<string, number>;
+  powers?: Record<string, number>;
 }
 
 export interface CityState {
@@ -41,6 +45,13 @@ export interface GameData {
   max_notif?: number;
   difficulty?: number;
   autopause?: Record<string, boolean>;
+  spellshidden?: boolean;
+  cooldowns?: Record<string, number>;
+  charging?: Record<string, number>;
+  spelltime?: Record<string, number>;
+  autocast?: string;
+  plagueMaxCities?: number;
+  burnNb?: number;
   emp_autoassign?: boolean;
   emp_priority?: string;
   emp_strong?: boolean;
