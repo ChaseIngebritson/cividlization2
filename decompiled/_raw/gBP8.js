@@ -1,0 +1,8 @@
+// webpack module: gBP8
+// size: 308
+function (l, n, e) {
+                "use strict";
+                l.exports = function () {
+                    this.text = 0, this.time = 0, this.xflags = 0, this.os = 0, this.extra = null, this.extra_len = 0, this.name = "", this.comment = "", this.hcrc = 0, this.done = !1
+                }
+            }

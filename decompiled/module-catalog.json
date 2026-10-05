@@ -1,0 +1,503 @@
+[
+  {
+    "id": "0",
+    "file": "0.js",
+    "size": 72,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "16wW",
+    "file": "16wW.js",
+    "size": 181,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "1uat",
+    "file": "1uat.js",
+    "size": 7725,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "3y9D",
+    "file": "3y9D.js",
+    "size": 2046,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "5hvy",
+    "file": "5hvy.js",
+    "size": 6080,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "7tol",
+    "file": "7tol.js",
+    "size": 679,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "9OqN",
+    "file": "9OqN.js",
+    "size": 773,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "ALsQ",
+    "file": "ALsQ.js",
+    "size": 1344,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "B/RK",
+    "file": "B_RK.js",
+    "size": 12956,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "E4JC",
+    "file": "E4JC.js",
+    "size": 4306,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "ELcG",
+    "file": "ELcG.js",
+    "size": 5428,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "ETIr",
+    "file": "ETIr.js",
+    "size": 2093,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "F+F2",
+    "file": "F_F2.js",
+    "size": 1094,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "GRuw",
+    "file": "GRuw.js",
+    "size": 692,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "HXk2",
+    "file": "HXk2.js",
+    "size": 4837,
+    "libs": [],
+    "is_game": true,
+    "strings": [
+      "msSaveOrOpenBlob"
+    ]
+  },
+  {
+    "id": "Ib8C",
+    "file": "Ib8C.js",
+    "size": 9278,
+    "libs": [
+      "crypto-js",
+      "angular"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "K3mO",
+    "file": "K3mO.js",
+    "size": 1216,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "KmYQ",
+    "file": "KmYQ.js",
+    "size": 571,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "LOvY",
+    "file": "LOvY.js",
+    "size": 1087,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "MlIO",
+    "file": "MlIO.js",
+    "size": 1117,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "NFKh",
+    "file": "NFKh.js",
+    "size": 456,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "OLod",
+    "file": "OLod.js",
+    "size": 11394,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "PVpz",
+    "file": "PVpz.js",
+    "size": 4286,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "QSbz",
+    "file": "QSbz.js",
+    "size": 3660,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "S6kV",
+    "file": "S6kV.js",
+    "size": 680,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "Tcbo",
+    "file": "Tcbo.js",
+    "size": 480,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "WYAk",
+    "file": "WYAk.js",
+    "size": 1276,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "aFNf",
+    "file": "aFNf.js",
+    "size": 3497,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "bQjk",
+    "file": "bQjk.js",
+    "size": 551,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "cX6o",
+    "file": "cX6o.js",
+    "size": 4071,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "cv67",
+    "file": "cv67.js",
+    "size": 6369,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "e7zE",
+    "file": "e7zE.js",
+    "size": 1414,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "eydS",
+    "file": "eydS.js",
+    "size": 3147,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "frGm",
+    "file": "frGm.js",
+    "size": 5804,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "gBP8",
+    "file": "gBP8.js",
+    "size": 308,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "gb/T",
+    "file": "gb_T.js",
+    "size": 530,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "iTZm",
+    "file": "iTZm.js",
+    "size": 367,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "jO9C",
+    "file": "jO9C.js",
+    "size": 464,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "lPiR",
+    "file": "lPiR.js",
+    "size": 3379,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "nm4c",
+    "file": "nm4c.js",
+    "size": 27356,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "oRuE",
+    "file": "oRuE.js",
+    "size": 570,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "oXfm",
+    "file": "oXfm.js",
+    "size": 23439,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "pA7S",
+    "file": "pA7S.js",
+    "size": 28228,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "qBft",
+    "file": "qBft.js",
+    "size": 631,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "qM6L",
+    "file": "qM6L.js",
+    "size": 1657,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "qu8F",
+    "file": "qu8F.js",
+    "size": 1553,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "uGsb",
+    "file": "uGsb.js",
+    "size": 919,
+    "libs": [
+      "crypto-js"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "uGxW",
+    "file": "uGxW.js",
+    "size": 251,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "vn/o",
+    "file": "vn_o.js",
+    "size": 2274,
+    "libs": [
+      "pako/zlib"
+    ],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "w7YG",
+    "file": "w7YG.js",
+    "size": 2131,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "wZgz",
+    "file": "wZgz.js",
+    "size": 4751,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "yDR0",
+    "file": "yDR0.js",
+    "size": 520,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  },
+  {
+    "id": "zUnb",
+    "file": "zUnb.js",
+    "size": 2081920,
+    "libs": [
+      "rxjs",
+      "angular"
+    ],
+    "is_game": true,
+    "strings": [
+      "Invalid CanActivateChild guard",
+      "food",
+      "food",
+      "let city of cityArray.controls; index as i",
+      "))\n        }\n    }\n    const ug = {\n        deity: ",
+      ",\n        save: ",
+      ",\n        city: ",
+      ",\n        food: ",
+      ",\n        wonder: ",
+      ",\n        diplomacy: "
+    ]
+  },
+  {
+    "id": "zn8P",
+    "file": "zn8P.js",
+    "size": 320,
+    "libs": [],
+    "is_game": false,
+    "strings": []
+  }
+]

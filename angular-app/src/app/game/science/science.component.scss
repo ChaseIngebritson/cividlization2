@@ -1,0 +1,5 @@
+.tech-list {
+  list-style: none; padding: 0; display: grid; gap: .4rem;
+  li { display: flex; flex-wrap: wrap; gap: .75rem; padding: .4rem .6rem; background: rgba(255,255,255,.04); }
+  .rank, .req { opacity: .7; font-size: .85rem; }
+}

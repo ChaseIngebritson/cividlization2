@@ -1,0 +1,15 @@
+<section class="page science">
+  <h2>{{ title }}</h2>
+  <p class="note">Tech tree recovered from production data (`sciences` / original var <code>dg</code>).</p>
+  <ul class="tech-list">
+    @for (tech of techs; track tech.id) {
+      <li>
+        <strong>{{ tech.label }}</strong>
+        <span class="rank">rank {{ tech.rank }}</span>
+        @if (tech.require?.length) {
+          <span class="req">requires {{ tech.require.join(', ') }}</span>
+        }
+      </li>
+    }
+  </ul>
+</section>

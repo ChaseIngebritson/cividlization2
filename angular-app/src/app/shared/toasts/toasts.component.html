@@ -1,0 +1,8 @@
+<div class="toasts">
+  @for (t of toasts.toasts(); track t.id) {
+    <div class="toast" [class]="t.type" (click)="toasts.dismiss(t.id)">
+      @if (t.title) { <strong>{{ t.title }}</strong> }
+      <span>{{ t.message }}</span>
+    </div>
+  }
+</div>

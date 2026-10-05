@@ -1,0 +1,8 @@
+<nav class="leftmenu">
+  @for (item of items; track item.path) {
+    <a [routerLink]="item.path" routerLinkActive="active">
+      <i [class]="item.icon"></i>
+      <span>{{ item.label }}</span>
+    </a>
+  }
+</nav>

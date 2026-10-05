@@ -1,0 +1,3 @@
+.game-shell { display: flex; flex-direction: column; height: 100vh; }
+.game-body { display: flex; flex: 1; min-height: 0; }
+.game-content { flex: 1; overflow: auto; padding: 1rem; }
