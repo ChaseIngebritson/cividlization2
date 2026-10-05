@@ -32,6 +32,15 @@ export interface GameData {
   cities: CityState[];
   turn?: number;
   version?: string;
+  darktheme?: boolean;
+  nostats?: boolean;
+  no_respawn?: boolean;
+  notif_pop?: boolean;
+  notif_building?: boolean;
+  max_rpt?: number;
+  max_notif?: number;
+  difficulty?: number;
+  autopause?: Record<string, boolean>;
   emp_autoassign?: boolean;
   emp_priority?: string;
   emp_strong?: boolean;

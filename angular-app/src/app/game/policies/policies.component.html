@@ -1,4 +1,4 @@
-<div class="h-100 overflow-auto p-3">
+<div class="policies-page h-100 overflow-auto p-3">
   <h5>
     Policy cost:
     <span class="text-culture">
@@ -28,12 +28,12 @@
     }
   </div>
 
-  <div class="policy-container border m-2 rounded-lg p-2" style="max-width: 1430px">
-    <h4 class="px-3 py-2 m-0">
+  <div class="policy-container border m-2 rounded-lg policy-unlocked" style="max-width: 1430px">
+    <h4 class="px-3 py-2 m-0 text-dark">
       Mixed policies
       <span class="text-70 text-secondary">(Policies that require 2 groups)</span>
     </h4>
-    <div class="d-flex flex-wrap px-2">
+    <div class="d-flex flex-wrap px-2 pb-2">
       @for (p of mixedPolicies; track p.id) {
         <span
           class="border rounded m-1 px-2 py-1"
@@ -52,6 +52,6 @@
     <div class="border p-3 text-success">Available for purchase</div>
     <div class="border p-3 text-primary">Purchased</div>
     <div class="border p-3 text-secondary">Unavailable</div>
-    <div class="border p-3 text-danger">Locked</div>
+    <div class="border p-3 policy-locked text-danger">Locked</div>
   </div>
 </div>

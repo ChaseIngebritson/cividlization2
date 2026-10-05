@@ -1,13 +1,15 @@
-<div class="science-page bg-dark p-4 overflow-auto">
-  <h2>Science</h2>
-  <p class="text-muted">Technology tree recovered from production data (original SVG map template also extracted).</p>
-  <ul class="tech-list">
+<div class="bg-dark p-4 h-100" style="overflow: auto">
+  <h2 class="text-light">Science</h2>
+  <p class="text-muted">
+    Technology tree recovered from production data (original SVG map template also extracted).
+  </p>
+  <ul class="list-group">
     @for (tech of techs; track tech.id) {
-      <li>
-        <strong>{{ tech.label }}</strong>
-        <span class="rank">rank {{ tech.rank }}</span>
+      <li class="list-group-item bg-dark text-light border-secondary d-flex flex-wrap">
+        <strong class="mr-3">{{ tech.label }}</strong>
+        <span class="text-muted mr-3">rank {{ tech.rank }}</span>
         @if (tech.require?.length) {
-          <span class="req">requires {{ tech.require.join(', ') }}</span>
+          <span class="text-muted">requires {{ tech.require.join(', ') }}</span>
         }
       </li>
     }

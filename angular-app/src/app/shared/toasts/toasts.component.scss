@@ -1,10 +1,4 @@
-.toasts {
-  position: fixed; right: 1rem; top: 1rem; z-index: 1000; display: flex; flex-direction: column; gap: .5rem;
-}
-.toast {
-  min-width: 220px; padding: .75rem 1rem; background: #1b2433; color: #fff; border-left: 4px solid #888; cursor: pointer;
-  &.success { border-color: #3cba7a; }
-  &.error { border-color: #e45858; }
-  &.warning { border-color: #e0a106; }
-  &.info { border-color: #4c8dff; }
+/* Toast chrome matches production: Bootstrap bg-* utilities on each toast. */
+:host {
+  display: block;
 }

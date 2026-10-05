@@ -1,8 +1,19 @@
-<div class="position-absolute toasts-wrap" style="bottom:0;right:0;z-index:5">
+<div class="position-absolute" style="bottom: 0; right: 0; z-index: 5">
   @for (t of toasts.toasts(); track t.id) {
-    <div class="toast-item d-flex cursor-pointer m-2 p-2 bg-dark text-light border" [class]="t.type" (click)="toasts.dismiss(t.id)">
-      <div class="font-weight-bold ml-2 flex-fill">{{ t.title || t.message }}</div>
-      <div class="text-150" title="close">×</div>
+    <div
+      class="toast show d-flex cursor-pointer m-2 p-2"
+      [ngClass]="t.classname"
+      role="alert"
+      aria-atomic="true"
+      (click)="toasts.dismiss(t.id)"
+    >
+      @if (t.icon) {
+        <i [class]="t.icon"></i>
+      }
+      <div class="font-weight-bold ml-2 flex-fill" style="height: auto !important">
+        {{ t.message }}
+      </div>
+      <div class="text-150 font-weight-bold line-height-1" title="close">&times;</div>
     </div>
   }
 </div>

@@ -2,9 +2,11 @@ import { Injectable, signal } from '@angular/core';
 
 export interface Toast {
   id: number;
-  type: 'success' | 'error' | 'info' | 'warning';
+  /** Bootstrap utility classes from the original ToastService */
+  classname: string;
   title?: string;
   message: string;
+  icon?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -12,29 +14,41 @@ export class ToastService {
   private seq = 0;
   readonly toasts = signal<Toast[]>([]);
 
-  success(message: string, title?: string): void {
-    this.push('success', message, title);
+  success(message: string, icon?: string, _link?: string): void {
+    this.push('bg-success text-light', message, icon);
   }
 
-  error(message: string, title?: string): void {
-    this.push('error', message, title);
+  info(message: string, icon?: string, _link?: string): void {
+    this.push('bg-info text-light', message, icon);
   }
 
-  info(message: string, title?: string): void {
-    this.push('info', message, title);
+  danger(message: string, icon?: string, _link?: string): void {
+    this.push('bg-danger text-light', message, icon);
   }
 
-  warning(message: string, title?: string): void {
-    this.push('warning', message, title);
+  /** Alias used by newer call sites */
+  error(message: string, icon?: string, _link?: string): void {
+    this.danger(message, icon, _link);
+  }
+
+  warning(message: string, icon?: string, _link?: string): void {
+    this.push('bg-warning text-light', message, icon);
+  }
+
+  black(message: string, icon?: string, _link?: string): void {
+    this.push('bg-dark text-light border border-light', message, icon);
   }
 
   dismiss(id: number): void {
     this.toasts.update((list) => list.filter((t) => t.id !== id));
   }
 
-  private push(type: Toast['type'], message: string, title?: string): void {
+  private push(classname: string, message: string, icon?: string): void {
     const id = ++this.seq;
-    this.toasts.update((list) => [...list, { id, type, message, title }]);
-    setTimeout(() => this.dismiss(id), 4000);
+    this.toasts.update((list) => [
+      { id, classname, message, icon, title: message },
+      ...list,
+    ]);
+    setTimeout(() => this.dismiss(id), 15000);
   }
 }

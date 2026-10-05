@@ -1,11 +1,11 @@
-<div class="d-flex flex-column vh-100">
+<div class="d-flex flex-column vh-100" [class.dark]="!!data.data['darktheme']">
   <app-topbar></app-topbar>
   <div class="container-fluid px-0 flex-fill">
     <div class="d-flex h-100">
       <div>
         <app-leftmenu></app-leftmenu>
       </div>
-      <div class="flex-fill" style="height:auto!important;width:0;">
+      <div class="flex-fill" style="height: auto !important; width: 0">
         <router-outlet></router-outlet>
         <app-toasts aria-atomic="true" aria-live="polite"></app-toasts>
       </div>

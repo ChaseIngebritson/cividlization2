@@ -1,20 +1,269 @@
-.homepage{background-image:url(/background.0a8e8fb2999222b3636e.jpg);background-size:cover;background-position-y:25%;box-shadow:inset 1em 1em 15em #000,inset -1em -1em 15em #000}.card-container{max-height:50vh}.flex-fill{height:auto!important}
-.spells-deck > div{width:40px;height:40px}.spells-deck > div   i{position:absolute;left:10px;bottom:8px}.spells-deck   .hoverable{cursor:pointer}.spells-deck   .hoverable:hover{background-color:#f8f9fa!important}.spells-deck   .hoverable:hover   i{color:#343a40!important}.spells-hidden{width:40px;height:40px;bottom:-20px}.spells-hidden:hover{bottom:-18px}
-a{color:inherit;text-decoration:none}.opacity-90{opacity:.9}.opacity-90:hover{opacity:1}
-li{cursor:pointer}.list-group-item{padding:.5rem 1.25rem!important}.list-group-min{width:58px;text-align:center}.list-group-min   .list-group-item{padding:.5rem!important}
-.toast{width:250px}.toast:not(:last-child){margin-bottom:.5rem!important}.toast-body{padding:.5rem!important}
-.tuto_bg{position:fixed;width:100%;height:100vh;background-color:rgba(0,0,0,.85);padding:10px}
-circle{fill:#fff;stroke:#000}text{font-weight:700}rect{stroke:#000}.fill{fill:#58ca8f;stroke:#0da054;stroke-width:2}.fill.rust{fill:#e18c55;stroke:#b7410e}.fill.center{stroke:#444;stroke-width:1;fill:url(#center)}
-.cursor-forbidden   .text-special{color:#6c757d!important}
-.bgicon{position:absolute;left:50%;z-index:-9}.bgicon > i{position:relative;top:15px;left:-50%;font-size:75vh;opacity:.05}
-g, rect, text{cursor:pointer}
-.map-menu{background:rgba(0,0,0,.6);border-radius:5px;padding:2px 8px}.menu-list > div{border-radius:50%;width:24px;height:24px;color:#fff;font-size:18px;text-align:center;cursor:pointer;margin:2px}.menu-list > div:hover{background:#fff;color:#000}.menu-list > div.disabled{background:0 0!important;color:#aaa!important;cursor:forbidden!important}.menu-desc{color:#fff;text-align:center;font-size:16px}.imp-menu{background:rgba(52,58,64,.8)!important}.imp-menu   img{width:48px;height:48px}
-.policy-unlocked{background-color:#d6eaf8}.policy-locked{background-color:#fadbd8}.list-group-item{background-color:transparent!important;padding:.5rem .75rem!important}
-.bg{position:fixed;width:100%;height:100vh;background-color:rgba(0,0,0,.85);padding:10px;top:0;left:0;z-index:500;font-size:800%}@-webkit-keyframes bounce{0%,10%,100%,20%,50%,80%{-webkit-transform:translateY(0);transform:translateY(0)}40%,60%{-webkit-transform:translateY(-15px);transform:translateY(-15px)}}@keyframes bounce{0%,10%,100%,20%,50%,80%{-webkit-transform:translateY(0);transform:translateY(0)}40%,60%{-webkit-transform:translateY(-15px);transform:translateY(-15px)}}.bg > i{-webkit-animation:2s infinite bounce;animation:2s infinite bounce}
-.card-body{height:auto!important}
-g{cursor:pointer}g   circle, line{stroke-width:3px}text{font-size:90%;font-weight:700}g.selected   circle, g:hover   circle{stroke-width:5px}.progress{height:20px}.progress   span{color:#000}.line{width:20px;height:4px;display:inline-block;margin-bottom:4px}
-.card-body, .card-body > div{height:auto!important}
+/*
+ * Recovered component styles from the production AOT bundle.
+ * Rules that were View-Encapsulation-scoped in the original must stay
+ * scoped here too — otherwise left-menu / flex layout get polluted.
+ */
 
+/* Home (also mirrored in home.component.scss for encapsulation) */
+.homepage {
+  background-image: url(/background.0a8e8fb2999222b3636e.jpg);
+  background-size: cover;
+  background-position-y: 25%;
+  box-shadow: inset 1em 1em 15em #000, inset -1em -1em 15em #000;
+}
+.homepage .card-container,
+.card-container {
+  max-height: 50vh;
+}
+/* Original HomeComponent overrode .flex-fill only inside itself */
+.homepage .flex-fill {
+  height: auto !important;
+}
+
+/* Spells bar */
+.spells-deck > div {
+  width: 40px;
+  height: 40px;
+}
+.spells-deck > div i {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+}
+.spells-deck .hoverable {
+  cursor: pointer;
+}
+.spells-deck .hoverable:hover {
+  background-color: #f8f9fa !important;
+}
+.spells-deck .hoverable:hover i {
+  color: #343a40 !important;
+}
+.spells-hidden {
+  width: 40px;
+  height: 40px;
+  bottom: -20px;
+}
+.spells-hidden:hover {
+  bottom: -18px;
+}
+
+/* Shared link / toast / tutorial chrome */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.opacity-90 {
+  opacity: 0.9;
+}
+.opacity-90:hover {
+  opacity: 1;
+}
+
+.toast {
+  width: 250px;
+}
+.toast:not(:last-child) {
+  margin-bottom: 0.5rem !important;
+}
+.toast-body {
+  padding: 0.5rem !important;
+}
+
+.tuto_bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+}
+
+/* Science / world SVG map */
+circle {
+  fill: #fff;
+  stroke: #000;
+}
+text {
+  font-weight: 700;
+}
+rect {
+  stroke: #000;
+}
+.fill {
+  fill: #58ca8f;
+  stroke: #0da054;
+  stroke-width: 2;
+}
+.fill.rust {
+  fill: #e18c55;
+  stroke: #b7410e;
+}
+.fill.center {
+  stroke: #444;
+  stroke-width: 1;
+  fill: url(#center);
+}
+
+.cursor-forbidden .text-special {
+  color: #6c757d !important;
+}
+
+.bgicon {
+  position: absolute;
+  left: 50%;
+  z-index: -9;
+}
+.bgicon > i {
+  position: relative;
+  top: 15px;
+  left: -50%;
+  font-size: 75vh;
+  opacity: 0.05;
+}
+
+g,
+rect,
+text {
+  cursor: pointer;
+}
+
+.map-menu {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  padding: 2px 8px;
+}
+.menu-list > div {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  margin: 2px;
+}
+.menu-list > div:hover {
+  background: #fff;
+  color: #000;
+}
+.menu-list > div.disabled {
+  background: 0 0 !important;
+  color: #aaa !important;
+  cursor: not-allowed !important;
+}
+.menu-desc {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+.imp-menu {
+  background: rgba(52, 58, 64, 0.8) !important;
+}
+.imp-menu img {
+  width: 48px;
+  height: 48px;
+}
+
+/* Policies — must stay scoped (originally PoliciesComponent encapsulation) */
+.policy-unlocked {
+  background-color: #d6eaf8;
+}
+.policy-locked {
+  background-color: #fadbd8;
+}
+.policies-page .list-group-item {
+  background-color: transparent !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* Daily / gift bounce overlay */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  font-size: 800%;
+}
+@-webkit-keyframes bounce {
+  0%,
+  10%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40%,
+  60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@keyframes bounce {
+  0%,
+  10%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40%,
+  60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+.bg > i {
+  -webkit-animation: 2s infinite bounce;
+  animation: 2s infinite bounce;
+}
+
+.card-body {
+  height: auto !important;
+}
+
+/* Science tree SVG extras */
+g {
+  cursor: pointer;
+}
+g circle,
+g line {
+  stroke-width: 3px;
+}
+text {
+  font-size: 90%;
+  font-weight: 700;
+}
+g.selected circle,
+g:hover circle {
+  stroke-width: 5px;
+}
+.progress {
+  height: 20px;
+}
+.progress span {
+  color: #000;
+}
+.line {
+  width: 20px;
+  height: 4px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.card-body,
+.card-body > div {
+  height: auto !important;
+}
+
+/* Game shell gift / deity bounce icons */
 .bounce {
   -webkit-animation: 2s infinite bounce;
   animation: 2s infinite bounce;

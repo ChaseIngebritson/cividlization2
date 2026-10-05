@@ -79,6 +79,24 @@ export class DataService {
       cities: [],
       turn: 0,
       version: 'reconstructed-0.1',
+      darktheme: false,
+      nostats: false,
+      no_respawn: false,
+      notif_pop: true,
+      notif_building: true,
+      max_rpt: 50,
+      max_notif: 100,
+      difficulty: 2,
+      autopause: {
+        citizen: false,
+        building: false,
+        science: false,
+        incoming: false,
+        city_captured: false,
+        city_lost: false,
+        city_joined: false,
+        plague: false,
+      },
     };
   }
 

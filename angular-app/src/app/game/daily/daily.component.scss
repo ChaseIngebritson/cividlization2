@@ -1,1 +1,4 @@
-.daily-card { height: 200px; min-width: 140px; background: #1a2332; }
+/* Original daily cards used Bootstrap .card + inline height only — no custom fill color. */
+.daily-card {
+  height: 200px;
+}
