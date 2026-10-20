@@ -1,0 +1,47 @@
+<div class="city-view">
+  @if (selected(); as city) {
+    <div class="city-header">
+      <span class="name">
+        @if (city.capital) {
+          <i class="fas fa-star text-warning"></i>
+        }
+        <strong>{{ city.name }}</strong>
+        <button type="button" class="icon-btn" title="Rename" (click)="rename(city)">
+          <i class="fas fa-edit"></i>
+        </button>
+      </span>
+      <div class="stat-row">
+        <span><i class="fas fa-users"></i> {{ dataService.pop(city) | cvFormat }}</span>
+        <span><i class="fas fa-leaf text-success"></i> {{ city.food | cvFormat }} / 100 (+{{ foodRate(city) | cvFormat:'.1' }})</span>
+        <span><i class="fas fa-heartbeat text-danger"></i> {{ 0.95 | cvPercent }}</span>
+        <span><i class="fas fa-coins text-warning"></i> {{ city.gold | cvFormat }} / 100 (+0.0)</span>
+        <span><i class="fas fa-flask text-info"></i> +0.1</span>
+        <span><i class="fas fa-smile text-warning"></i> {{ (city.happiness ?? 0.9) | cvPercent }}</span>
+      </div>
+    </div>
+
+    <div class="citizens">
+      @for (job of jobs(); track job.id) {
+        <div class="job-row">
+          <span class="job-name">{{ job.label }}</span>
+          <span class="job-bonus text-success">+{{ job.bonus }}</span>
+          @if (job.id === 'idle') {
+            <span class="count">{{ city.citizens.idle }}</span>
+          } @else {
+            <button type="button" class="step" (click)="adjust(city, job.id, -1)" [disabled]="!city.citizens[job.id]">−</button>
+            <span class="count">{{ city.citizens[job.id] || 0 }}</span>
+            <button type="button" class="step" (click)="adjust(city, job.id, 1)" [disabled]="!city.citizens.idle">+</button>
+          }
+        </div>
+      }
+      <label class="check"><input type="checkbox" [(ngModel)]="city.prevent_growth" /> Prevent growth</label>
+      <label class="check"><input type="checkbox" [(ngModel)]="city.autoassign" /> Auto-assign</label>
+    </div>
+
+    <div class="row">
+      <app-citybuildings [city]="city"></app-citybuildings>
+      <app-citytroops [city]="city"></app-citytroops>
+    </div>
+  }
+  <div class="watermark" aria-hidden="true"></div>
+</div>

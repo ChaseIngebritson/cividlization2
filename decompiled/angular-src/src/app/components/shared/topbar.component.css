@@ -1,0 +1,52 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  background: #343a40;
+  color: #fff;
+  min-height: 42px;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.science a {
+  color: #63b3ed;
+  margin-left: 0.35rem;
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-btn {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: #007bff;
+  border: 0;
+  color: #fff;
+  padding: 0.25rem 0.7rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.text-warning {
+  color: #ffc107;
+  margin-right: 0.25rem;
+}
+.text-info {
+  color: #17a2b8;
+}

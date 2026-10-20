@@ -1,0 +1,32 @@
+<div class="support">
+  <h1>Support</h1>
+  <p>
+    This game is completly free and provided without ads. However, if you wish to support it, you can
+    still offer a gift!
+  </p>
+
+  <h3>Buy those useless items</h3>
+  <div class="gifts">
+    @for (g of gifts; track g) {
+      <button type="button" class="gift gift-{{ g }}" (click)="buy(g)">
+        <i class="fas fa-coins"></i> Give {{ g }} Kreds
+      </button>
+    }
+  </div>
+
+  <h3>Thanks</h3>
+  <p>
+    Many thanks to <strong>henkekalmar, Wicia777, aussy8, Rekaniso, Sieker, WLBjork</strong> and
+    <strong>cbianco8808</strong> for helping with beta-testing this game!
+  </p>
+
+  <h3>Credits</h3>
+  <p>Icons made by Freepik, Eucalyp from <a href="https://www.flaticon.com" target="_blank" rel="noopener">www.flaticon.com</a></p>
+
+  <h3>GitHub</h3>
+  <a class="btn-primary" href="https://github.com/chaseingebritson/cividlization2" target="_blank" rel="noopener">
+    View on GitHub
+  </a>
+
+  <div class="version">Version: {{ dataService.getStrVersion() }}</div>
+</div>

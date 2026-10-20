@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-10-20T18:56:44.374Z",
+  "selectors": {
+    "app-home": [
+      "Delete",
+      "Cancel",
+      "Cividlization II ",
+      "Industrial Revolution Update"
+    ],
+    "app-game": [
+      "Select"
+    ],
+    "app-citycontainer": [
+      "Cancel",
+      "Relocate",
+      "A town hall is required",
+      "Cost: "
+    ],
+    "app-science": [
+      "Available",
+      "Done",
+      "Clear queue"
+    ],
+    "app-world": [
+      "Hide Terrain"
+    ],
+    "app-attacks": [
+      "Origin",
+      "Destination",
+      "Speed",
+      "Gold",
+      "Remaining Time",
+      "Troops"
+    ],
+    "app-simulator": [
+      "Simulate"
+    ],
+    "app-reports": [
+      "Back to list",
+      "Battle reports"
+    ],
+    "app-policies": [
+      "Policy cost: ",
+      "Mixed policies ",
+      "(Policies that require 2 groups)",
+      "Available for purchase",
+      "Purchased",
+      "Unavailable",
+      "Locked"
+    ],
+    "app-notifications": [
+      "Purchased",
+      "Unavailable",
+      "Locked",
+      "Notifications"
+    ],
+    "app-help": [
+      "Related"
+    ],
+    "app-support": [
+      " Give 200 Kreds",
+      " Give 500 Kreds",
+      " Give 1000 Kreds",
+      "Thanks",
+      "\\nMany thanks to ",
+      "henkekalmar",
+      ", ",
+      "Wicia777",
+      "aussy8",
+      "Rekaniso",
+      "Sieker",
+      "WLBjork",
+      " and\\n",
+      "cbianco8808",
+      " for\\nhelping with beta-testing this game ! ",
+      "Credits",
+      "Icons made by ",
+      "Freepik",
+      "Eucalyp",
+      " from ",
+      "www.flaticon.com",
+      "GitHub",
+      "View on GitHub"
+    ],
+    "app-options": [
+      "Restart this run",
+      "\\xd7",
+      "Are you sure you want to restart ?",
+      " All progress from this run will be lost !",
+      "Cancel",
+      "Restart"
+    ],
+    "app-diplomacy": [
+      "Total"
+    ],
+    "app-powers": [
+      "\\xd7",
+      "This upgrade costs ",
+      " which is more than 10% of your total.",
+      " ? ",
+      "Cancel",
+      "Shut up and take my ",
+      " !"
+    ],
+    "app-daily": [
+      "Replay !",
+      "Daily Bonus !"
+    ],
+    "app-deity": [
+      "Deity Selection"
+    ],
+    "app-root": [
+      "Deity Selection",
+      "This game is available for free on ",
+      "Kongregate.com"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+.gifts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.gift {
+  background: #fff;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+}
+.gift-10 { color: #17a2b8; }
+.gift-20 { color: #ffc107; }
+.gift-50 { color: #007bff; }
+.gift-100 { color: #fd7e14; }
+.gift-200 { color: #e83e8c; }
+.gift-500 { color: #dc3545; }
+.gift-1000 { color: #6f42c1; }
+.btn-primary {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.2rem;
+}
+.version {
+  margin-top: 2rem;
+  color: #6c757d;
+  text-align: right;
+}

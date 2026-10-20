@@ -1,0 +1,87 @@
+.science-wrap {
+  max-width: 900px;
+}
+
+.era-tabs {
+  display: flex;
+  gap: 0;
+}
+
+.era-tab {
+  flex: 1;
+  background: #6c757d;
+  color: #fff;
+  border: 0;
+  padding: 0.45rem;
+  cursor: pointer;
+}
+
+.era-tab.active {
+  background: #343a40;
+}
+
+.tree-panel {
+  background: #343a40;
+  color: #fff;
+  padding: 1rem;
+  min-height: 320px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tech {
+  border: 0;
+  border-radius: 0.35rem;
+  padding: 0.55rem 0.75rem;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+}
+
+.tech.available {
+  background: #28a745;
+}
+.tech.locked {
+  background: #1b2631;
+}
+.tech.current {
+  background: #17a2b8;
+}
+.tech.done {
+  background: #d4a017;
+  color: #212529;
+}
+
+.legend {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.legend .tech {
+  cursor: default;
+  min-width: 5.5rem;
+  font-size: 0.85rem;
+}
+
+.clear {
+  margin-top: 0.5rem;
+  background: #6c757d;
+  color: #fff;
+  border: 0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}

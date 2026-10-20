@@ -1,0 +1,85 @@
+.city-view {
+  position: relative;
+  min-height: 70vh;
+}
+
+.city-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+}
+
+.citizens {
+  max-width: 28rem;
+}
+
+.job-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.job-bonus {
+  color: #28a745;
+  font-size: 0.85rem;
+}
+
+.step {
+  background: #007bff;
+  color: #fff;
+  border: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.step:disabled {
+  opacity: 0.4;
+}
+
+.check {
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.icon-btn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.watermark {
+  position: absolute;
+  inset: 20% 10% 10% 10%;
+  background: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 80'%3E%3Cpath fill='%23e9ecef' d='M10 70h100V35H90V25H75V15H45v10H30v10H10z'/%3E%3C/svg%3E");
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.city-header,
+.citizens,
+.row {
+  position: relative;
+  z-index: 1;
+}

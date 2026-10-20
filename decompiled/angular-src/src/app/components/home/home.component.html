@@ -1,0 +1,76 @@
+<div class="homepage">
+  <div class="home-center">
+    <h1>Cividlization II</h1>
+    <div class="subtitle">Industrial Revolution Update</div>
+
+    @if (step === 'menu') {
+      <div class="menu-stack">
+        <button type="button" class="menu-btn" (click)="openNew()">New game</button>
+        <button type="button" class="menu-btn" disabled>Continue</button>
+        <button
+          type="button"
+          class="menu-btn"
+          [disabled]="!saves.length"
+          (click)="saves.length && loadSave(saves[0])"
+        >
+          Load game
+        </button>
+        <label class="menu-btn export-label">
+          Load an exported save
+          <input type="file" accept=".json,application/json,text/plain" (change)="onExportFile($event)" hidden />
+        </label>
+      </div>
+      @if (saves.length) {
+        <div class="save-list">
+          @for (s of saves; track s.name) {
+            <button type="button" class="linkish" (click)="loadSave(s)">{{ s.name }}</button>
+          }
+        </div>
+      }
+    }
+
+    @if (step === 'difficulty') {
+      <input class="name-input" [(ngModel)]="name" placeholder="Name" required />
+      <div class="diff-row">
+        @for (d of difficulties(); track d.id) {
+          <button
+            type="button"
+            class="diff-card"
+            [class.selected]="difficulty === d.id"
+            (click)="difficulty = d.id"
+          >
+            <strong>{{ d.name }}</strong>
+            <div class="diff-body" [innerHTML]="safeDesc(d.description)"></div>
+          </button>
+        }
+      </div>
+      <div class="nav-row">
+        <button type="button" class="nav-btn" (click)="backMenu()">Cancel</button>
+        <button type="button" class="nav-btn dark" [disabled]="!name.trim()" (click)="nextFromDifficulty()">
+          Next
+        </button>
+      </div>
+    }
+
+    @if (step === 'civ') {
+      <h4 class="choose">Choose your civilization</h4>
+      <div class="civ-box">
+        @for (c of civEntries(); track c.id) {
+          <button type="button" class="civ-row" [class.selected]="civId === c.id" (click)="civId = c.id">
+            <strong>{{ c.name }}</strong>
+            <div class="civ-desc" [innerHTML]="safeDesc(c.description || c.bonus || '')"></div>
+          </button>
+        }
+      </div>
+      <div class="nav-row">
+        <button type="button" class="nav-btn" (click)="step = 'difficulty'">Back</button>
+        <button type="button" class="nav-btn dark" [disabled]="!civId" (click)="startGame()">Start</button>
+      </div>
+    }
+
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+  </div>
+  <div class="version">Version: {{ dataService.getStrVersion() }}</div>
+</div>

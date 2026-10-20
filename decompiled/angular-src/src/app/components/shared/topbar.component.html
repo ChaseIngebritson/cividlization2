@@ -1,0 +1,23 @@
+<header class="topbar navbar navbar-dark bg-dark">
+  <div class="stats">
+    <span><i class="fas fa-users text-warning"></i> {{ pop() | cvFormat }}</span>
+    <span><i class="fas fa-smile text-warning"></i> {{ happiness() | cvPercent }}</span>
+    <span class="science">
+      <i class="fas fa-flask text-info"></i>
+      <a href="#" (click)="$event.preventDefault()">Nothing selected</a>
+    </span>
+  </div>
+  <div class="actions">
+    <button type="button" class="icon-btn" (click)="togglePause()" [title]="data.pause ? 'Play' : 'Pause'">
+      <i [class]="data.pause ? 'fas fa-play' : 'fas fa-pause'"></i>
+    </button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-sm" (click)="doSave()">
+        Save ({{ saveAgeSec() }}s)
+      </button>
+    </div>
+    <button type="button" class="icon-btn" (click)="exit()" title="Exit">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>

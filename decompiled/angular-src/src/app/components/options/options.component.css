@@ -1,0 +1,58 @@
+.tabs button {
+  border: 0;
+  background: transparent;
+  color: #007bff;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.tabs button.active {
+  color: #212529;
+  border-bottom: 2px solid #212529;
+}
+.diff-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+.diff-card {
+  text-align: left;
+  background: #fff;
+  border: 2px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  min-height: 180px;
+  font-size: 0.85rem;
+}
+.diff-card.selected {
+  border-color: #007bff;
+}
+label {
+  display: block;
+  margin: 0.35rem 0;
+}
+.btn-primary {
+  background: #007bff;
+  color: #fff;
+  border: 0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+  border: 0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.mt {
+  margin: 0.75rem 0 1.25rem;
+}
+@media (max-width: 900px) {
+  .diff-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

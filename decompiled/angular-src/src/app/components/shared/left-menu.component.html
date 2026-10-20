@@ -1,0 +1,28 @@
+@if (!minimized) {
+  <div class="border-right position-relative overflow-hidden side">
+    <ul class="list-group">
+      <li class="list-group-item" routerLink="city" routerLinkActive="active" tabindex="0">City</li>
+      <li class="list-group-item" routerLink="science" routerLinkActive="active" tabindex="0">
+        @if (scienceAlert()) {
+          <i class="fas fa-exclamation-circle text-warning mr-1"></i>
+        }
+        Science
+      </li>
+      <li class="list-group-item" routerLink="notifications" routerLinkActive="active" tabindex="0">
+        Notifications
+      </li>
+      <li class="list-group-item" routerLink="help" routerLinkActive="active" tabindex="0">Help</li>
+      <li class="list-group-item" routerLink="options" routerLinkActive="active" tabindex="0">Options</li>
+      <li class="list-group-item" routerLink="support" routerLinkActive="active" tabindex="0">
+        Support &amp; Credits
+      </li>
+      <li class="list-group-item text-secondary" (click)="minimized = true" tabindex="0">
+        <i class="fas fa-angle-double-left"></i> Minimize
+      </li>
+    </ul>
+  </div>
+} @else {
+  <button type="button" class="expand" (click)="minimized = false" title="Expand">
+    <i class="fas fa-angle-double-right"></i>
+  </button>
+}

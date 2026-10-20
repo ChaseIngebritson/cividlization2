@@ -1,0 +1,49 @@
+.side {
+  min-width: 230px;
+  background: #f8f9fa;
+  height: 100%;
+}
+
+.list-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list-group-item {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  cursor: pointer;
+  color: #212529;
+  background: #fff;
+}
+
+.list-group-item.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.list-group-item:hover:not(.active) {
+  background: #e9ecef;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.expand {
+  border: 0;
+  background: #f8f9fa;
+  padding: 0.5rem;
+  cursor: pointer;
+  height: 100%;
+}

@@ -1,0 +1,47 @@
+<div class="options">
+  <div class="tabs">
+    <button type="button" [class.active]="tab === 'game'" (click)="tab = 'game'">Game Options</button>
+    <button type="button" [class.active]="tab === 'ui'" (click)="tab = 'ui'">UI Options</button>
+  </div>
+
+  @if (tab === 'game') {
+    <h2>Game options</h2>
+    <h3>Difficulty</h3>
+    <div class="diff-row">
+      @for (d of difficulties(); track d.id) {
+        <button
+          type="button"
+          class="diff-card"
+          [class.selected]="data.difficulty === d.id"
+          (click)="data.difficulty = d.id"
+        >
+          <strong>{{ d.name }}</strong>
+          <div [innerHTML]="safe(d.description)"></div>
+        </button>
+      }
+    </div>
+
+    <h3>Offline</h3>
+    <label><input type="checkbox" [(ngModel)]="data.no_offline" /> Prevent progress when offline</label>
+
+    <h3>Barbarians</h3>
+    <label><input type="checkbox" [(ngModel)]="data.no_respawn" /> Prevent city respawn</label>
+
+    <h3>Stats &amp; highscore</h3>
+    <label><input type="checkbox" [(ngModel)]="data.nostats" /> Do not send stats &amp; highscores</label>
+
+    <div class="mt">
+      <button type="button" class="btn-primary" (click)="doSave()">Save</button>
+    </div>
+
+    <h3>Restart this run</h3>
+    <p>Like a reincarnation but without any gain from this run!</p>
+    <button type="button" class="btn-danger" (click)="restart()">Restart this run</button>
+  } @else {
+    <h2>UI Options</h2>
+    <label><input type="checkbox" [(ngModel)]="data.darktheme" /> Dark theme</label>
+    <label><input type="checkbox" [(ngModel)]="data.pause" /> Paused</label>
+    <label><input type="checkbox" [(ngModel)]="data.notif_pop" /> Pop notifications</label>
+    <label><input type="checkbox" [(ngModel)]="data.notif_building" /> Building notifications</label>
+  }
+</div>

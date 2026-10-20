@@ -1,0 +1,10 @@
+<div class="game-shell" [class.dark]="data.darktheme">
+  <app-topbar></app-topbar>
+  <div class="game-body">
+    <app-leftmenu></app-leftmenu>
+    <div class="game-main">
+      <router-outlet></router-outlet>
+    </div>
+    <app-spells></app-spells>
+  </div>
+</div>

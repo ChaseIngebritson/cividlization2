@@ -1,0 +1,30 @@
+<div class="science-wrap">
+  <div class="era-tabs">
+    @for (era of eras(); track era.id; let i = $index) {
+      <button type="button" class="era-tab" [class.active]="selectedEra === i" (click)="selectedEra = i">
+        {{ era.name }}
+      </button>
+    }
+  </div>
+
+  <div class="tree-panel">
+    <div class="cols">
+      @for (col of columns(); track $index) {
+        <div class="col">
+          @for (id of col; track id) {
+            <button type="button" class="tech" [ngClass]="state(id)" (click)="enqueue(id)">
+              {{ labelOf(id) }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+    <div class="legend">
+      <span class="tech current">Current</span>
+      <span class="tech locked">Locked</span>
+      <span class="tech available">Available</span>
+      <span class="tech done">Done</span>
+    </div>
+  </div>
+  <button type="button" class="clear" (click)="clearQueue()">Clear queue</button>
+</div>

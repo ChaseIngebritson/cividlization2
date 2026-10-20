@@ -1,0 +1,6 @@
+node_modules/
+decompiled/angular-src/node_modules/
+decompiled/angular-src/dist/
+decompiled/angular-src/.angular/
+*.log
+.DS_Store
